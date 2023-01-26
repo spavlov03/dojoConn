@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
 </head>
 <body>
-    <h2>Welcome {{user['first_name']}}</h2>
-    <a href="/logout" class="btn btn-success">Logout</a>
+    <div>
+        <h2>Welcome, {{user['first_name']}}</h2>
+        <a href="/logout" class="btn btn-success">Logout</a>
+    </div>
     All posts - {{all_posts}}
 </body>
 </html>
