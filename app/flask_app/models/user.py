@@ -12,7 +12,7 @@ PASS_REGEX = re.compile(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")
 #At least one special character - (?=.*?[#?!@$%^&*-])
 
 class User:
-    DB = "login_reg"
+    DB = "dojo_connect"
 
     def __init__(self,data): 
         self.id = data['id']
@@ -20,6 +20,7 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
+        self.pfp = data['pfp']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
