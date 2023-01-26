@@ -1,0 +1,8 @@
+Name: Keifer Smith,Maleko Osby,Hakop Ekizyan & Svetoslav Pavlov
+Stack : Python
+GitHub Repo: https://github.com/spavlov03/dojoConnect
+Wireframe link: PDF attached
+Project Name: Dojo Connect
+Project Description: Web-app for coding topics and issues added by users. 
+MVP Features: Add, edit, view and delete topics.Login and reg, protected routes 
+Bonus features: responsive app, bootstrap and deployed. File upload for profile picture. Might add messaging between users if time allow. 

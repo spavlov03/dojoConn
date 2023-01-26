@@ -1,0 +1,7 @@
+.messages {
+    width: 300px;
+    /* background-color:  aqua; */
+}
+.right, .left {
+    width: 300px;
+}
