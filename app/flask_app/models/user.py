@@ -20,7 +20,7 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.pfp = data['pfp']
+        self.pfp = None
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -29,6 +29,13 @@ class User:
         query = "INSERT INTO users (first_name,last_name,email,password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s);"
         result = connectToMySQL(cls.DB).query_db(query,user_data)
         print("___ADDING NEW USER___",result)
+        return result
+    
+    @classmethod
+    def update_user(cls,user_data): 
+        query = "UPDATE users SET first_name=%(first_name)s,last_name=%(last_name)s,email=%(email)s,pfp=%(pfp)s;"
+        result = connectToMySQL(cls.DB).query_db(query,user_data)
+        print("UPDATING USER",result)
         return result
 
     @classmethod
