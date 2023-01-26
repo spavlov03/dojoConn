@@ -7,8 +7,13 @@ bcrypt = Bcrypt(app)
 @app.route("/")
 def index():
     return render_template('index.html')
-@app.route("/register",methods=["POST"])
+
+@app.route("/register")
 def register(): 
+    return render_template('register.html')
+
+@app.route("/register_user",methods=["POST"])
+def register_user(): 
     if not user.User.validate_user(request.form):
         return redirect("/")
     data = {
@@ -22,8 +27,12 @@ def register():
 
     return redirect("/dashboard")
 
-@app.route('/login',methods=["POST"])
-def login():
+@app.route("/login")
+def login(): 
+    return render_template('login.html')
+
+@app.route('/login_user',methods=["POST"])
+def login_user():
     users = user.User.get_user_info_by_email(request.form)
     if not users:
         flash("Invalid Email/Password","login")

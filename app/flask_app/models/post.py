@@ -20,6 +20,34 @@ class Post:
     query = "INSERT into posts (title,technology,description,user_id) VALUES (%(title)s,%(technology)s,%(description)s,%(user_id)s);"
     result = connectToMySQL(cls.DB).query_db(query,post_data)
     return result 
+  
+  @classmethod
+  def get_one_post_by_id_with_user(cls,id): 
+    data = {"id":id}
+    query = "SELECT * FROM posts JOIN users on posts.user_id = user.id WHERE posts.id = %(id)s;"
+    result = connectToMySQL(cls.DB).query_db(query,data)
+    for row in result: 
+      post = cls(row)
+      post_creator_info = { 
+        "id":row['users.id'], 
+        "first_name":row['first_name'], 
+        "last_name":row['last_name'], 
+        "email":row['email'], 
+        'password':row['password'], 
+        "created_at": row['created_at'],
+        "updated_at": row['updated_at']
+      }
+      creator = user.User(post_creator_info)
+      post.creator = creator
+      print('The post is---',post)
+    return post
+
+  @classmethod
+  def edit_post(cls,post_data): 
+    query = "UPDATE posts SET title=%(title)s,%(technology)s,%(description)s WHERE id=%(id)s"
+    result = connectToMySQL(cls.DB).query_db(query,post_data)
+    print("Updating Post",result)
+    return result
 
   @classmethod
   def get_all_posts(cls): 
