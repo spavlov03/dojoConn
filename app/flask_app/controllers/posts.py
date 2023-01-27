@@ -17,7 +17,7 @@ def new_post():
     return redirect('/logout')
   data = {"id": session['user_id']}
   logged_user = user.User.get_user_by_id(data)
-  return render_template('add_post.html', logged_user=logged_user)
+  return render_template('create_post.html', logged_user=logged_user)
 
 @app.route("/add/post",methods=['POST'])
 def add_post(): 
@@ -38,8 +38,9 @@ def add_post():
 def view_post(id):
   if 'user_id' not in session: 
     return redirect('/logout')
-  this_post = post.Post.get_one_post_by_id_with_user(id)
   data = {"id": session['user_id']}
+  post_data = {"id":id}
+  this_post = post.Post.get_one_post_by_id_with_user(post_data)
   logged_user = user.User.get_user_by_id(data)
   return render_template("view_post.html",this_post=this_post,logged_user=logged_user)
 
@@ -47,11 +48,22 @@ def view_post(id):
 def edit_post(id):
   if 'user_id' not in session: 
     return redirect('/logout')
-  this_post = post.Post.get_one_post_by_id_with_user(id)
+  post_data = {"id":id}
+  this_post = post.Post.get_one_post_by_id_with_user(post_data)
   data = {"id": session['user_id']}
   logged_user = user.User.get_user_by_id(data)
   return render_template("edit_post.html",this_post=this_post,logged_user=logged_user)
 
-# @app.route("/post/edit/%(id)s")
-# def post_edit(id)
+@app.route("/post/edit/<int:id>",methods=['POST'])
+def post_edit(id): 
+  if 'user_id' not in session: 
+    return redirect('/logout')
+  data = { 
+    'id':id, 
+    'title':request.form['title'], 
+    "technology" : request.form['technology'], 
+    "description": request.form['description']
+  }
+  post.Post.edit_post(data)
+  return redirect(f"/post/{id}")
 

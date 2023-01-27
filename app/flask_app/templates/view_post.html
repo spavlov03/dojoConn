@@ -28,7 +28,15 @@
 
         <!-- post content -->
         <div>
-            
+            <p>Title - {{this_post.title}}</p>
+            <p>Tech - {{this_post.technology}}</p>
+            <p>Description - {{this_post.description}}</p>
+            <a href="/user/{{this_post.creator.id}}">Creator - {{this_post.creator.first_name}} {{this_post.creator.last_name}}</a>
+            {% if logged_user.id==this_post.creator.id %}
+            <p>
+            <a href="/post/{{this_post.id}}/edit">Edit</a>
+            </p>
+            {% endif %}
         </div>
     </div>
 </body>

@@ -22,10 +22,10 @@ class Post:
     return result 
   
   @classmethod
-  def get_one_post_by_id_with_user(cls,id): 
-    data = {"id":id}
-    query = "SELECT * FROM posts JOIN users on posts.user_id = user.id WHERE posts.id = %(id)s;"
+  def get_one_post_by_id_with_user(cls,data): 
+    query = "SELECT * FROM posts JOIN users on posts.user_id = users.id WHERE posts.id = %(id)s;"
     result = connectToMySQL(cls.DB).query_db(query,data)
+    print(result)
     for row in result: 
       post = cls(row)
       post_creator_info = { 
@@ -44,7 +44,7 @@ class Post:
 
   @classmethod
   def edit_post(cls,post_data): 
-    query = "UPDATE posts SET title=%(title)s,%(technology)s,%(description)s WHERE id=%(id)s"
+    query = "UPDATE posts SET title=%(title)s,technology=%(technology)s,description=%(description)s WHERE id=%(id)s"
     result = connectToMySQL(cls.DB).query_db(query,post_data)
     print("Updating Post",result)
     return result
@@ -76,7 +76,7 @@ class Post:
     if len(post['title']) <1: 
       flash("Tile is required")
       is_valid = False
-    if len(post['technilogy']) <1: 
+    if len(post['technology']) <1: 
       flash("Must select Technology")
       is_valid = False
     if len(post['description']) <1: 

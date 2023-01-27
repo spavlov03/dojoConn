@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="/post/edit/{{this_post.id}}" method="post">
+    <label for="">Title</label>
+    <input type="text" name="title" value="{{this_post.title}}">
+    <label for="">Tech</label>
+    <select name="technology" id="">
+      <option value="" disabled hidden>Select Tech</option>
+      <option value="mern" {% if this_post.technology=="mern" %} selected {% endif %}> MERN </option>
+      <option value="python" {% if this_post.technology=="python" %} selected {% endif %} > Python </option>
+      <option value="java" {% if this_post.technology=="java" %} selected {% endif %} > Java </option>
+    </select>
+    <!-- ^^^^ Conditional rendering for the selected techn -->
+    <label for="">Description</label>
+    <textarea name="description" id="" cols="30" rows="10">{{this_post.description}}</textarea>
+    <input type="hidden" name="user_id" value="{{logged_user.id}}">
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>

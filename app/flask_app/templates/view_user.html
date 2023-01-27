@@ -12,6 +12,11 @@
   <p>First Name : {{user_info.first_name}}</p>
   <p>Last Name : {{user_info.last_name}}</p>
   <p>email: {{user_info.email}}</p>
+  {% if logged_user.id==user_info.id %}
   <a href="/user/{{user_info.id}}/edit">Edit</a>
+  {% endif %}
+  <!-- Added Conditional Rendering for edit profile button if logged user is the account owner can edit -->
+  <p>logged user - {{logged_user.id}} {{logged_user.first_name}}</p>
+  <p>user info - {{user_info.id}} {{user_info.first_name}}</p>
 </body>
 </html>
