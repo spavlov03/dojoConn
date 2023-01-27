@@ -39,16 +39,6 @@ class User:
         return result
 
     @classmethod
-    def get_user_info(cls,data):
-        #print("DATA IS --- ",data)
-        query = "SELECT * FROM users;"
-        results = connectToMySQL(cls.DB).query_db(query,data)
-        users = []
-        for row in results:
-            users.append(cls(row))
-        #print("__SELECTING USER__",result)
-        return users
-    @classmethod
     def get_user_info_by_email(cls,data):
         #print("DATA IS --- ",data)
         query = "SELECT * FROM users WHERE email= %(email)s;"
