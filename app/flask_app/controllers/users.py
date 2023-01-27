@@ -15,7 +15,7 @@ def register():
 @app.route("/register_user",methods=["POST"])
 def register_user(): 
     if not user.User.validate_user(request.form):
-        return redirect("/")
+        return redirect("/register")
     data = {
             "first_name":request.form['first_name'],
             "last_name":request.form['last_name'],
@@ -36,7 +36,7 @@ def login_user():
     users = user.User.get_user_info_by_email(request.form)
     if not users:
         flash("Invalid Email/Password","login")
-        return redirect('/')
+        return redirect('/login')
     if not bcrypt.check_password_hash(users.password, request.form['password']):
         flash("Invalid Email/Password","login")
         return redirect('/')
