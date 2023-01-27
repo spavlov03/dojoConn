@@ -66,7 +66,7 @@ def edit_user(id):
 def user_edit(id): 
     if 'user_id' not in session: 
         return redirect('/logout')
-    user_id = session['user_id']
+    # user_id = session['user_id']
     # if not user.User.validate_user(request.form):  Might have to do separate validation of update
     #     return redirect(url_for('edit_user',id=user_id))
     data = { 
@@ -76,7 +76,8 @@ def user_edit(id):
         'email' : request.form['email']
     }
     user.User.update_user(data)
-    return redirect(url_for('view_user',id=user_id))
+    # return redirect(url_for('view_user',id=user_id)) This way works too. 
+    return redirect(f"/user/{id}")
 
 
 @app.route('/logout')
