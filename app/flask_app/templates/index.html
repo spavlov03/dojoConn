@@ -10,21 +10,15 @@
 </head>
 <body>
     <div class="container mt-5">
+        <!-- navbar -->
         <div class=" d-flex justify-content-between align-center">
             <div class="navLeft d-flex">
-                <a href="/">Home</a> 
+                <a class="text-decoration-none" href="/">Home</a> 
                 <p class="ps-2 pe-2" >|</p>
-                <a href="/discussion_board">Discussion Board</a>
-                {% for user in users %}
-                    {% if users.id == user_id:  %}
-                        <p class="ps-2 pe-2" >|</p>
-                        <a href="PLACEHOLDER">User Profile</a>
-                    {% endif %}
-                {% endfor %}
-                <!-- end -->
+                <a class="text-decoration-none" href="/discussion_board">Discussion Board</a>
             </div>
             <div class="navRight d-flex justify-content-around">
-                <!-- if/for statement here -->
+                <!-- if/for statement for login/logout here -->
                 <form  action="/login">
                     <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
                 </form>
@@ -44,7 +38,19 @@
 
         <!-- placeholder  until topics/posts get created -->
         <div class="mainIndex container mt-5">
-            
+            <div class="tableContent container">
+                <div class="tableContent container">
+                    <div class="topicsHeader">
+                        <h4>Most Liked Topics</h4>
+                    </div>
+                    <div class="topicsContainer mt-4">
+                        {% for post in all_posts %}
+                            <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
+                            <p class="topicsText">{{post.description}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

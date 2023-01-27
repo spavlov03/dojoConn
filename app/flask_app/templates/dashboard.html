@@ -10,35 +10,19 @@
 </head>
 <body>
     <div class="container mt-5">
-        <div class=" d-flex justify-content-between align-center">
-            <div class="navLeft d-flex">
-                <a href="/">Home</a> 
-                <p class="ps-2 pe-2">|</p>
-                <a href="/discussion_board">Discussion Board</a>
-                <!-- if statement/for loop user logged in statement here -->
-                {% for user in users %}
-                    {% if users.id == user_id:  %}
-                        <p class="ps-2 pe-2">|</p>
-                        <a href="PLACEHOLDER">User Profile</a>
-                    {% endif %}
-                {% endfor %}
-                <!-- end -->
-        </div>
-            <h2>Welcome, {{logged_user['first_name']}}</h2>
-            <a href="/logout">Logout</a>
-        <div>
-
+        <!-- navbar -->
+        <div class="navbar d-flex justify-content-between">
+            <div class="navLeft d-flex align-items-center">
+                <a class="text-decoration-none" href="/">Home</a> 
+                <p class="ps-2 pe-2 m-0">|</p>
+                <a class="text-decoration-none" href="/discussion_board">Discussion Board</a>
+                <p class="ps-2 pe-2 m-0">|</p>
+                <a class="text-decoration-none" href="/user/{{logged_user.id}}">User Profile</a>
             </div>
 
-            <div class="navRight d-flex justify-content-around">
-                <!-- for/if statement here -->
-                <form  action="/login">
-                    <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
-                </form>
-                <form  action="/register">
-                    <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
-                </form>
-                <!-- end -->
+            <div class="navbar">
+                <h6 class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</h6>
+                <a class="text-decoration-none text-danger" href="/logout">Logout</a>
             </div>
         </div>
         
@@ -49,9 +33,21 @@
             <button>Search</button>
         </div>
         
-        <!-- placeholder  until topics/posts routes get created -->
+        <!-- placeholder until topics/posts routes get created -->
         <div class="mainIndex container mt-5">
-            <!-- All posts - {{all_posts}} -->
+            <div class="tableContent container">
+                <div class="topicsHeader">
+                    <h4>All Topics</h4>
+                </div>
+                <div class="topicsContainer">
+                    <div class="mt-4">
+                        {% for post in all_posts %}
+                            <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
+                            <p class="text-danger">{{post.description}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

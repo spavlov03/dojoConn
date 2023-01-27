@@ -9,12 +9,14 @@
 
 
 /* navbar css */
-.navLeft1 {
-    width: 12rem;
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
 }
 
 .navLeft {
-    width: 12rem;
+    width: 20rem;
 }
 
 .navRight {
@@ -29,4 +31,41 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+
+
+
+
+/* posts table */
+.tableContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.topicsHeader {
+    width: 50rem;
+    height: 3rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgb(153, 174, 192);
+    color: rgb(59, 59, 59);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topicsContainer {
+    width: 50rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px black;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
