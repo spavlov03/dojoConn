@@ -34,7 +34,7 @@ def add_post():
   post.Post.add_post(data)
   return redirect('/dashboard')
 
-@app.route("/post/%(id)s/")
+@app.route("/post/<int:id>/")
 def view_post(id):
   if 'user_id' not in session: 
     return redirect('/logout')
@@ -43,7 +43,7 @@ def view_post(id):
   logged_user = user.User.get_user_by_id(data)
   return render_template("view_post.html",this_post=this_post,logged_user=logged_user)
 
-@app.route("/post/%(id)s/edit")
+@app.route("/post/<int:id>/edit")
 def edit_post(id):
   if 'user_id' not in session: 
     return redirect('/logout')

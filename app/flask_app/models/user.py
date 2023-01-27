@@ -33,7 +33,7 @@ class User:
     
     @classmethod
     def update_user(cls,user_data): 
-        query = "UPDATE users SET first_name=%(first_name)s,last_name=%(last_name)s,email=%(email)s,pfp=%(pfp)s WHERE id=%(id)s;"
+        query = "UPDATE users SET first_name=%(first_name)s,last_name=%(last_name)s,email=%(email)s WHERE id=%(id)s;"
         result = connectToMySQL(cls.DB).query_db(query,user_data)
         print("UPDATING USER",result)
         return result
@@ -74,7 +74,7 @@ class User:
         #if len(user['password']) < 8:
             flash("Password must be at least 8 characters and include One Uppercase, One lowercase and a number","register")
             is_valid = False
-        if user['password'] != user['password_confirm']:
+        if user['password'] != user['confirm_password']:
             flash("Passwords don't match","register")
             is_valid = False
         return is_valid

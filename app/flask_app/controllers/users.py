@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request,session,flash
+from flask import render_template, redirect, request,session,flash,url_for
 from flask_app import app
 from flask_app.models import user
 from flask_bcrypt import Bcrypt
@@ -42,12 +42,42 @@ def login_user():
         return redirect('/')
     session['user_id'] = users.id
     return redirect("/dashboard")
+    
 
-@app.route('/user/%(id)s')
+@app.route('/user/<int:id>')
 def view_user(id): 
+    data = {"id":id}
     if 'user_id' not in session: 
         return redirect('/logout')
-    user_info = user.User.get_user_by_id(id)
+    user_info = user.User.get_user_by_id(data)
+    logged_user = user.User.get_user_by_id(data)
+    return render_template('view_user.html', user_info=user_info,logged_user=logged_user)
+
+@app.route('/user/<int:id>/edit')
+def edit_user(id): 
+    data = {"id":id}
+    if 'user_id' not in session: 
+        return redirect('/logout')
+    user_info = user.User.get_user_by_id(data)
+    logged_user = user.User.get_user_by_id(data)
+    return render_template('edit_user.html', user_info=user_info,logged_user=logged_user)
+
+@app.route('/user/edit/<int:id>',methods=["POST"])
+def user_edit(id): 
+    if 'user_id' not in session: 
+        return redirect('/logout')
+    user_id = session['user_id']
+    # if not user.User.validate_user(request.form):  Might have to do separate validation of update
+    #     return redirect(url_for('edit_user',id=user_id))
+    data = { 
+        'id' : id,
+        'first_name' : request.form['first_name'],
+        'last_name' : request.form['last_name'],
+        'email' : request.form['email']
+    }
+    user.User.update_user(data)
+    return redirect(url_for('view_user',id=user_id))
+
 
 @app.route('/logout')
 def logout():
