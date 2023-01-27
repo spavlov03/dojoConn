@@ -9,10 +9,50 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
 </head>
 <body>
-    <div>
-        <h2>Welcome, {{user['first_name']}}</h2>
-        <a href="/logout" class="btn btn-success">Logout</a>
+    <div class="container mt-5">
+        <div class=" d-flex justify-content-between align-center">
+            <div class="navLeft d-flex">
+                <a href="/">Home</a> 
+                <p class="ps-2 pe-2">|</p>
+                <a href="/discussion_board">Discussion Board</a>
+                <!-- if statement/for loop user logged in statement here -->
+                {% for user in users %}
+                    {% if users.id == user_id:  %}
+                        <p class="ps-2 pe-2">|</p>
+                        <a href="PLACEHOLDER">User Profile</a>
+                    {% endif %}
+                {% endfor %}
+                <!-- end -->
+        </div>
+            <h2>Welcome, {{logged_user['first_name']}}</h2>
+            <a href="/logout">Logout</a>
+        <div>
+
+            </div>
+
+            <div class="navRight d-flex justify-content-around">
+                <!-- for/if statement here -->
+                <form  action="/login">
+                    <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
+                </form>
+                <form  action="/register">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+                </form>
+                <!-- end -->
+            </div>
+        </div>
+        
+        
+        <!-- content -->
+        <div class="container d-flex justify-content-center mt-5">
+            <input type="search" onfocus="this.value=''" value="Search Topics">
+            <button>Search</button>
+        </div>
+        
+        <!-- placeholder  until topics/posts routes get created -->
+        <div class="mainIndex container mt-5">
+            <!-- All posts - {{all_posts}} -->
+        </div>
     </div>
-    <!-- All posts - {{all_posts}} -->
 </body>
 </html>

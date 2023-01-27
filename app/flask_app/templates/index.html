@@ -9,48 +9,42 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
 </head>
 <body>
-    <div class="container">
-        <div class="d-flex gap-2">
-            <div class="left bg-dark">
-                <h2 class="text-primary">Register</h2>
-                <form action="/register" method="post" class="text-light d-flex flex-column">
-                    <label for="first_name">First Name:</label>
-                    <input type="text" name="first_name">
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" name="last_name">
-                    <label for="email">Email:</label>
-                    <input type="text" name="email">
-                    <label for="password">Password</label>
-                    <input type="password" name="password">
-                    <label for="password_confirm">Password</label>
-                    <input type="password" name="password_confirm">
-                    <input type="submit" value="Register" class="btn btn-primary">
-                </form>
-                {% with messages = get_flashed_messages(category_filter=['register']) %}
-                    {% if messages %}
-                        {% for message in messages %}
-                        <div class="messages"><p class="text-light">{{message}}</p></div>
-                        {% endfor %}
+    <div class="container mt-5">
+        <div class=" d-flex justify-content-between align-center">
+            <div class="navLeft d-flex">
+                <a href="/">Home</a> 
+                <p class="ps-2 pe-2" >|</p>
+                <a href="/discussion_board">Discussion Board</a>
+                {% for user in users %}
+                    {% if users.id == user_id:  %}
+                        <p class="ps-2 pe-2" >|</p>
+                        <a href="PLACEHOLDER">User Profile</a>
                     {% endif %}
-                {% endwith %}
+                {% endfor %}
+                <!-- end -->
             </div>
-            <div class="right bg-dark">
-                <h2 class="text-success">Login</h2>
-                <form action="/login" method="post" class="text-light d-flex flex-column">
-                    <label for="email">Email:</label>
-                    <input type="text" name="email">
-                    <label for="password">Password</label>
-                    <input type="password" name="password">
-                    <input type="submit" value="Login" class="btn btn-success">
+            <div class="navRight d-flex justify-content-around">
+                <!-- if/for statement here -->
+                <form  action="/login">
+                    <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
                 </form>
-                {% with messages = get_flashed_messages(category_filter=['login']) %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="messages"><p class="text-light">{{message}}</p></div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
+                <form  action="/register">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+                </form>
+                <!-- end -->
             </div>
+        </div>
+
+
+        <!-- content -->
+        <div class="container d-flex justify-content-center mt-5">
+            <input type="search" onfocus="this.value=''" value="Search Topics">
+            <button>Search</button>
+        </div>
+
+        <!-- placeholder  until topics/posts get created -->
+        <div class="mainIndex container mt-5">
+            
         </div>
     </div>
 </body>

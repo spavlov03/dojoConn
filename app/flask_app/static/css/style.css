@@ -1,7 +1,32 @@
+/* validation messages */
 .messages {
     width: 300px;
     /* background-color:  aqua; */
 }
-.right, .left {
-    width: 300px;
+
+
+
+
+
+/* navbar css */
+.navLeft1 {
+    width: 12rem;
+}
+
+.navLeft {
+    width: 12rem;
+}
+
+.navRight {
+    width: 10rem;
+}
+
+
+
+/* login/reg form */
+.LoginForm, .RegForm {
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
