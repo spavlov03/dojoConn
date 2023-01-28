@@ -13,6 +13,7 @@ class Comment:
     self.post_id = self['post_id']
     self.user_id = self['user_id'] 
     self.post = NONE
+    self.comment_poster = NONE
   
   @classmethod
   def add_commment(cls, comment_data):
@@ -22,8 +23,9 @@ class Comment:
 
   @classmethod
   def get_comments_by_post(cls, data):
-    query = "SELECT * FROM comments JOIN posts ON comments.post_id = posts.id WHERE posts.id = %(id)s;"
+    query = "SELECT * FROM comments JOIN posts ON comments.post_id = posts.id JOIN users ON posts.user_id = users.id WHERE posts.id = %(id)s;"
     results = connectToMySQL(cls.DB).query_db(query)
+    comments = []
     for row in results:
       one_comment = cls(row)
       one_comments_post_info = {
@@ -34,10 +36,22 @@ class Comment:
         'created_at': row['posts.created_at'],
         'updated_at': row['posts.updated_at'],
       }
+      one_comments_user_info = {
+        'id': row['users.id'],
+        'first_name': row['first_name'],
+        "last_name":row['last_name'], 
+        "email":row['email'], 
+        'password':row['password'], 
+        "created_at": row['created_at'],
+        "updated_at": row['updated_at']
+      }
+      comment_poster = user.User(one_comments_user_info)
+      one_comment.user = comment_poster
       post = post.Post(one_comment_post_info)
-      comment.post = post 
-      print('Comment is--', comment)
-    return comment
+      one_comment.post = post 
+      comments.append(one_comment)
+      print('Comment is ', comment)
+    return comments
 
   @classmethod
   def update_comment(cls, data):
