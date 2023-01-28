@@ -77,6 +77,11 @@ class Post:
     print(result)
     return result
 
+  @classmethod
+  def delete_post(cls,data): 
+    query = "DELETE FROM posts WHERE id=%(id)s;"
+    result = connectToMySQL(cls.DB).query_db(query,data)
+    return result 
 
   @staticmethod
   def post_validation(post): 

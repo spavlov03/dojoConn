@@ -29,8 +29,10 @@
         
         <!-- content -->
         <div class="container d-flex justify-content-center mt-5">
-            <input type="search" onfocus="this.value=''" value="Search Topics">
-            <button>Search</button>
+            <form action="/search" method="POST">
+                <input type="search" onfocus="this.value=''" value="Search Topics">
+                <button>Search</button>
+            </form>
         </div>
         
         <!-- placeholder until topics/posts routes get created -->

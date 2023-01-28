@@ -35,6 +35,7 @@
             {% if logged_user.id==this_post.creator.id %}
             <p>
             <a href="/post/{{this_post.id}}/edit">Edit</a>
+            <a href="/post/{{this_post.id}}/delete">Delete</a>
             </p>
             {% endif %}
         </div>

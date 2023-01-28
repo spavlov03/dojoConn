@@ -67,6 +67,14 @@ def post_edit(id):
   post.Post.edit_post(data)
   return redirect(f"/post/{id}")
 
+@app.route("/post/<int:id>/delete")
+def delete_post(id): 
+  if 'user_id' not in session: 
+    return redirect('/logout')
+  data = {"id":id}
+  post.Post.delete_post(data)
+  return redirect("/dashboard")
+
 @app.route("/discussion_board")
 def discussion_board(): 
   if 'user_id' not in session: 
