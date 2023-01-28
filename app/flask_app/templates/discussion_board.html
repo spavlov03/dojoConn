@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a href="/posts/mern">Mern</a>
+  <a href="/posts/python">Python</a>
+  <a href="/posts/java">Java</a>
+  <a href="/post/add"><button>Add Topic</button></a>
+  <!-- I cant figure out how to make a dropdown and pass the selected option variable in the form action -->
+  {% for post in all_posts %}
+  <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
+  <p class="text-danger">{{post.description}}</p>
+  {% endfor %}
+</body>
+</html>

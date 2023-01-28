@@ -70,6 +70,14 @@ class Post:
       posts.append(post)
     return posts
 
+  @classmethod
+  def get_all_posts_by_tech(cls,data): 
+    query = "SELECT * FROM posts WHERE technology=%(technology)s;"
+    result = connectToMySQL(cls.DB).query_db(query,data)
+    print(result)
+    return result
+
+
   @staticmethod
   def post_validation(post): 
     is_valid = True
