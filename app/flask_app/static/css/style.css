@@ -1,7 +1,10 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
 /* validation messages */
 .messages {
     width: 300px;
-    /* background-color:  aqua; */
 }
 
 
@@ -11,13 +14,17 @@
 /* navbar css */
 .navbar {
     display: flex;
-    justify-content: space-evenly;
-    text-align: center;
+    height: 5rem;
+    border-bottom: solid 2px #8a7cad;
 }
 
-.navLeft {
-    width: 20rem;
+.navbarWelcome {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    margin: 0;
 }
+
 
 .navRight {
     width: 10rem;
@@ -31,6 +38,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-shadow: 10px 10px 5px rgb(184, 184, 184);
+}
+
+.RegWelcome {
+    text-shadow: 2px 2px 5px rgb(90, 90, 90);
+    color: rgb(41, 41, 41);
 }
 
 
@@ -49,10 +62,12 @@
 
 .topicsHeader {
     width: 50rem;
-    height: 3rem;
+    height: 3.25rem;
     border: 1px solid black;
-    border-radius: 5px;
-    background-color: rgb(153, 174, 192);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom: 0px;
+    background-color: #8a7cad;
     color: rgb(59, 59, 59);
     display: flex;
     align-items: center;
@@ -68,4 +83,9 @@
     border: solid 1px black;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+.topicsContent {
+    width: 80%;
+    border-bottom: solid 1px rgb(184, 184, 184);
 }
