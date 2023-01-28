@@ -4,19 +4,59 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>{{user_info.first_name}}'s Profile</title>
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+  <!-- css -->
+  <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body> 
-  <p>Added this page just to make sure it's all working.</p>
 
-  <p>First Name : {{user_info.first_name}}</p>
-  <p>Last Name : {{user_info.last_name}}</p>
-  <p>email: {{user_info.email}}</p>
-  {% if logged_user.id==user_info.id %}
-  <a href="/user/{{user_info.id}}/edit">Edit</a>
-  {% endif %}
-  <!-- Added Conditional Rendering for edit profile button if logged user is the account owner can edit -->
-  <p>logged user - {{logged_user.id}} {{logged_user.first_name}}</p>
-  <p>user info - {{user_info.id}} {{user_info.first_name}}</p>
+  <div class="container">
+    <div class="navbar">
+      <div class="ps-3 d-flex">
+          <a href="/"><img class="" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0" width="152px" height="50px"></a>
+      </div>
+
+      <div class="d-flex align-items-center text-center">
+          <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
+          <p class="ps-2 pe-2 m-0">|</p>
+          <a class="ps-2 text-decoration-none text-black" href="/discussion_board">Discussion Board</a>
+          <p class="ps-2 pe-2 m-0">|</p>
+          <a class="ps-2 text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
+      </div>
+
+      <div class="d-flex justify-content-center">
+          <form class="d-flex" role="search" action="/search" method="POST">
+              <input class="form-control me-2" type="search" placeholder="Search Topics" aria-label="Search">
+              <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+          </form>
+      </div>
+
+      <div class="navbarWelcome align-items-center">
+          <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
+          <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
+      </div>
+  </div>
+
+    <p>Added this page just to make sure it's all working.</p>
+
+    <p>First Name : {{user_info.first_name}}</p>
+    <p>Last Name : {{user_info.last_name}}</p>
+    <p>email: {{user_info.email}}</p>
+    {% if logged_user.id==user_info.id %}
+    <a href="/user/{{user_info.id}}/edit">Edit</a>
+    {% endif %}
+    <!-- Added Conditional Rendering for edit profile button if logged user is the account owner can edit -->
+    <p>logged user - {{logged_user.id}} {{logged_user.first_name}}</p>
+    <p>user info - {{user_info.id}} {{user_info.first_name}}</p>
+  </div>
 </body>
 </html>
