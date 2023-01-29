@@ -14,6 +14,7 @@ class Post:
     self.updated_at = data['updated_at']
     self.user_id = data['user_id']
     self.creator = None
+    # self.likes = []
 
   @classmethod
   def add_post(cls,post_data): 
@@ -82,7 +83,14 @@ class Post:
     query = "DELETE FROM posts WHERE id=%(id)s;"
     result = connectToMySQL(cls.DB).query_db(query,data)
     return result 
-
+  
+  @classmethod
+  def search(cls,data): 
+    query = "SELECT * FROM posts WHERE INSTR(title,'{$%(title)s}' >0"
+    result = connectToMySQL(cls.DB).query_db(query,data)
+    print(result)
+    return result
+# Need to fix search 
   @staticmethod
   def post_validation(post): 
     is_valid = True

@@ -59,6 +59,24 @@
             <a href="/post/{{this_post.id}}/delete">Delete</a>
             </p>
             {% endif %}
+            {% for comment in post_comments %}
+            <p>Comment - {{comment.comment}}</p>
+            <p>made by : {{comment.creator.first_name}} {{comment.creator.last_name}}</p>
+            {% if logged_user.id==comment.creator.id %}
+            <a href="/post/{{comment.post_id}}/comment/{{comment.id}}/delete">Delete Comment</a>
+            <p>Comment ID - {{comment.id}}</p>
+            {% endif %}
+            <p>Comment {{comment.creator.id}}</p>
+            <p>Logged User ID {{logged_user.id}}</p>
+            <p>Comment Creator ID {{comment.creator.id}}</p>
+            {% endfor %}
+            <form action="/post/{{this_post.id}}/comment" method="post">
+                <label for="">Add Comment</label>
+                <textarea name="comment" id="" cols="30" rows="5"></textarea>
+                <input type="hidden" name="user_id" value="{{logged_user.id}}">
+                <input type="submit" value="Add">
+            </form>
+
         </div>
     </div>
 </body>
