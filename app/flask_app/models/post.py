@@ -44,6 +44,12 @@ class Post:
     return post
 
   @classmethod
+  def get_one_post_by_id(cls,data): 
+    query = "SELECT * FROM posts WHERE id=%(id)s"
+    result = connectToMySQL(cls.DB).query_db(query,data)
+    return result
+
+  @classmethod
   def edit_post(cls,post_data): 
     query = "UPDATE posts SET title=%(title)s,technology=%(technology)s,description=%(description)s WHERE id=%(id)s"
     result = connectToMySQL(cls.DB).query_db(query,post_data)

@@ -4,8 +4,8 @@ from flask_app.models import user,post,comment
 
 @app.route("/dashboard")
 def dashboard():
-    # if "user_id" not in session:
-    #     return redirect("/logout")
+    if "user_id" not in session:
+        return redirect("/logout")
     data = {"id": session['user_id']}
     logged_user = user.User.get_user_by_id(data)
     all_posts = post.Post.get_all_posts()
@@ -51,6 +51,8 @@ def edit_post(id):
     return redirect('/logout')
   post_data = {"id":id}
   this_post = post.Post.get_one_post_by_id_with_user(post_data)
+  if session['user_id'] != this_post.user_id:
+        return redirect(f'/post/{id}')
   data = {"id": session['user_id']}
   logged_user = user.User.get_user_by_id(data)
   return render_template("edit_post.html",this_post=this_post,logged_user=logged_user)
@@ -73,14 +75,18 @@ def delete_post(id):
   if 'user_id' not in session: 
     return redirect('/logout')
   data = {"id":id}
+  this_post = post.Post.get_one_post_by_id_with_user(data)
+  if session['user_id'] != this_post.user_id:
+        return redirect(f'/post/{id}')
   post.Post.delete_post(data)
   return redirect("/dashboard")
 
 @app.route("/discussion_board")
 def discussion_board(): 
   if 'user_id' not in session: 
-    all_posts = post.Post.get_all_posts()
-    return render_template('discussion_board.html',all_posts=all_posts)
+    # all_posts = post.Post.get_all_posts()
+    # return render_template('discussion_board.html',all_posts=all_posts)
+    return redirect('/logout')
   data = {"id": session['user_id']}
   logged_user = user.User.get_user_by_id(data)
   all_posts = post.Post.get_all_posts()

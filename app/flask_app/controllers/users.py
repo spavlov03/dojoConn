@@ -58,9 +58,11 @@ def view_user(id):
 
 @app.route('/user/<int:id>/edit')
 def edit_user(id): 
-    data = {"id":id}
     if 'user_id' not in session: 
         return redirect('/logout')
+    if session['user_id'] != id:
+        return redirect(f'/user/{id}')
+    data = {"id":id}
     user_info = user.User.get_user_by_id(data)
     logged_user = user.User.get_user_by_id(data)
     return render_template('edit_user.html', user_info=user_info,logged_user=logged_user)
