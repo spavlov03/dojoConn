@@ -83,13 +83,14 @@ def delete_post(id):
 
 @app.route("/discussion_board")
 def discussion_board(): 
+  all_posts = post.Post.get_all_posts()
   if 'user_id' not in session: 
-    # all_posts = post.Post.get_all_posts()
-    # return render_template('discussion_board.html',all_posts=all_posts)
-    return redirect('/logout')
+
+    return render_template('discussion_board.html',all_posts=all_posts)
+
   data = {"id": session['user_id']}
   logged_user = user.User.get_user_by_id(data)
-  all_posts = post.Post.get_all_posts()
+  # all_posts = post.Post.get_all_posts()
   return render_template('discussion_board.html',logged_user = logged_user,all_posts=all_posts)
 
 @app.route("/posts/<technology>")
@@ -100,6 +101,6 @@ def posts_by_tech(technology):
 
 @app.route("/search",methods=["POST"])
 def search(): 
-  data = {"title":request.form['search']}
+  data = {'title':'%'+request.form['search']+'%'}
   post.Post.search(data)
   return redirect('/dashboard')

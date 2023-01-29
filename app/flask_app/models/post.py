@@ -92,9 +92,9 @@ class Post:
   
   @classmethod
   def search(cls,data): 
-    query = "SELECT * FROM posts WHERE INSTR(title,'{$%(title)s}' >0"
+    query = "SELECT * FROM posts WHERE title LIKE %(title)s;"
     result = connectToMySQL(cls.DB).query_db(query,data)
-    print(result)
+    print("Search Result is --- ",result)
     return result
 # Need to fix search 
   @staticmethod

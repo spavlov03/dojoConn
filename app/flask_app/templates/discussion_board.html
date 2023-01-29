@@ -26,23 +26,35 @@
       </div>
 
       <div class="d-flex align-items-center text-center">
-          <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
-          <p class="ps-2 pe-2 m-0">|</p>
+          {% if logged_user is not defined%}
+          <!-- <a class="ps-2 text-decoration-none text-black" href="/">Home</a>  -->
+          <!-- <p class="ps-2 pe-2 m-0">|</p> -->
+          {% else %}
           <a class="ps-2 text-decoration-none text-black" href="/discussion_board">Discussion Board</a>
-          <p class="ps-2 pe-2 m-0">|</p>
+          <p class="ps-2 pe-2 m-0">|</p> 
           <a class="ps-2 text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
+          {% endif %}
       </div>
 
       <div class="d-flex justify-content-center">
           <form class="d-flex" role="search" action="/search" method="POST">
-              <input class="form-control me-2" type="search" placeholder="Search Topics" aria-label="Search">
+              <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
               <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
           </form>
       </div>
 
       <div class="navbarWelcome align-items-center">
+        {% if logged_user is not defined%}
+        <form action="/login">
+          <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
+        </form>
+        <form  action="/register">
+          <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+        </form>
+        {% else %}
           <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
           <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
+          {% endif %}
       </div>
     </div>
 
