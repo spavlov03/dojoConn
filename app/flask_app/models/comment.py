@@ -53,6 +53,12 @@ class Comment:
       comments.append(one_comment)
       print('Comment is ', comments)
     return comments
+  
+  @classmethod
+  def get_comment_by_id(cls, data):
+    query = "SELECT * FROM comments WHERE id = %(id)s;";
+    results = connectToMySQL(cls.DB).query_db(query, data)
+    return results
 
   @classmethod
   def update_comment(cls, data):
