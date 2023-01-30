@@ -108,7 +108,8 @@
                     </div>
                 </div>
 
-
+                {% if logged_user is not defined %}
+                {%else%}
                 <div class="commentBorder">
                     <div class="addComment mt-3">
                         <div class="ok">
@@ -125,6 +126,7 @@
                         </form>
                     </div>
                 </div>
+                {%endif%}
 
                 {% for comment in post_comments %}
                     <div class="commentsContainer container mt-5 p-4 mb-5">
