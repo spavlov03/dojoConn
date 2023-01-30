@@ -27,23 +27,23 @@
     
             <div class="d-flex align-items-center text-center">
                 <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
+                <p class="ps-2 pe-2 m-0">|</p> 
+                <div class="d-flex justify-content-around">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Technology
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
+                        <li><a class="dropdown-item" href="/posts/python">Python</a></li>
+                        <li><a class="dropdown-item" href="/posts/java">Java</a></li>
+                        </ul>
+                    </div>
+                </div>
                 {% if logged_user is not defined%}
                 {% else %}
                     <p class="ps-2 pe-2 m-0">|</p>
                     <a class="text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
-                    <p class="ps-2 pe-2 m-0">|</p> 
-                    <div class="mt-3 d-flex justify-content-around">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select Technology
-                            </button>
-                            <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
-                            <li><a class="dropdown-item" href="/posts/python">Python</a></li>
-                            <li><a class="dropdown-item" href="/posts/java">Java</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 {% endif %}
             </div>
     
@@ -58,15 +58,16 @@
                 {% if logged_user is not defined %}
                 <div class="navRight d-flex justify-content-around">
                     <form action="/login">
-                    <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
+                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
                     </form>
+
                     <form  action="/register">
-                    <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
                     </form>
                 </div>
                 {% else %}
-                <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
-                <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
+                    <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
+                    <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
                 {% endif %}
             </div>
         </div>
@@ -74,33 +75,25 @@
 
         <!-- content -->
         <div class="mainIndex container mt-5">
-            <div class="mt-3 d-flex justify-content-around">
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Select Technology
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
-                        <li><a class="dropdown-item" href="/posts/python">Python</a></li>
-                        <li><a class="dropdown-item" href="/posts/java">Java</a></li>
-                    </ul>
-                </div>
-            </div>
-        
-        
-            <div class="tableContent">
+            <div class="tableContent mt-5">
                 <div class="topicsHeader">
-                    <h4>All Topics</h4>
+                    <h4 class="topicsText">All Topics</h4>
+                    {% if logged_user is not defined %}
+                    {% else %}
+                        <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>
+                    {% endif %}
                 </div>
-                <div class="topicsContainer">
+            
+                <div class="topicsContainer pt-2 pb-5">
                     {% for post in all_posts %}
-                        <div class="topicsContent mt-4">
+                        <div class="topicsContent mt-4 mb-2">
                             <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
                             <p class="text-black ">{{post.description}}</p>
                         </div>
                     {% endfor %}
                 </div>
             </div>
+        </div>
     </div>
 </body>
 </html>

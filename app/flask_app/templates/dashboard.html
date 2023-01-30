@@ -32,7 +32,7 @@
                 <p class="ps-2 pe-2 m-0">|</p>
                 <a class=" text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
                 <p class="ps-2 pe-2 m-0">|</p> 
-                <div class="mt-3 d-flex justify-content-around">
+                <div class=" d-flex justify-content-around">
                     <div class="dropdown">
                         <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Select Technology
@@ -85,7 +85,7 @@
                     {% endif %}
                 </div>
             
-                <div class="topicsContainer">
+                <div class="topicsContainer pt-2 pb-5">
                     {% for post in all_posts %}
                         <div class="topicsContent mt-4">
                             <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>

@@ -97,7 +97,11 @@ def discussion_board():
 def posts_by_tech(technology): 
   data = {"technology":technology}
   all_posts=post.Post.get_all_posts_by_tech(data)
-  return render_template("/discussions.html",all_posts=all_posts)
+  logged_user_data = {"id": session['user_id']}
+  logged_user = user.User.get_user_by_id(logged_user_data)
+  if logged_user not in session:
+    return render_template('/discussions.html', all_posts=all_posts, logged_user=logged_user)
+  return render_template("/discussions.html",all_posts=all_posts, logged_user=logged_user)
 
 @app.route("/search",methods=["POST"])
 def search(): 
