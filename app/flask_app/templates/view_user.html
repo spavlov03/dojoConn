@@ -79,7 +79,7 @@
         <h5 class="card-text">{{user_info.email}}</h5>
         <p class="card-text">  
           {% if logged_user.id==user_info.id %}
-          <a href="/user/{{user_info.id}}/edit">Edit</a>
+          <a class="text-decoration-none" href="/user/{{user_info.id}}/edit">Edit</a>
           {% endif %}</p>
       </div>
     </div>
@@ -89,7 +89,7 @@
       <div class="card-body">
         <h1>Posts By User</h1>
         {% for post in posts_by_user %}
-          <h5>{{post.title}}</h5>
+          <h5><a class="text-decoration-none text-black" href="/post/{{post.id}}">{{post.title}}</a></h5>
         {% endfor %}
       </div>
     </div>
