@@ -85,8 +85,8 @@ class Post:
     return result
 
   @classmethod
-  def get_all_posts_by_user(cls,data): 
-    query = "SELECT * FROM posts WHERE user_id = %(user_id)s;"
+  def get_all_posts_by_user(cls, data):
+    query = "SELECT * FROM posts JOIN users ON posts.user_id = users.id WHERE user_id = %(id)s;"
     result = connectToMySQL(cls.DB).query_db(query,data)
     posts = []
     for row in result:
@@ -121,13 +121,3 @@ class Post:
       flash("Must enter description")
       is_valid = False
     return is_valid
-
-  @classmethod
-  def get_all_posts_by_user(cls, data):
-    query = "SELECT * FROM posts JOIN users ON posts.user_id = users.id WHERE user_id = %(id)s;"
-    result = connectToMySQL(cls.DB).query_db(query,data)
-    posts = []
-    for row in result:
-      post = cls(row)
-      posts.append(post)
-    return posts
