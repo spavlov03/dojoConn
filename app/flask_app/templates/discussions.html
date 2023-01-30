@@ -77,13 +77,17 @@
 
             <div class="tableContent mt-5">
                 <div class="topicsHeader">
-                    <h4>All {{all_posts[0].technology}} Posts</h4>
+                    <h4>All 
+                        {%filter title%}
+                            {{all_posts[0].technology}} 
+                            {%endfilter%}
+                        Posts</h4>
                     {% if logged_user is not defined %}
                     {% else %}
                         <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>
                     {% endif %}
                 </div>
-                <div class="topicsContainer d-flex">
+                <div class="topicsContainer pt-2 pb-4 d-flex">
                     {% for post in all_posts %}
                         <div class="topicsContent mt-4 mb-4">
                             <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
