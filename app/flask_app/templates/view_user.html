@@ -58,6 +58,16 @@
       </div>
     </div>
   </div>
+  <div class="col-sm mt-5 d-flex justify-content-center">
+    <div class="card" style="width: 20rem;">
+      <div class="card-body">
+        <h1>Posts By User</h1>
+        {% for post in posts_by_user %}
+          <h5>{{post.title}}</h5>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
   </div>
 </body>
 </html>

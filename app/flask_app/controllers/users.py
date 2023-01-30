@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request,session,flash,url_for
 from flask_app import app
-from flask_app.models import user
+from flask_app.models import user, post
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -54,7 +54,8 @@ def view_user(id):
         return redirect('/logout')
     user_info = user.User.get_user_by_id(data)
     logged_user = user.User.get_user_by_id(logged_user_data)
-    return render_template('view_user.html', user_info=user_info,logged_user=logged_user)
+    posts_by_user = post.Post.get_all_posts_by_user(logged_user_data)
+    return render_template('view_user.html', user_info=user_info,logged_user=logged_user,posts_by_user=posts_by_user)
 
 @app.route('/user/<int:id>/edit')
 def edit_user(id): 
@@ -89,3 +90,4 @@ def user_edit(id):
 def logout():
     session.clear()
     return redirect('/')
+
