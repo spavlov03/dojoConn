@@ -77,11 +77,7 @@
 
             <div class="tableContent mt-5">
                 <div class="topicsHeader">
-                    <h4>All 
-                        {%filter title%}
-                            {{all_posts[0].technology}} 
-                            {%endfilter%}
-                        Posts</h4>
+                    <h4>All {%filter title%} {{all_posts[0].technology}} {%endfilter%} Posts</h4>
                     {% if logged_user is not defined %}
                     {% else %}
                         <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>

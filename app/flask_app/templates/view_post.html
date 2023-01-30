@@ -75,34 +75,78 @@
 
         <!-- post content -->
         <div>
-            <p>Title - {{this_post.title}}</p>
-            <p>Tech - {{this_post.technology}}</p>
-            <p>Description - {{this_post.description}}</p>
-            <a href="/user/{{this_post.creator.id}}">Creator - {{this_post.creator.first_name}} {{this_post.creator.last_name}}</a>
-            {% if logged_user.id==this_post.creator.id %}
-            <p>
-            <a href="/post/{{this_post.id}}/edit">Edit</a>
-            <a href="/post/{{this_post.id}}/delete">Delete</a>
-            </p>
-            {% endif %}
-            {% for comment in post_comments %}
-            <p>Comment - {{comment.comment}}</p>
-            <p>made by : {{comment.creator.first_name}} {{comment.creator.last_name}}</p>
-            {% if logged_user.id==comment.creator.id %}
-            <a href="/post/{{comment.post_id}}/comment/{{comment.id}}/delete">Delete Comment</a>
-            <p>Comment ID - {{comment.id}}</p>
-            {% endif %}
-            <p>Comment {{comment.creator.id}}</p>
-            <!-- <p>Logged User ID {{logged_user.id}}</p> -->
-            <p>Comment Creator ID {{comment.creator.id}}</p>
-            {% endfor %}
-            <form action="/post/{{this_post.id}}/comment" method="post">
-                <label for="">Add Comment</label>
-                <textarea name="comment" id="" cols="30" rows="5"></textarea>
-                <input type="hidden" name="user_id" value="{{logged_user.id}}">
-                <input type="submit" value="Add">
-            </form>
+            <div class="container">
+                <div class="postContainer bg-white text-black p-5 rounded-3 mt-5">
+                    <div class="postHeader">
+                        <h3>{{this_post.title}}</h3>
+                        <div class="postBtns d-flex justify-content-around">
+                            {% if logged_user.id==this_post.creator.id %}
+                                <a class="btn btn-outline-dark btn-sm" href="/post/{{this_post.id}}/edit">Edit</a>
+                                <span>   </span>
+                                <a class="btn btn-outline-danger btn-sm" href="/post/{{this_post.id}}/delete">Delete</a>
+                            {% endif %}
+                        </div>
+                    </div>
 
+                    <div class="postTech pb-2">
+                        <h6 class="postTechText">{%filter title%} {{this_post.technology}} {%endfilter%}</h6>
+                    </div>
+
+                    <div class="postDescription">
+                        <p class="ps-5 pe-5">{{this_post.description}}</p>
+                    </div>
+
+                    <div class="addedBy">
+                        <div class="m-0">
+                            <p class="postedAt">posted {{this_post.created_at.strftime('%b %e, %Y at %H:%M')}}</p>
+                        </div>
+
+                        <div class="postedAt">
+                            <p class="pe-1 m-0">by</p>
+                            <a class="text-decoration-none" href="/user/{{this_post.creator.id}}">{{this_post.creator.first_name}} {{this_post.creator.last_name}}</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="commentBorder">
+                    <div class="addComment mt-3">
+                        <div class="ok">
+                            <form action="/post/{{this_post.id}}/comment" method="post">
+                                <label class="form-group" for="">Add Comment</label>
+                        </div>
+                            <div class="form-control mt-4">
+                                <textarea class="form-control border-dark" name="comment" id="" cols="30" rows="5"></textarea>
+                            </div>
+                            <input type="hidden" name="user_id" value="{{logged_user.id}}">
+                            <div class="d-flex justify-content-center mt-2">
+                                <input class="btn btn-outline-dark btn-sm" type="submit" value="Post">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                {% for comment in post_comments %}
+                    <div class="commentsContainer container mt-5 p-4 mb-5">
+                        <div class="comment">
+                            <p>{{comment.comment}}</p>
+                        </div>
+
+                        <div class="addedBy">
+                            <div>
+                                <p class="postedAt">posted {{comment.created_at.strftime('%b %e, %Y at %H:%M')}}</p>
+                                <p class="postedAt">by: <a class="text-decoration-none ps-1" href="/user/{{comment.creator.id}}">{{comment.creator.first_name}}</a></p>
+                            </div>
+    
+                            <div class="postedAt">
+                                {% if logged_user.id==comment.creator.id %}
+                                <a class="btn btn-outline-danger btn-sm" href="/post/{{comment.post_id}}/comment/{{comment.id}}/delete">Remove</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>

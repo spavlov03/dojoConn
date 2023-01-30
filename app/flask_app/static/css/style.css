@@ -97,8 +97,111 @@
 .topicsContent {
     width: 80%;
     border-bottom: solid 1px rgb(184, 184, 184);
+    overflow: hidden;
+    white-space: nowrap; /* Don't forget this one */
+    text-overflow: ellipsis;
 }
 
+
+
+
+/* view post css */
+.postContainer {
+    border: solid 1px #8a7cad;
+    width: 60%;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    box-shadow: 5px 5px 5px rgb(184, 184, 184);
+}
+
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* text-align: center; */
+}
+
+.postBtns {
+    width: 8rem;
+}
+
+
+.postTech {
+    border-bottom: 1px solid  rgb(184, 184, 184);
+}
+
+.postTechText, .postedAt {
+    font-size: small;
+}
+
+.postDescription {
+    word-wrap: break-word;
+    margin-top: 3rem;
+    /* background-color: #d8d8d8; */
+    padding: .75rem;
+    border-radius: 10px;
+}
+
+.addedBy {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    text-align: center;
+    margin: 0;
+}
+
+.postedAt {
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+/* comments css */
+.commentsContainer {
+    width: 60%;
+    border-radius: 10px;
+    background-color: #e0d9f0;
+    word-wrap: break-word;
+    box-shadow: 10px 10px 10px rgb(184, 184, 184);
+}
+
+.commentBorder {
+    margin-top: 2rem;
+    width: 60%;
+    border: solid 1px #8a7cad;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgb(184, 184, 184);
+}
+
+.comment {
+    text-align: center;
+    padding: 2rem;
+    margin-top: -2.5rem;
+}
+
+.commentBorder label {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+.ok {
+    border-bottom: solid 1px rgb(184, 184, 184);
+}
+
+
+
+
+
+/* user profile css */
 .card {
     background-image: linear-gradient(to right,#8a7cad , #81e0b8  );
 }
