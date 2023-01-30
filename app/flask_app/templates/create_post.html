@@ -74,15 +74,21 @@
   </div>
 
     <div class="col-sm mt-5 d-flex justify-content-center">
-
       <div class="card" style="width: 30rem;">
         <div class="card-body-add">
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          {% for message in messages %}
+          <p class="error-msg text-warning">{{message}}</p>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
           <form action="/add/post" method="post">
             <label for="">Title</label>
             <input type="text" name="title">
             <label for="">Tech</label>
             <select name="technology" id="">
-              <option value="" selected disabled hidden>Select Tech</option>
+              <option value="">Select Tech</option>
               <option value="mern">MERN</option>
               <option value="python">Python</option>
               <option value="java">Java</option>
