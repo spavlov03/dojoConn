@@ -73,22 +73,39 @@
       </div>
   </div>
 
-    <form action="/post/edit/{{this_post.id}}" method="post">
-      <label for="">Title</label>
-      <input type="text" name="title" value="{{this_post.title}}">
-      <label for="">Tech</label>
-      <select name="technology" id="">
-        <option value="" disabled hidden>Select Tech</option>
-        <option value="mern" {% if this_post.technology=="mern" %} selected {% endif %}> MERN </option>
-        <option value="python" {% if this_post.technology=="python" %} selected {% endif %} > Python </option>
-        <option value="java" {% if this_post.technology=="java" %} selected {% endif %} > Java </option>
-      </select>
-      <!-- ^^^^ Conditional rendering for the selected techn -->
-      <label for="">Description</label>
-      <textarea name="description" id="" cols="30" rows="10">{{this_post.description}}</textarea>
-      <input type="hidden" name="user_id" value="{{logged_user.id}}">
-      <input type="submit" value="Submit">
-    </form>
+    <div class="col-sm mt-5 d-flex justify-content-center">
+        <div class="edit-card rounded-4 shadow-lg" style="width: 30rem;">
+            <div class="card-body-add">
+                <h5 class="text-center border-bottom border-3 border-light text-light fw-bold">Edit Post</h5>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <p class="error-msg text-warning">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <form action="/post/edit/{{this_post.id}}" method="post">
+                    <label for="">Title</label>
+                    <input type="text" name="title" value="{{ this_post.title }}" class="form-control rounded-4">
+                    <label for="" class="form-label mt-2">Tech</label>
+                    <select name="technology" id="" class="form-select rounded-4">
+                        <option value="" disabled hidden>Select Tech</option>
+                        <option value="mern" {% if this_post.technology=="mern" %} selected {% endif %}> MERN </option>
+                        <option value="python" {% if this_post.technology=="python" %} selected {% endif %} > Python </option>
+                        <option value="java" {% if this_post.technology=="java" %} selected {% endif %} > Java </option>
+                    </select>
+                    <!-- <div class="card-foot"> -->
+                        <label for="" class="form-label mt-2">Description</label>
+                        <textarea name="description" id="" cols="" rows="7" class="form-control rounded-4">{{ this_post.description }}</textarea>
+                        <input type="hidden" name="user_id" value="{{logged_user.id}}">
+                    <!-- </div> -->
+                    <div class="submitter row p-3">
+                        <input type="submit" class="btn btn-light" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
   </div>
 </body>

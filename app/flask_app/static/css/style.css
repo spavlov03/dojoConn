@@ -206,6 +206,10 @@
     background-image: linear-gradient(to right,#8a7cad , #81e0b8  );
 }
 
+.edit-card {
+    background-image: linear-gradient(to left, #8a7cad, #81e0b8  );
+}
+
 .card-body-add {
     margin: 10px;
     padding: 5px;
