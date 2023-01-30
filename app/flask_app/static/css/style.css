@@ -99,6 +99,20 @@
     border-bottom: solid 1px rgb(184, 184, 184);
 }
 
-.dropdown {
-    margin-top: -1rem;
+.card {
+    background-image: linear-gradient(to right,#8a7cad , #81e0b8  );
+}
+
+.card-body-add {
+    margin: 10px;
+    padding: 5px;
+}
+
+.card-foot {
+    margin-top: 20px;
+    display: flex;
+}
+
+.submitter {
+    padding: 5px;
 }
