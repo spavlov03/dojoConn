@@ -93,6 +93,7 @@ class Post:
   @classmethod
   def search(cls,data): 
     query = "SELECT * FROM posts WHERE title LIKE %(title)s;"
+    # query = "SELECT * FROM posts WHERE title=%(title)s;"
     result = connectToMySQL(cls.DB).query_db(query,data)
     print("Search Result is --- ",result)
     return result

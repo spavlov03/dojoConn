@@ -67,7 +67,7 @@
             <p>Comment ID - {{comment.id}}</p>
             {% endif %}
             <p>Comment {{comment.creator.id}}</p>
-            <p>Logged User ID {{logged_user.id}}</p>
+            <!-- <p>Logged User ID {{logged_user.id}}</p> -->
             <p>Comment Creator ID {{comment.creator.id}}</p>
             {% endfor %}
             <form action="/post/{{this_post.id}}/comment" method="post">

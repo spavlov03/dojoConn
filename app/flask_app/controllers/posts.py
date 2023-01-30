@@ -101,6 +101,7 @@ def posts_by_tech(technology):
 
 @app.route("/search",methods=["POST"])
 def search(): 
-  data = {'title':'%'+request.form['search']+'%'}
+  # data = {'title':'%'+request.form['search']+'%'}
+  data = {'title':request.form['search']}
   post.Post.search(data)
   return redirect('/dashboard')
