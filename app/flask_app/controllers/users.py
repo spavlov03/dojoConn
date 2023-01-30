@@ -8,7 +8,8 @@ bcrypt = Bcrypt(app)
 def index():
     if 'user_id' in session: 
         return redirect('/dashboard')
-    return render_template('index.html')
+    all_posts = post.Post.get_all_posts()
+    return render_template('index.html', all_posts = all_posts)
 
 @app.route("/register")
 def register(): 
@@ -41,7 +42,7 @@ def login_user():
         return redirect('/login')
     if not bcrypt.check_password_hash(users.password, request.form['password']):
         flash("Invalid Email/Password","login")
-        return redirect('/')
+        return redirect('/login')
     session['user_id'] = users.id
     return redirect("/dashboard")
     

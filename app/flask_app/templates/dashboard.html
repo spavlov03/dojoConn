@@ -19,42 +19,73 @@
 </head>
 <div class="placement">
     <div class="container">
-        <!-- navbar -->
-        <div class="navbar">
-            <div class="ps-3 d-flex">
-                <a href="/"><img class="" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0" width="152px" height="50px"></a>
-            </div>
+    <!-- navbar -->
+    <div class="navbar">
+        <div class="ps-3 d-flex">
+            <a href="/"><img class="" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0" width="152px" height="50px"></a>
+        </div>
 
-            <div class="d-flex align-items-center text-center">
-                <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
+        <div class="d-flex align-items-center text-center">
+            <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
+            {% if logged_user is not defined%}
+            {% else %}
                 <p class="ps-2 pe-2 m-0">|</p>
-                <a class="ps-2 text-decoration-none text-black" href="/discussion_board">Discussion Board</a>
-                <p class="ps-2 pe-2 m-0">|</p>
-                <a class="ps-2 text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
-            </div>
+                <a class=" text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
+                <p class="ps-2 pe-2 m-0">|</p> 
+                <div class=" d-flex justify-content-around">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Technology
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
+                        <li><a class="dropdown-item" href="/posts/python">Python</a></li>
+                        <li><a class="dropdown-item" href="/posts/java">Java</a></li>
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
 
-            <div class="d-flex justify-content-center">
-                <form class="d-flex" role="search" action="/search" method="POST">
-                    <input class="form-control me-2" type="search" placeholder="Search Topics" aria-label="Search">
-                    <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
-                </form>
-            </div>
+        <div class="d-flex justify-content-center">
+            <form class="d-flex" role="search" action="/search" method="POST">
+                <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
+                <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+            </form>
+        </div>
 
-            <div class="navbarWelcome align-items-center">
+        <div class="navbarWelcome align-items-center">
+            {% if logged_user is not defined %}
+                <div class="navRight d-flex justify-content-around">
+                    <form action="/login">
+                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
+                    </form>
+
+                    <form  action="/register">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+                    </form>
+                </div>
+            {% else %}
                 <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
                 <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
-            </div>
+            {% endif %}
         </div>
+    </div>
 
 
         
         <!-- content -->
         <div class="mainIndex container mt-5">
-            <div class="tableContent">
+            <div class="tableContent mt-5">
                 <div class="topicsHeader">
-                    <h4>All Topics</h4>
+                    <h4 class="topicsText">All Topics</h4>
+                    {% if logged_user is not defined %}
+                    {% else %}
+                        <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>
+                    {% endif %}
                 </div>
-                <div class="topicsContainer">
+            
+                <div class="topicsContainer pt-2 pb-4">
                     {% for post in all_posts %}
                         <div class="topicsContent mt-4">
                             <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>

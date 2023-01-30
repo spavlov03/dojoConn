@@ -26,14 +26,14 @@
       </div>
 
       <div class="d-flex align-items-center text-center">
-          {% if logged_user is not defined%}
-          <!-- <a class="ps-2 text-decoration-none text-black" href="/">Home</a>  -->
-          <!-- <p class="ps-2 pe-2 m-0">|</p> -->
-          {% else %}
-          <a class="ps-2 text-decoration-none text-black" href="/discussion_board">Discussion Board</a>
-          <p class="ps-2 pe-2 m-0">|</p> 
+        <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
+        {% if logged_user is not defined%}
+        {% else %}
+          <p class="ps-2 pe-2 m-0">|</p>
           <a class="ps-2 text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
-          {% endif %}
+          <p class="ps-2 pe-2 m-0">|</p> 
+          <a class="ps-2 text-decoration-none text-black" href="/post/add">Add A Topic</a>
+        {% endif %}
       </div>
 
       <div class="d-flex justify-content-center">
@@ -44,17 +44,19 @@
       </div>
 
       <div class="navbarWelcome align-items-center">
-        {% if logged_user is not defined%}
-        <form action="/login">
-          <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
-        </form>
-        <form  action="/register">
-          <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
-        </form>
+        {% if logged_user is not defined %}
+          <div class="navRight d-flex justify-content-around">
+            <form action="/login">
+              <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
+            </form>
+            <form  action="/register">
+              <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+            </form>
+          </div>
         {% else %}
           <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
           <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
-          {% endif %}
+        {% endif %}
       </div>
     </div>
 

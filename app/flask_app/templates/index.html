@@ -24,46 +24,73 @@
             <div class="ps-3 d-flex">
                 <a href="/"><img class="" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0" width="152px" height="50px"></a>
             </div>
-
+    
             <div class="d-flex align-items-center text-center">
                 <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
-                <p class="ps-2 pe-2 m-0">|</p>
-                <a class="ps-2 text-decoration-none text-black" href="/discussion_board">Discussion Board</a>
+                <p class="ps-2 pe-2 m-0">|</p> 
+                <div class="d-flex justify-content-around">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Technology
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
+                        <li><a class="dropdown-item" href="/posts/python">Python</a></li>
+                        <li><a class="dropdown-item" href="/posts/java">Java</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% if logged_user is not defined%}
+                {% else %}
+                    <p class="ps-2 pe-2 m-0">|</p>
+                    <a class="text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
+                {% endif %}
             </div>
-
+    
             <div class="d-flex justify-content-center">
                 <form class="d-flex" role="search" action="/search" method="POST">
-                    <input class="form-control me-2" type="search" placeholder="Search Topics" aria-label="Search">
+                    <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
                     <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
                 </form>
             </div>
+    
+            <div class="navbarWelcome align-items-center">
+                {% if logged_user is not defined %}
+                <div class="navRight d-flex justify-content-around">
+                    <form action="/login">
+                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
+                    </form>
 
-            <div class="navRight d-flex justify-content-around">
-                <!-- if/for statement for login/logout here -->
-                <form action="/login">
-                    <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
-                </form>
-                <form  action="/register">
-                    <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
-                </form>
-                <!-- end -->
+                    <form  action="/register">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+                    </form>
+                </div>
+                {% else %}
+                    <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
+                    <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
+                {% endif %}
             </div>
         </div>
 
 
         <!-- content -->
         <div class="mainIndex container mt-5">
-            <div class="tableContent container">
-                <div class="tableContent container">
-                    <div class="topicsHeader">
-                        <h4>Most Liked Topics</h4>
-                    </div>
-                    <div class="topicsContainer mt-4">
-                        {% for post in all_posts %}
+            <div class="tableContent mt-5">
+                <div class="topicsHeader">
+                    <h4 class="topicsText">All Topics</h4>
+                    {% if logged_user is not defined %}
+                    {% else %}
+                        <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>
+                    {% endif %}
+                </div>
+            
+                <div class="topicsContainer pt-2 pb-4">
+                    {% for post in all_posts %}
+                        <div class="topicsContent mt-4 mb-2">
                             <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
-                            <p class="topicsText">{{post.description}}</p>
-                        {% endfor %}
-                    </div>
+                            <p class="text-black ">{{post.description}}</p>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
