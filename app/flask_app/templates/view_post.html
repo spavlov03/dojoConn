@@ -30,20 +30,20 @@
                 {% else %}
                     <p class="ps-2 pe-2 m-0">|</p>
                     <a class=" text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
-                    <p class="ps-2 pe-2 m-0">|</p> 
-                    <div class=" d-flex justify-content-around">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select Technology
-                            </button>
-                            <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
-                            <li><a class="dropdown-item" href="/posts/python">Python</a></li>
-                            <li><a class="dropdown-item" href="/posts/java">Java</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 {% endif %}
+                <p class="ps-2 pe-2 m-0">|</p> 
+                <div class=" d-flex justify-content-around">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Technology
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
+                        <li><a class="dropdown-item" href="/posts/python">Python</a></li>
+                        <li><a class="dropdown-item" href="/posts/java">Java</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
     
             <div class="d-flex justify-content-center">
@@ -80,10 +80,13 @@
                     <div class="postHeader">
                         <h3>{{this_post.title}}</h3>
                         <div class="postBtns d-flex justify-content-around">
+                            {% if logged_user is not defined %}
+                            {% else %}
                             {% if logged_user.id==this_post.creator.id %}
                                 <a class="btn btn-outline-dark btn-sm" href="/post/{{this_post.id}}/edit">Edit</a>
                                 <span>   </span>
                                 <a class="btn btn-outline-danger btn-sm" href="/post/{{this_post.id}}/delete">Delete</a>
+                            {% endif %}
                             {% endif %}
                         </div>
                     </div>
@@ -141,8 +144,11 @@
                             </div>
     
                             <div class="postedAt">
+                                {% if logged_user is not defined %}
+                                {%else%}
                                 {% if logged_user.id==comment.creator.id %}
                                 <a class="btn btn-outline-danger btn-sm" href="/post/{{comment.post_id}}/comment/{{comment.id}}/delete">Remove</a>
+                                {% endif %}
                                 {% endif %}
                             </div>
                         </div>

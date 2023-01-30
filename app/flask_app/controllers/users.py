@@ -50,12 +50,12 @@ def login_user():
 @app.route('/user/<int:id>')
 def view_user(id): 
     data = {"id":id}
-    logged_user_data={"id":session['user_id']}
-    if 'user_id' not in session: 
-        return redirect('/logout')
     user_info = user.User.get_user_by_id(data)
-    logged_user = user.User.get_user_by_id(logged_user_data)
     posts_by_user = post.Post.get_all_posts_by_user(data)
+    if 'user_id' not in session: 
+        return render_template('view_user.html', user_info=user_info,posts_by_user=posts_by_user)
+    logged_user_data={"id":session['user_id']}
+    logged_user = user.User.get_user_by_id(logged_user_data)
     return render_template('view_user.html', user_info=user_info,logged_user=logged_user,posts_by_user=posts_by_user)
 
 @app.route('/user/<int:id>/edit')

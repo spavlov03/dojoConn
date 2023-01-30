@@ -36,13 +36,13 @@ def add_post():
 
 @app.route("/post/<int:id>/")
 def view_post(id):
-  # if 'user_id' not in session: 
-  #   return redirect('/logout')
-  data = {"id": session['user_id']}
   post_data = {"id":id}
   this_post = post.Post.get_one_post_by_id_with_user(post_data)
-  logged_user = user.User.get_user_by_id(data)
   post_comments = comment.Comment.get_comments_by_post(post_data)
+  if 'user_id' not in session: 
+    return render_template("view_post.html",this_post=this_post,post_comments=post_comments)
+  data = {"id": session['user_id']}
+  logged_user = user.User.get_user_by_id(data)
   return render_template("view_post.html",this_post=this_post,logged_user=logged_user,post_comments=post_comments)
 
 @app.route("/post/<int:id>/edit")
@@ -97,15 +97,20 @@ def discussion_board():
 def posts_by_tech(technology): 
   data = {"technology":technology}
   all_posts=post.Post.get_all_posts_by_tech(data)
+  if 'user_id' not in session:
+    return render_template('/discussions.html', all_posts=all_posts)
   logged_user_data = {"id": session['user_id']}
   logged_user = user.User.get_user_by_id(logged_user_data)
-  if logged_user not in session:
-    return render_template('/discussions.html', all_posts=all_posts, logged_user=logged_user)
   return render_template("/discussions.html",all_posts=all_posts, logged_user=logged_user)
 
 @app.route("/search",methods=["POST"])
 def search(): 
   # data = {'title':'%'+request.form['search']+'%'}
   data = {'title':request.form['search']}
-  post.Post.search(data)
-  return redirect('/dashboard')
+  all_posts=post.Post.search(data)
+  if 'user_id' not in session:
+    return render_template("/discussions.html",all_posts=all_posts)
+  logged_user_data = {"id": session['user_id']}
+  logged_user = user.User.get_user_by_id(logged_user_data)
+  return render_template("/discussions.html",all_posts=all_posts, logged_user=logged_user)
+  

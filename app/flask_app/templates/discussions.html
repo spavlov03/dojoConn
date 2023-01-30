@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts in {{all_posts[0].technology}}</title>
+    <title>Test</title>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -30,20 +30,20 @@
                 {% else %}
                     <p class="ps-2 pe-2 m-0">|</p>
                     <a class=" text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
-                    <p class="ps-2 pe-2 m-0">|</p> 
-                    <div class=" d-flex justify-content-around">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select Technology
-                            </button>
-                            <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
-                            <li><a class="dropdown-item" href="/posts/python">Python</a></li>
-                            <li><a class="dropdown-item" href="/posts/java">Java</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 {% endif %}
+                <p class="ps-2 pe-2 m-0">|</p> 
+                <div class=" d-flex justify-content-around">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Technology
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
+                        <li><a class="dropdown-item" href="/posts/python">Python</a></li>
+                        <li><a class="dropdown-item" href="/posts/java">Java</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
     
             <div class="d-flex justify-content-center">
@@ -77,19 +77,24 @@
 
             <div class="tableContent mt-5">
                 <div class="topicsHeader">
-                    <h4>All {%filter title%} {{all_posts[0].technology}} {%endfilter%} Posts</h4>
-                    {% if logged_user is not defined %}
+                    {% if all_posts[0] is not defined %}
+                        <h4>No Results</h4>
                     {% else %}
-                        <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>
-                    {% endif %}
+                        <h4>Results</h4>
+                        <!-- <h4>All {%filter title%} {{all_posts[0].technology}} {%endfilter%} Posts</h4> -->
+                        {% if logged_user is not defined %}
+                        {% else %}
+                            <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>
+                        {% endif %}
                 </div>
                 <div class="topicsContainer pt-2 pb-4 d-flex">
-                    {% for post in all_posts %}
-                        <div class="topicsContent mt-4 mb-4">
-                            <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
-                            <p class="text-black">{{post.description}}</p>
-                        </div>
-                    {% endfor %}
+                        {% for post in all_posts %}
+                            <div class="topicsContent mt-4 mb-4">
+                                <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
+                                <p class="text-black">{{post.description}}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>

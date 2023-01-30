@@ -27,23 +27,23 @@
 
             <div class="d-flex align-items-center text-center">
                 <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
+                <p class="ps-2 pe-2 m-0">|</p> 
+                <div class=" d-flex justify-content-around">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Technology
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
+                        <li><a class="dropdown-item" href="/posts/python">Python</a></li>
+                        <li><a class="dropdown-item" href="/posts/java">Java</a></li>
+                        </ul>
+                    </div>
+                </div>
                 {% if logged_user is not defined%}
                 {% else %}
                     <p class="ps-2 pe-2 m-0">|</p>
                     <a class=" text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
-                    <p class="ps-2 pe-2 m-0">|</p> 
-                    <div class=" d-flex justify-content-around">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select Technology
-                            </button>
-                            <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
-                            <li><a class="dropdown-item" href="/posts/python">Python</a></li>
-                            <li><a class="dropdown-item" href="/posts/java">Java</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 {% endif %}
             </div>
 
