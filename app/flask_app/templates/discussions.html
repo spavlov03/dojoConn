@@ -38,9 +38,20 @@
                             Select Technology
                         </button>
                         <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
-                        <li><a class="dropdown-item" href="/posts/python">Python</a></li>
-                        <li><a class="dropdown-item" href="/posts/java">Java</a></li>
+                            <li><a class="dropdown-item" href="/posts/html">HTML</a></li>
+                            <li><a class="dropdown-item" href="/posts/css">CSS</a></li>
+                            <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
+                            <li><a class="dropdown-item" href="/posts/mean">Mean</a></li>
+                            <li><a class="dropdown-item" href="/posts/python">Python</a></li>
+                            <li><a class="dropdown-item" href="/posts/java">Java</a></li>
+                            <li><a class="dropdown-item" href="/posts/c#">C#</a></li>
+                            <li><a class="dropdown-item" href="/posts/c++">C++</a></li>
+                            <li><a class="dropdown-item" href="/posts/swift">Swift</a></li>
+                            <li><a class="dropdown-item" href="/posts/ruby">Ruby</a></li>
+                            <li><a class="dropdown-item" href="/posts/bootstrap">Bootstrap</a></li>
+                            <li><a class="dropdown-item" href="/posts/tailwind">Tailwind</a></li>
+                            <li><a class="dropdown-item" href="/posts/git">GIT</a></li>
+                            <li><a class="dropdown-item" href="/posts/other">Other</a></li>
                         </ul>
                     </div>
                 </div>
@@ -80,8 +91,11 @@
                     {% if all_posts[0] is not defined %}
                         <h4>No Results</h4>
                     {% else %}
+                        {% if search is not defined %}
+                        <h4>All {%filter title%} {{all_posts[0].technology}} {%endfilter%} Posts</h4>
+                        {% else %}
                         <h4>Results</h4>
-                        <!-- <h4>All {%filter title%} {{all_posts[0].technology}} {%endfilter%} Posts</h4> -->
+                        {% endif %}
                         {% if logged_user is not defined %}
                         {% else %}
                             <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>

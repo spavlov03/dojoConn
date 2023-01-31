@@ -58,7 +58,7 @@ class Post:
 
   @classmethod
   def get_all_posts(cls): 
-    query = "SELECT * FROM posts JOIN users ON posts.user_id = users.id;"  
+    query = "SELECT * FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC;"  
     result = connectToMySQL(cls.DB).query_db(query)
     posts = []
     for row in result: 
@@ -79,7 +79,7 @@ class Post:
 
   @classmethod
   def get_all_posts_by_tech(cls,data): 
-    query = "SELECT * FROM posts WHERE technology=%(technology)s;"
+    query = "SELECT * FROM posts WHERE technology=%(technology)s ORDER BY posts.created_at DESC;"
     result = connectToMySQL(cls.DB).query_db(query,data)
     print(result)
     return result
@@ -102,7 +102,7 @@ class Post:
   
   @classmethod
   def search(cls,data): 
-    query = "SELECT * FROM posts WHERE title LIKE %(title)s;"
+    query = "SELECT * FROM posts WHERE title LIKE %(title)s ORDER BY posts.created_at DESC;"
     # query = "SELECT * FROM posts WHERE title=%(title)s;"
     result = connectToMySQL(cls.DB).query_db(query,data)
     print("Search Result is --- ",result)

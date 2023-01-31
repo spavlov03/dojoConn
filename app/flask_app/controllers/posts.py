@@ -107,10 +107,11 @@ def posts_by_tech(technology):
 def search(): 
   # data = {'title':'%'+request.form['search']+'%'}
   data = {'title':request.form['search']}
+  search = "search"
   all_posts=post.Post.search(data)
   if 'user_id' not in session:
-    return render_template("/discussions.html",all_posts=all_posts)
+    return render_template("/discussions.html",all_posts=all_posts,search=search)
   logged_user_data = {"id": session['user_id']}
   logged_user = user.User.get_user_by_id(logged_user_data)
-  return render_template("/discussions.html",all_posts=all_posts, logged_user=logged_user)
+  return render_template("/discussions.html",all_posts=all_posts, logged_user=logged_user,search=search)
   
