@@ -20,7 +20,7 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.pfp = data['pfp']
+        self.pfp = None
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -30,17 +30,14 @@ class User:
         result = connectToMySQL(cls.DB).query_db(query,user_data)
         print("___ADDING NEW USER___",result)
         return result
-
+    
     @classmethod
-    def get_user_info(cls,data):
-        #print("DATA IS --- ",data)
-        query = "SELECT * FROM users;"
-        results = connectToMySQL(cls.DB).query_db(query,data)
-        users = []
-        for row in results:
-            users.append(cls(row))
-        #print("__SELECTING USER__",result)
-        return users
+    def update_user(cls,user_data): 
+        query = "UPDATE users SET first_name=%(first_name)s,last_name=%(last_name)s,email=%(email)s WHERE id=%(id)s;"
+        result = connectToMySQL(cls.DB).query_db(query,user_data)
+        print("UPDATING USER",result)
+        return result
+
     @classmethod
     def get_user_info_by_email(cls,data):
         #print("DATA IS --- ",data)
@@ -77,7 +74,7 @@ class User:
         #if len(user['password']) < 8:
             flash("Password must be at least 8 characters and include One Uppercase, One lowercase and a number","register")
             is_valid = False
-        if user['password'] != user['password_confirm']:
+        if user['password'] != user['confirm_password']:
             flash("Passwords don't match","register")
             is_valid = False
         return is_valid
