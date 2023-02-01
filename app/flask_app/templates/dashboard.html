@@ -100,6 +100,7 @@
                     {% for post in all_posts %}
                         <div class="topicsContent mt-4">
                             <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
+                            <h6 class="postedAt mb-4">{%filter title%} {{post.technology}} {%endfilter%}</h6>
                             <p class="text-black ">{{post.description}}</p>
                         </div>
                     {% endfor %}
