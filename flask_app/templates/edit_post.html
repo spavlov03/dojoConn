@@ -101,9 +101,20 @@
                     <label for="" class="form-label mt-2">Tech</label>
                     <select name="technology" id="" class="form-select rounded-4">
                         <option value="" disabled hidden>Select Tech</option>
+                        <option value="html" {% if this_post.technology=="html" %} selected {% endif %}> HTML </option>
+                        <option value="css" {% if this_post.technology=="css" %} selected {% endif %}> CSS </option>
                         <option value="mern" {% if this_post.technology=="mern" %} selected {% endif %}> MERN </option>
+                        <option value="mean" {% if this_post.technology=="mean" %} selected {% endif %}> MEAN </option>
                         <option value="python" {% if this_post.technology=="python" %} selected {% endif %} > Python </option>
                         <option value="java" {% if this_post.technology=="java" %} selected {% endif %} > Java </option>
+                        <option value="c#" {% if this_post.technology=="c#" %} selected {% endif %}> C# </option>
+                        <option value="c++" {% if this_post.technology=="c++" %} selected {% endif %}> C++ </option>
+                        <option value="swift" {% if this_post.technology=="swift" %} selected {% endif %}> SWIFT </option>
+                        <option value="ruby" {% if this_post.technology=="ruby" %} selected {% endif %}> Ruby </option>
+                        <option value="bootstrap" {% if this_post.technology=="bootstrap" %} selected {% endif %}> Bootstrap </option>
+                        <option value="tailwind" {% if this_post.technology=="tailwind" %} selected {% endif %}> Tailwind </option>
+                        <option value="git" {% if this_post.technology=="git" %} selected {% endif %}> GIT </option>
+                        <option value="other" {% if this_post.technology=="other" %} selected {% endif %}> Other </option>
                     </select>
                     <!-- <div class="card-foot"> -->
                         <label for="" class="form-label mt-2">Description</label>
