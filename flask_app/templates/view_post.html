@@ -138,6 +138,13 @@
                                 <input class="btn btn-outline-dark btn-sm" type="submit" value="Post">
                             </div>
                         </form>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="error-msg text-warning">{{message}}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
                     </div>
                 </div>
                 {%endif%}

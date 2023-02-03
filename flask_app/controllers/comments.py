@@ -6,6 +6,8 @@ from flask_app.models import user,post,comment
 def add_comment(id): 
   if 'user_id' not in session: 
     return redirect('/logout')
+  if not comment.Comment.comment_validation(request.form): 
+    return redirect(f'/post/{id}')
   data = {
     "comment": request.form['comment'], 
     "post_id": id, 

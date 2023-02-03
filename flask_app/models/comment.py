@@ -82,7 +82,7 @@ class Comment:
   @staticmethod
   def comment_validation(comment):
     is_valid = True
-    if len(post['comment']) <1: 
+    if len(comment['comment']) <1: 
       flash("comment is required")
       is_valid = False
     return is_valid
