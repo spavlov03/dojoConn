@@ -73,6 +73,12 @@ class Comment:
     result = connectToMySQL(cls.DB).query_db(query,data)
     return result 
 
+  @classmethod
+  def delete_all_comments_of_post(cls,data): 
+    query = "DELETE FROM comments WHERE post_id = %(post_id)s"
+    result = connectToMySQL(cls.DB).query_db(query,data)
+    return result
+
   @staticmethod
   def comment_validation(comment):
     is_valid = True

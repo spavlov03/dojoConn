@@ -78,6 +78,8 @@ def delete_post(id):
   this_post = post.Post.get_one_post_by_id_with_user(data)
   if session['user_id'] != this_post.user_id:
         return redirect(f'/post/{id}')
+  post_data = {"post_id":id}
+  comment.Comment.delete_all_comments_of_post(post_data)
   post.Post.delete_post(data)
   return redirect("/dashboard")
 
