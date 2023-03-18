@@ -18,14 +18,77 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <div class="placement">
-    <div class="container">
     <!-- navbar -->
-    <div class="navbar">
-        <div class="ps-3 d-flex">
-            <a href="/"><img class="" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0" width="152px" height="50px"></a>
+    <div id="wrap">
+    <nav class="our-navbar">
+        <div class="logo">
+            <a href="/"><img class="brand-title" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0"></a>
         </div>
 
-        <div class="d-flex align-items-center text-center">
+        <button type="button" class="btn-hamburger" data-action="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+
+        <!-- <div class="">
+            <form class="d-flex" role="search" action="/search" method="POST">
+                <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
+                <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+            </form>
+        </div> -->
+
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#">Home</a></li>
+            {% if logged_user is not defined%}
+            {% else %}
+            <li class="nav-item"><a href="/user/{{logged_user.id}}">User Profile</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" data-action="dropdown-toggle">Select Technology</a>
+                <div class="dropdown-menu">
+                    <a href="/posts/html" class="dropdown-item">HTML</a>
+                    <a href="/posts/css" class="dropdown-item">CSS</a>
+                    <a href="/posts/javascript" class="dropdown-item">JavaScript</a>
+                    <a href="/posts/bootstrap" class="dropdown-item">BootStrap</a>
+                    <a href="/posts/c#" class="dropdown-item">C#</a>
+                    <a href="/posts/c++" class="dropdown-item">C++</a>
+                    <a href="/posts/git" class="dropdown-item">GIT</a>
+                    <a href="/posts/java" class="dropdown-item">Java</a>
+                    <a href="/posts/mern" class="dropdown-item">Mern</a>
+                    <a href="/posts/mean" class="dropdown-item">Mean</a>
+                    <a href="/posts/python" class="dropdown-item">Python</a>
+                    <a href="/posts/ruby" class="dropdown-item">Ruby</a>
+                    <a href="/posts/swift" class="dropdown-item">Swift</a>
+                    <a href="/posts/tailwind" class="dropdown-item">Tailwind</a>
+                    <a href="/posts/other" class="dropdown-item">Other</a>
+                </div>
+                {% endif %}
+            </li>
+        </ul>
+
+        <!-- <div class="navbarWelcome align-items-center">
+            {% if logged_user is not defined %}
+                <div class="navRight d-flex justify-content-around">
+                    <form action="/login">
+                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
+                    </form>
+
+                    <form  action="/register">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+                    </form>
+                </div>
+            {% else %}
+                <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
+                <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
+            {% endif %}
+        </div> -->
+    </nav>
+    </div>
+
+        <!-- <div class="d-flex align-items-center text-center">
             <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
             {% if logged_user is not defined%}
             {% else %}
@@ -80,8 +143,7 @@
                 <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
                 <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
             {% endif %}
-        </div>
-    </div>
+        </div> -->
 
 
         
@@ -107,8 +169,31 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
+
+<script>
+    let nav = document.querySelector('nav');
+    let dropdown = nav.querySelector('.dropdown');
+    let dropdownToggle = nav.querySelector("[data-action='dropdown-toggle']");
+    let navToggle = nav.querySelector("[data-action='nav-toggle']");
+
+    dropdownToggle.addEventListener('click', () => {
+        if (dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
+        } else {
+            dropdown.classList.add('show');
+        }
+    })
+
+    navToggle.addEventListener('click', () => {
+        if (nav.classList.contains('opened')) {
+            nav.classList.remove('opened');
+        } else {
+            nav.classList.add('opened');
+        }
+    })
+</script>
+
 </body>
 </html>
 
