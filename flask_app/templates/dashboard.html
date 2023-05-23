@@ -17,14 +17,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
 </head>
-<div class="placement">
+<body>
     <!-- navbar -->
     <div id="wrap">
     <nav class="our-navbar">
         <div class="logo">
-            <a href="/"><img class="brand-title" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0"></a>
+            <a href="/"><img class="brand-title" src="https://i.ibb.co/5YmWWrG/dojoconnect-UPDATED.png" alt="dojoconnect-UPDATED" border="0"></a>
+            <h1>DOJO CONNECT</h1>
+            <!-- <a href="/"><img class="brand-title" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0"></a> -->
         </div>
-
+        
         <button type="button" class="btn-hamburger" data-action="nav-toggle">
             <span></span>
             <span></span>
@@ -33,16 +35,16 @@
             <span></span>
         </button>
 
-
-        <!-- <div class="">
+        <!-- <div class="searchbar">
             <form class="d-flex" role="search" action="/search" method="POST">
                 <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
                 <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
             </form>
         </div> -->
 
+    <div>
         <ul class="nav-menu">
-            <li class="nav-item"><a href="#">Home</a></li>
+            <li class="nav-item"><a href="/">Home</a></li>
             {% if logged_user is not defined%}
             {% else %}
             <li class="nav-item"><a href="/user/{{logged_user.id}}">User Profile</a></li>
@@ -68,6 +70,22 @@
                 {% endif %}
             </li>
         </ul>
+
+        <div class="search">
+            <span class="searchIcon">
+                <ion-icon name="search-outline" class="searchBtn"></ion-icon>
+                <ion-icon name="close-outline" class="closeBtn"></ion-icon>
+            </span>
+        </div>
+
+        <div class="searchBox">
+            <form class="" role="search" action="/search" method="POST">
+                <input class="" name="search" value="{{request.form.search}}" type="search" placeholder="Search a Topic" aria-label="Search">
+                <!-- <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button> -->
+            </form>
+        </div>
+
+    </div>
 
         <!-- <div class="navbarWelcome align-items-center">
             {% if logged_user is not defined %}
@@ -145,10 +163,9 @@
             {% endif %}
         </div> -->
 
-
         
         <!-- content -->
-        <div class="mainIndex container mt-5">
+        <div class="mainIndex mt-5">
             <div class="tableContent mt-5">
                 <div class="topicsHeader">
                     <h4 class="topicsText">All Topics</h4>
@@ -160,40 +177,20 @@
             
                 <div class="topicsContainer pt-2 pb-4">
                     {% for post in all_posts %}
-                        <div class="topicsContent mt-4">
-                            <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
-                            <h6 class="postedAt mb-4">{%filter title%} {{post.technology}} {%endfilter%}</h6>
-                            <p class="text-black ">{{post.description}}</p>
+                    <div class="topicsContent mt-2">
+                        <h5 class="postHeader mt-3"> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
+                        <h6 class="postedAt mb-2"> <a class="text-decoration-none" href="/posts/{{post.technology}}">{%filter title%} {{post.technology}} {%endfilter%}</a></h6>
+                        <p class="postDesc mt-4">{{post.description}}</p>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
-</div>
 
-<script>
-    let nav = document.querySelector('nav');
-    let dropdown = nav.querySelector('.dropdown');
-    let dropdownToggle = nav.querySelector("[data-action='dropdown-toggle']");
-    let navToggle = nav.querySelector("[data-action='nav-toggle']");
-
-    dropdownToggle.addEventListener('click', () => {
-        if (dropdown.classList.contains('show')) {
-            dropdown.classList.remove('show');
-        } else {
-            dropdown.classList.add('show');
-        }
-    })
-
-    navToggle.addEventListener('click', () => {
-        if (nav.classList.contains('opened')) {
-            nav.classList.remove('opened');
-        } else {
-            nav.classList.add('opened');
-        }
-    })
-</script>
-
+    <!-- js/scripts -->
+    <script src="{{url_for('static',filename='/js/navbar.js')}}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
 
