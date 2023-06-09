@@ -30,6 +30,7 @@ body {
     margin-top: 10px;
     font-size: medium;
     color: rgb(196, 196, 196);
+    font-weight: 500;
 }
 
 nav {
@@ -45,7 +46,7 @@ nav {
 
 nav .nav-menu {
     position: absolute;
-    right: 6.5em;
+    right: 17rem;
     top: 0;
     padding: 0;
     margin: 0;
@@ -92,7 +93,7 @@ nav .dropdown-menu {
     right: 0;
     top: 100%;
     padding: .5em 0;
-    margin-top: -.5em;
+    margin-top: 1.6em;
     border: 1px solid  #8a7cad;;
     border-radius: .5em;
     background-color: #342f42;
@@ -111,10 +112,13 @@ nav .dropdown-item {
     text-decoration: none;
 }
 
+.userTabNav {
+    display: none;
+}
+
 
 /* search bar */
 .search {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,11 +142,11 @@ nav .dropdown-item {
 }
 
 .searchBox.active {
-    margin-right: 28rem;
+    margin-right: 42.5rem;
 }
 
 .searchBox input {
-    width: 23rem;
+    width: 22rem;
     height: 35px;
     border: none;
     outline: none;
@@ -157,25 +161,55 @@ nav .dropdown-item {
 }
 
 .searchBtn {
-    position: relative;
     transition: 0.7s ease-in-out;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: .5rem;
 }
 
 .searchBtn.active {
-    left: 0;
+    opacity: 0;
 }
 
 .closeBtn {
     opacity: 0;
     visibility: hidden;
     scale: 0;
+    font-size: 1.85rem;
+    z-index: 2;
 }
 
 .closeBtn.active {
+    z-index: 2;
     opacity: 1;
     visibility: visible;
     transition: 0.7s;
     scale: 1;
+    position: relative;
+    top: .5rem;
+    right: 1.75rem;
+}
+
+.mobile-search {
+    visibility: hidden;
+    font-size: 1.5em;
+    z-index: 10;
+}
+
+.mobilesearchBtn {
+    visibility: hidden;
+    position: relative;
+}
+
+.mobilesearchBtn.active {
+    visibility: hidden;
+}
+
+.mobilecloseBtn {
+    visibility: hidden;
+    z-index: 2;
+
 }
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -187,6 +221,71 @@ input[type="search"]::-webkit-search-cancel-button {
     align-items: center;
     justify-content: center;
 }
+
+
+
+/* user tab/icon */
+.userTab {
+    transition: 0.7s ease-in-out;
+}
+
+.userTab ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.userTab li {
+    display: inline-block;
+    position: relative;
+    /* transition: 0.7s ease-in-out; */
+}
+
+.userTab a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    margin-left: 5rem;
+    /* transition: 0.7s ease-in-out; */
+}
+
+.userTabDropdownMenu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    padding: .5em 0;
+    top: 4rem;
+    border: 1px solid  #8a7cad;;
+    border-radius: .5em;
+    background-color: #342f42;
+    /* box-shadow: 0px 8px 16px 5px rgb(82, 82, 82); */
+}
+
+
+.userTabDropdownMenu li {
+    display: block;
+}
+
+.userTabDropdownMenu.active {
+    /* transition: 0.7s; */
+    transition: bottom .5s ease-in-out
+}
+
+.userNavIcon {
+    margin-right: 3.5rem;
+    margin-top: 1.25rem;
+    font-size: 1.75rem;
+    color: #7284ca;
+}
+
+.userNavIcon:hover {
+    color: rgb(196, 196, 196);
+}
+
+
+
+
+
 
 
 /* MOBILE */
@@ -253,7 +352,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
         flex-direction: column;
         justify-content: start;
         background-color: #43364e;
-        transition: bottom .5s ease-in-out;
+        transition: bottom .7s ease-in-out;
         overflow: scroll;
     }
 
@@ -265,32 +364,72 @@ nav.opened .btn-hamburger span:nth-child(3) {
     }
 
     nav .dropdown-menu {
+        max-height: 300px;
         position: relative;
         top: 0;
         margin: 0 1.5em;
-        overflow: scroll;
+        overflow: auto;
     }
 
     nav .btn-hamburger {
         display: block;
+        z-index: 2;
     }
 
-    .search {
+    .mobile-search {
         right: 1.75rem;
     }
 
-    .searchBtn.active {
+    .mobilesearchBtn {
+        transition: 0.7s ease-in-out;
+        position: relative;
+        visibility: visible;
+        left: 1.5rem;
+        top: .2rem;
+        /* z-index: 20; */
+    }
+
+    .mobilesearchBtn.active {
         opacity: 0;
     }
 
-    .closeBtn {
+    .mobilecloseBtn {
         position: relative;
-        right: 1.65rem;
-        transition: 0.7s ease-in-out;
+        font-size: 1.85rem;
+        right: .75rem;
+        top: .3rem;
+        opacity: 0;
+        visibility: hidden;
+        scale: 0;
+    }
+
+    .mobilecloseBtn.active {
+        z-index: 20;
+        visibility: visible;
+        transition: 0.7s;
+        scale: 1;
+        opacity: 1;
+        /* left: -2rem; */
     }
 
     .searchBox.active {
-        right: -34.5rem;
+        right: -49rem;
+    }
+
+    .searchBtn {
+        visibility: hidden;
+    }
+    
+    .searchBtn.active {
+        visibility: hidden;
+    }
+    
+    .closeBtn {
+        visibility: hidden;
+    }
+    
+    .closeBtn.active {
+        visibility: hidden;
     }
 
     .searchBox input {
@@ -304,8 +443,69 @@ nav.opened .btn-hamburger span:nth-child(3) {
         border-bottom: solid 1px #7284ca;
     }
 
+    .userTab a  {
+        display: none;
+    }
+
+    .userTabDropdownMenu, .userTabDropdownMenu p {
+        transition: 0.7s;
+        display: none;
+    }
+
+    .userTabNav {
+        display:flex;
+        /* justify-content: space-between; */
+        position: absolute;
+        bottom: 0.01rem;
+        left: -0.01rem ;
+        width: 100%;
+        height: 70px;
+        z-index: 1;
+        border-top: solid 2px #8a7cad;
+        background-color: #342f42;
+    }
+
+    .userTabNav a {
+        text-decoration: none;
+        color: #8a7cad;
+        top: 1rem;
+    }
+
+    #login {
+        color: #8a7cad;
+        /* color: rgb(196, 196, 196); */
+    }
+    
+    #register {
+        color:  #7284ca;
+    }
+    
+    #login:hover, #register:hover {
+        color: rgb(196, 196, 196)
+        
+    }
+
+    .userTabNav div {
+        width: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .userNavIcon {
+        font-size: 2.7rem;
+        position: relative;
+        left: 1rem;
+    }
+    
+
+    .userTabNav-item {
+        padding: 0 2.5rem;
+    }
+
     .mainIndex {
         overflow: hidden;
+        font-size: .75rem;
     }
 
     .topicsContainer, .topicsHeader {
@@ -551,21 +751,4 @@ nav.opened .btn-hamburger span:nth-child(3) {
 
 .submitter {
     padding: 5px;
-}
-
-
-
-
-.light {
-    position: absolute;
-    width: 0px;
-    opacity: .75;
-    background-color: white;
-    box-shadow: #e9f1f1 0px 0px 20px 2px;
-    opacity: 0;
-    top: 100vh;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
 }

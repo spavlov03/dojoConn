@@ -24,7 +24,6 @@
         <div class="logo">
             <a href="/"><img class="brand-title" src="https://i.ibb.co/5YmWWrG/dojoconnect-UPDATED.png" alt="dojoconnect-UPDATED" border="0"></a>
             <h1>DOJO CONNECT</h1>
-            <!-- <a href="/"><img class="brand-title" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0"></a> -->
         </div>
         
         <button type="button" class="btn-hamburger" data-action="nav-toggle">
@@ -35,14 +34,7 @@
             <span></span>
         </button>
 
-        <!-- <div class="searchbar">
-            <form class="d-flex" role="search" action="/search" method="POST">
-                <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
-                <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
-            </form>
-        </div> -->
-
-    <div>
+    <div class="navbarthings">
         <ul class="nav-menu">
             <li class="nav-item"><a href="/">Home</a></li>
             {% if logged_user is not defined%}
@@ -69,12 +61,32 @@
                 </div>
                 {% endif %}
             </li>
-        </ul>
 
-        <div class="search">
-            <span class="searchIcon">
-                <ion-icon name="search-outline" class="searchBtn"></ion-icon>
-                <ion-icon name="close-outline" class="closeBtn"></ion-icon>
+            <!-- june 7th. try to utlize the userTab Icon and dropdown into the actual nav bar list instead of it being its own div/entity -->
+            <li class="nav-item search">
+                <span class="searchIcon">
+                    <ion-icon name="search-outline" class="searchBtn"></ion-icon>
+                    <ion-icon name="close-outline" class="closeBtn"></ion-icon>
+                </span>
+            </li>
+            <ul>
+                <li class="userTabNav">
+                    <a class="userTabBtn" href="#"><ion-icon name="person-circle-outline" class="userNavIcon"></ion-icon></a>
+                    <ul class="blank">
+                        <!-- <li>
+                            <a href="/login" id="login" class="userTabNav-item">Login</a>
+                            <a href="/register" id="register" class="userTabNav-item">Register</a>
+                        </li> -->
+                    </ul>
+                </li>
+            </ul>
+        </ul>
+        </div>
+
+        <div class="mobile-search">
+            <span class="mobile-searchIcon">
+                <ion-icon name="search-outline" class="mobilesearchBtn"></ion-icon>
+                <ion-icon name="close-outline" class="mobilecloseBtn"></ion-icon>
             </span>
         </div>
 
@@ -84,8 +96,75 @@
                 <!-- <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button> -->
             </form>
         </div>
+        
 
+        <div class="userAction">
+            {% if logged_user is not defined %}
+                <div>
+                    <form action="/login">
+                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
+                    </form>
+
+                    <form  action="/register">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+                    </form>
+                </div>
+            {% else %}
+            <ul class="userTab">
+                <li>
+                    <a class="userTabBtn" href="#"><ion-icon name="person-circle-outline" class="userNavIcon"></ion-icon></a>
+                    <ul class="userTabDropdownMenu">
+                        <p>{{logged_user['first_name']}}</p>
+                        <li><a href="#" class="userTab-item">User Profile</a></li>
+                            <li><a href="#" class="userTab-item">Add Topic</a></li>
+                            <li><a href="/logout" class="userTab-item">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
     </div>
+
+        
+        <!-- content -->
+        <div class="mainIndex mt-5">
+            <div class="tableContent mt-5">
+                <div class="topicsHeader">
+                    <h4 class="topicsText">All Topics</h4>
+                    {% if logged_user is not defined %}
+                    {% else %}
+                        <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>
+                    {% endif %}
+                </div>
+            
+                <div class="topicsContainer pt-2 pb-4">
+                    {% for post in all_posts %}
+                    <div class="topicsContent mt-2">
+                        <h5 class="postHeader mt-3"> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
+                        <h6 class="postedAt mb-2"> <a class="text-decoration-none" href="/posts/{{post.technology}}">{%filter title%} {{post.technology}} {%endfilter%}</a></h6>
+                        <p class="postDesc mt-4">{{post.description}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    <!-- js/scripts -->
+    <script src="{{url_for('static',filename='/js/navbar.js')}}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
+
+            <!-- <a href="/"><img class="brand-title" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0"></a> -->
+
+        <!-- <div class="searchbar">
+            <form class="d-flex" role="search" action="/search" method="POST">
+                <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
+                <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+            </form>
+        </div> -->
 
         <!-- <div class="navbarWelcome align-items-center">
             {% if logged_user is not defined %}
@@ -103,8 +182,10 @@
                 <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
             {% endif %}
         </div> -->
-    </nav>
-    </div>
+
+    <!-- <div class="userTab-menu">
+        <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
+    </div> -->
 
         <!-- <div class="d-flex align-items-center text-center">
             <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
@@ -162,37 +243,6 @@
                 <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
             {% endif %}
         </div> -->
-
-        
-        <!-- content -->
-        <div class="mainIndex mt-5">
-            <div class="tableContent mt-5">
-                <div class="topicsHeader">
-                    <h4 class="topicsText">All Topics</h4>
-                    {% if logged_user is not defined %}
-                    {% else %}
-                        <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>
-                    {% endif %}
-                </div>
-            
-                <div class="topicsContainer pt-2 pb-4">
-                    {% for post in all_posts %}
-                    <div class="topicsContent mt-2">
-                        <h5 class="postHeader mt-3"> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
-                        <h6 class="postedAt mb-2"> <a class="text-decoration-none" href="/posts/{{post.technology}}">{%filter title%} {{post.technology}} {%endfilter%}</a></h6>
-                        <p class="postDesc mt-4">{{post.description}}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
-    <!-- js/scripts -->
-    <script src="{{url_for('static',filename='/js/navbar.js')}}"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
-</html>
 
                 <!-- dojo connect BLOCK -->
                 <!-- <a href="/"><img src="https://i.ibb.co/tbvjKk3/dojoconnect2.png" alt="dojoconnectlogo" border="0" width="125px" height="97px"></a> -->
