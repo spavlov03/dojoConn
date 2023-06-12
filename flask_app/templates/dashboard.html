@@ -37,7 +37,7 @@
     <div class="navbarthings">
         <ul class="nav-menu">
             <li class="nav-item"><a href="/">Home</a></li>
-            {% if logged_user is not defined%}
+            {% if logged_user is not defined %}
             {% else %}
             <li class="nav-item"><a href="/user/{{logged_user.id}}">User Profile</a></li>
             <li class="nav-item dropdown">
@@ -62,25 +62,36 @@
                 {% endif %}
             </li>
 
-            <!-- june 7th. try to utlize the userTab Icon and dropdown into the actual nav bar list instead of it being its own div/entity -->
             <li class="nav-item search">
                 <span class="searchIcon">
                     <ion-icon name="search-outline" class="searchBtn"></ion-icon>
                     <ion-icon name="close-outline" class="closeBtn"></ion-icon>
                 </span>
             </li>
-            <ul>
-                <li class="userTabNav">
-                    <a class="userTabBtn" href="#"><ion-icon name="person-circle-outline" class="userNavIcon"></ion-icon></a>
-                    <ul class="blank">
-                        <!-- <li>
-                            <a href="/login" id="login" class="userTabNav-item">Login</a>
-                            <a href="/register" id="register" class="userTabNav-item">Register</a>
-                        </li> -->
+
+            <ul class="nav-item userTab">
+                <li class="blank">
+                    <p class="userTabBtn"><ion-icon name="person-circle-outline" class="userNavIcon"></ion-icon></p>
+                    {% if logged_user is not defined %}
+                    <ul class="userTabDropdownMenu">
+                        <div class="userTabList">
+                            <p>Guest</p>
+                            <a href="/login" class="userTab-item">Login</a>
+                            <a href="/register" class="userTab-item">Register</a>
+                        </div>
+                    </ul>
+                    {% else %}
+                    <ul class="userTabDropdownMenu">
+                        <div class="userTabList">
+                            <p>{{logged_user['first_name']}}</p>
+                            <a href="/user/{{logged_user.id}}" class="userTab-item">User Profile</a>
+                            <a href="/post/add" class="userTab-item">Add Topic</a>
+                            <a href="/logout" class="userTab-item">Logout</a>
+                        </div>
                     </ul>
                 </li>
-            </ul>
-        </ul>
+                </ul>
+            {% endif %}
         </div>
 
         <div class="mobile-search">
@@ -93,35 +104,7 @@
         <div class="searchBox">
             <form class="" role="search" action="/search" method="POST">
                 <input class="" name="search" value="{{request.form.search}}" type="search" placeholder="Search a Topic" aria-label="Search">
-                <!-- <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button> -->
             </form>
-        </div>
-        
-
-        <div class="userAction">
-            {% if logged_user is not defined %}
-                <div>
-                    <form action="/login">
-                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
-                    </form>
-
-                    <form  action="/register">
-                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
-                    </form>
-                </div>
-            {% else %}
-            <ul class="userTab">
-                <li>
-                    <a class="userTabBtn" href="#"><ion-icon name="person-circle-outline" class="userNavIcon"></ion-icon></a>
-                    <ul class="userTabDropdownMenu">
-                        <p>{{logged_user['first_name']}}</p>
-                        <li><a href="#" class="userTab-item">User Profile</a></li>
-                            <li><a href="#" class="userTab-item">Add Topic</a></li>
-                            <li><a href="/logout" class="userTab-item">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-            {% endif %}
         </div>
     </nav>
     </div>
@@ -241,6 +224,33 @@
             {% else %}
                 <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
                 <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
+            {% endif %}
+        </div> -->
+
+
+        <!-- <div class="userAction">
+            {% if logged_user is not defined %}
+                <div>
+                    <form action="/login">
+                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
+                    </form>
+
+                    <form  action="/register">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
+                    </form>
+                </div>
+            {% else %}
+            <ul class="userTab">
+                <li>
+                    <a class="userTabBtn" href="#"><ion-icon name="person-circle-outline" class="userNavIcon"></ion-icon></a>
+                    <ul class="userTabDropdownMenu">
+                        <p>{{logged_user['first_name']}}</p>
+                        <li><a href="#" class="userTab-item">User Profile</a></li>
+                            <li><a href="#" class="userTab-item">Add Topic</a></li>
+                            <li><a href="/logout" class="userTab-item">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
             {% endif %}
         </div> -->
 

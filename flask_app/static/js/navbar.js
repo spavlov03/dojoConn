@@ -1,3 +1,5 @@
+// let viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+
 // dropdown
 let nav = document.querySelector('nav');
 let dropdown = nav.querySelector('.dropdown');
@@ -15,8 +17,8 @@ let mobilecloseBtn = document.querySelector('.mobilecloseBtn');
 // let searchBox = document.querySelector('.searchBox');
 
 // usertab & dropdown
-let userTabMenu = document.querySelector(".userTabDropdownMenu");
 let userBtn = document.querySelector('.userTab li');
+let userTabMenu = document.querySelector(".userTabDropdownMenu");
 
 
 
@@ -52,7 +54,6 @@ closeBtn.addEventListener('click', () => {
 }) 
 
 // mobile search events
-
 mobilesearchBtn.addEventListener('click', () => {
     searchBox.classList.add('active');
     mobilecloseBtn.classList.add('active');
@@ -68,9 +69,22 @@ mobilecloseBtn.addEventListener('click', () => {
 // usertab & dropdown events
 userBtn.addEventListener('click', () => {
     userTabMenu.classList.add('active')
-    if (userTabMenu.style.display === 'block') {
+    if (window.innerWidth >= 960 && userTabMenu.classList.contains('active') && userTabMenu.style.display === 'block') {
         userTabMenu.style.display = 'none';
-    } else {
-        userTabMenu.style.display = 'block'
+        userTabMenu.classList.remove('active')
+    }
+    else if(window.innerWidth <= 960 && userTabMenu.classList.contains('active') &&  userTabMenu.style.display === 'flex') {
+        userTabMenu.style.display = 'none';
+        userTabMenu.classList.remove('active')
+    }
+    else if(window.innerWidth <= 960) {
+        userTabMenu.style.display = 'flex';
+    }
+    else {
+        userTabMenu.style.display = 'block';
     }
 })
+
+// userBtn.addEventListener('click', ()=> {
+//     userTabMenu.classList.remove('active')
+// })

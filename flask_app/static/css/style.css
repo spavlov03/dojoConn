@@ -46,7 +46,7 @@ nav {
 
 nav .nav-menu {
     position: absolute;
-    right: 17rem;
+    right: 11rem;
     top: 0;
     padding: 0;
     margin: 0;
@@ -97,6 +97,8 @@ nav .dropdown-menu {
     border: 1px solid  #8a7cad;;
     border-radius: .5em;
     background-color: #342f42;
+    max-height: 400px;
+    overflow: auto;
 }
 
 nav .dropdown.show .dropdown-menu {
@@ -112,9 +114,6 @@ nav .dropdown-item {
     text-decoration: none;
 }
 
-.userTabNav {
-    display: none;
-}
 
 
 /* search bar */
@@ -142,7 +141,7 @@ nav .dropdown-item {
 }
 
 .searchBox.active {
-    margin-right: 42.5rem;
+    margin-right: 46rem;
 }
 
 .searchBox input {
@@ -166,6 +165,7 @@ nav .dropdown-item {
     margin: 0;
     position: relative;
     top: .5rem;
+    /* margin-right: 5r; */
 }
 
 .searchBtn.active {
@@ -227,6 +227,13 @@ input[type="search"]::-webkit-search-cancel-button {
 /* user tab/icon */
 .userTab {
     transition: 0.7s ease-in-out;
+    list-style: none;
+}
+
+.userTabBtn {
+    position: relative;
+    top: .5rem;
+    z-index: 2;
 }
 
 .userTab ul {
@@ -237,45 +244,59 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .userTab li {
     display: inline-block;
-    position: relative;
-    /* transition: 0.7s ease-in-out; */
+    /* position: relative; */
 }
 
 .userTab a {
-    display: block;
-    padding: 10px;
     text-decoration: none;
-    margin-left: 5rem;
-    /* transition: 0.7s ease-in-out; */
 }
 
 .userTabDropdownMenu {
-    display: none;
+    display: block;
     position: absolute;
-    right: 2rem;
     padding: .5em 0;
-    top: 4rem;
+    top: -100rem;
     border: 1px solid  #8a7cad;;
     border-radius: .5em;
     background-color: #342f42;
-    /* box-shadow: 0px 8px 16px 5px rgb(82, 82, 82); */
+    transition: 0.7s ease-in-out;
+    z-index: 0;
 }
 
+.userTabDropdownMenu.active {
+    /* display: block; */
+    transition: 0.7s;
+    top: 4rem;
+    z-index: 2;
+}
+
+
+.userTabList {
+    text-align: center;
+    transition: 0.7s ease-in-out;
+    color: rgb(196, 196, 196);
+}
+
+.userTabList a {
+    color: #7284ca;
+}
+
+.userTabList a:hover {
+    color:#8a7cad;
+}
 
 .userTabDropdownMenu li {
     display: block;
 }
 
-.userTabDropdownMenu.active {
-    /* transition: 0.7s; */
+.userTabDropdownMenu li.active {
     transition: bottom .5s ease-in-out
 }
 
 .userNavIcon {
-    margin-right: 3.5rem;
-    margin-top: 1.25rem;
     font-size: 1.75rem;
     color: #7284ca;
+    margin-left: 5rem;
 }
 
 .userNavIcon:hover {
@@ -341,7 +362,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
     opacity: 0;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 960px) {
     nav .nav-menu {
         position: fixed;
         left: 0;
@@ -384,9 +405,8 @@ nav.opened .btn-hamburger span:nth-child(3) {
         transition: 0.7s ease-in-out;
         position: relative;
         visibility: visible;
-        left: 1.5rem;
+        right: 1rem;
         top: .2rem;
-        /* z-index: 20; */
     }
 
     .mobilesearchBtn.active {
@@ -396,7 +416,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
     .mobilecloseBtn {
         position: relative;
         font-size: 1.85rem;
-        right: .75rem;
+        right: 3.20rem;
         top: .3rem;
         opacity: 0;
         visibility: hidden;
@@ -413,7 +433,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
     }
 
     .searchBox.active {
-        right: -49rem;
+        right: -58.5rem;
     }
 
     .searchBtn {
@@ -443,18 +463,8 @@ nav.opened .btn-hamburger span:nth-child(3) {
         border-bottom: solid 1px #7284ca;
     }
 
-    .userTab a  {
+    .userTab {
         display: none;
-    }
-
-    .userTabDropdownMenu, .userTabDropdownMenu p {
-        transition: 0.7s;
-        display: none;
-    }
-
-    .userTabNav {
-        display:flex;
-        /* justify-content: space-between; */
         position: absolute;
         bottom: 0.01rem;
         left: -0.01rem ;
@@ -463,17 +473,66 @@ nav.opened .btn-hamburger span:nth-child(3) {
         z-index: 1;
         border-top: solid 2px #8a7cad;
         background-color: #342f42;
+        padding: 0;
+        transition: 0.7s ease-in-out;
     }
 
-    .userTabNav a {
-        text-decoration: none;
-        color: #8a7cad;
+    .userTab.active {
+        transition: 0.7s ease-in-out;
+    }
+
+    .userNavIcon {
+        font-size: 2.25rem;
+    }
+
+    .userTabBtn {
+        right: 4.25rem;
         top: 1rem;
+    }
+
+    .userTabDropdownMenu {
+        transition: 0.7s ease-in-out;
+        display: none;
+        border: 0px;
+        top: 1.5rem;
+        right: -20rem;
+        background-color: transparent;
+        width: 95%;
+    }
+
+
+    .userTabDropdownMenu.active {
+        right: 2rem;
+        transition: 0.7s ease-in-out;
+    }
+
+
+    .userTabList {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        text-align: center;
+        flex-wrap: nowrap;
+        margin-left: 4rem;
+        transition: 0.7s ease-in-out;
+    }
+
+    .userTabList a {
+        color: #7284ca;
+    }
+
+    .userTab-item {
+        font-size: .95rem;
+    }
+
+    .userTabDropdownMenu p {
+        display: none;
     }
 
     #login {
         color: #8a7cad;
-        /* color: rgb(196, 196, 196); */
     }
     
     #register {
@@ -485,23 +544,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
         
     }
 
-    .userTabNav div {
-        width: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
 
-    .userNavIcon {
-        font-size: 2.7rem;
-        position: relative;
-        left: 1rem;
-    }
-    
-
-    .userTabNav-item {
-        padding: 0 2.5rem;
-    }
 
     .mainIndex {
         overflow: hidden;
@@ -625,7 +668,8 @@ nav.opened .btn-hamburger span:nth-child(3) {
 .topicsContent {
     width: 90%;
     border-bottom: solid 1px #8a7cad;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     white-space: nowrap; /* Don't forget this one */
     text-overflow: ellipsis;
 }
