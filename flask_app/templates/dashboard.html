@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dojo Connect - Dashboard</title>
     <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
     
     <!-- css -->
     <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
@@ -19,7 +19,7 @@
 </head>
 <body>
     <!-- navbar -->
-    <div id="wrap">
+    <div id="wrapa">
     <nav class="our-navbar">
         <div class="logo">
             <a href="/"><img class="brand-title" src="https://i.ibb.co/5YmWWrG/dojoconnect-UPDATED.png" alt="dojoconnect-UPDATED" border="0"></a>
@@ -40,38 +40,47 @@
             {% if logged_user is not defined %}
             {% else %}
             <li class="nav-item"><a href="/user/{{logged_user.id}}">User Profile</a></li>
-            <li class="nav-item dropdown">
-                <a href="#" data-action="dropdown-toggle">Select Technology</a>
-                <div class="dropdown-menu">
-                    <a href="/posts/html" class="dropdown-item">HTML</a>
-                    <a href="/posts/css" class="dropdown-item">CSS</a>
-                    <a href="/posts/javascript" class="dropdown-item">JavaScript</a>
-                    <a href="/posts/bootstrap" class="dropdown-item">BootStrap</a>
-                    <a href="/posts/c#" class="dropdown-item">C#</a>
-                    <a href="/posts/c++" class="dropdown-item">C++</a>
-                    <a href="/posts/git" class="dropdown-item">GIT</a>
-                    <a href="/posts/java" class="dropdown-item">Java</a>
-                    <a href="/posts/mern" class="dropdown-item">Mern</a>
-                    <a href="/posts/mean" class="dropdown-item">Mean</a>
-                    <a href="/posts/python" class="dropdown-item">Python</a>
-                    <a href="/posts/ruby" class="dropdown-item">Ruby</a>
-                    <a href="/posts/swift" class="dropdown-item">Swift</a>
-                    <a href="/posts/tailwind" class="dropdown-item">Tailwind</a>
-                    <a href="/posts/other" class="dropdown-item">Other</a>
-                </div>
-                {% endif %}
-            </li>
+                <p class="nav-item dropdown">Select Technology<ion-icon class="dropdownIcon" name="arrow-down-outline"></ion-icon></p>
+                    <div class="dropdown-menu"> 
+                        <li class="dropdown-item"><a href="/posts/html">HTML</a></li>
+                        <li class="dropdown-item"><a href="/posts/css">CSS</a></li>
+                        <li class="dropdown-item"><a href="/posts/javascript">JavaScript</a></li>
+                        <li class="dropdown-item"><a href="/posts/bootstrap">BootStrap</a></li>
+                        <li class="dropdown-item"><a href="/posts/c#">C#</a></li>
+                        <li class="dropdown-item"><a href="/posts/c++">C++</a></li>
+                        <li class="dropdown-item"><a href="/posts/git">GIT</a></li>
+                        <li class="dropdown-item"><a href="/posts/java">Java</a></li>
+                        <li class="dropdown-item"><a href="/posts/mern">Mern</a></li>
+                        <li class="dropdown-item"><a href="/posts/mean">Mean</a></li>
+                        <li class="dropdown-item"><a href="/posts/python">Python</a></li>
+                        <li class="dropdown-item"><a href="/posts/ruby">Ruby</a></li>
+                        <li class="dropdown-item"><a href="/posts/swift">Swift</a></li>
+                        <li class="dropdown-item"><a href="/posts/tailwind">Tailwind</a></li>
+                        <li class="dropdown-item"><a href="/posts/other">Other</a></li>
+                    </div>
 
-            <li class="nav-item search">
-                <span class="searchIcon">
-                    <ion-icon name="search-outline" class="searchBtn"></ion-icon>
-                    <ion-icon name="close-outline" class="closeBtn"></ion-icon>
-                </span>
-            </li>
+            <!-- </li> -->
+                {% endif %}
+                <li class="nav-item search">
+                    <div class="searchBox">
+                        <form class="sss" role="search" action="/search" method="POST">
+                            <input class="" name="search" value="{{request.form.search}}" type="search" placeholder="Search for a Topic" aria-label="Search">
+                            <button class="enterBtn" type="submit"><ion-icon class="what" name="enter-outline"></ion-icon></button>
+                        </form>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <span class="nav-item searchIcon">
+                        <ion-icon name="search-outline" class="searchBtn"></ion-icon>
+                        <ion-icon name="close-outline" class="closeBtn"></ion-icon>
+                    </span>
+                </li>
+            <!-- </li> -->
 
             <ul class="nav-item userTab">
                 <li class="blank">
-                    <p class="userTabBtn"><ion-icon name="person-circle-outline" class="userNavIcon"></ion-icon></p>
+                    <ion-icon name="person-circle-outline" class="userTabBtn userNavIcon"></ion-icon>
                     {% if logged_user is not defined %}
                     <ul class="userTabDropdownMenu">
                         <div class="userTabList">
@@ -81,30 +90,17 @@
                         </div>
                     </ul>
                     {% else %}
+                    <div class="utddm">
                     <ul class="userTabDropdownMenu">
-                        <div class="userTabList">
-                            <p>{{logged_user['first_name']}}</p>
-                            <a href="/user/{{logged_user.id}}" class="userTab-item">User Profile</a>
-                            <a href="/post/add" class="userTab-item">Add Topic</a>
-                            <a href="/logout" class="userTab-item">Logout</a>
-                        </div>
-                    </ul>
+                            <li><p>Hello, {%filter title%} {{logged_user['first_name']}}!  {%endfilter%}</p></li>
+                            <li class="userTab-item"><a href="/user/{{logged_user.id}}">Profile</a></li>
+                            <li class="userTab-item"><a href="/post/add">New Topic</a></li>
+                            <li class="userTab-item" id="logout"><a href="/logout">Sign Out</a></li>
+                        </ul>
+                    </div>
                 </li>
-                </ul>
             {% endif %}
-        </div>
-
-        <div class="mobile-search">
-            <span class="mobile-searchIcon">
-                <ion-icon name="search-outline" class="mobilesearchBtn"></ion-icon>
-                <ion-icon name="close-outline" class="mobilecloseBtn"></ion-icon>
-            </span>
-        </div>
-
-        <div class="searchBox">
-            <form class="" role="search" action="/search" method="POST">
-                <input class="" name="search" value="{{request.form.search}}" type="search" placeholder="Search a Topic" aria-label="Search">
-            </form>
+            </ul>
         </div>
     </nav>
     </div>
@@ -140,119 +136,7 @@
 </body>
 </html>
 
-            <!-- <a href="/"><img class="brand-title" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0"></a> -->
 
-        <!-- <div class="searchbar">
-            <form class="d-flex" role="search" action="/search" method="POST">
-                <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
-                <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
-            </form>
-        </div> -->
-
-        <!-- <div class="navbarWelcome align-items-center">
-            {% if logged_user is not defined %}
-                <div class="navRight d-flex justify-content-around">
-                    <form action="/login">
-                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
-                    </form>
-
-                    <form  action="/register">
-                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
-                    </form>
-                </div>
-            {% else %}
-                <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
-                <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
-            {% endif %}
-        </div> -->
-
-    <!-- <div class="userTab-menu">
-        <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
-    </div> -->
-
-        <!-- <div class="d-flex align-items-center text-center">
-            <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
-            {% if logged_user is not defined%}
-            {% else %}
-                <p class="ps-2 pe-2 m-0">|</p>
-                <a class=" text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
-                <p class="ps-2 pe-2 m-0">|</p> 
-                <div class=" d-flex justify-content-around">
-                    <div class="dropdown">
-                        <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Select Technology
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/posts/html">HTML</a></li>
-                            <li><a class="dropdown-item" href="/posts/css">CSS</a></li>
-                            <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
-                            <li><a class="dropdown-item" href="/posts/mean">Mean</a></li>
-                            <li><a class="dropdown-item" href="/posts/python">Python</a></li>
-                            <li><a class="dropdown-item" href="/posts/java">Java</a></li>
-                            <li><a class="dropdown-item" href="/posts/c#">C#</a></li>
-                            <li><a class="dropdown-item" href="/posts/c++">C++</a></li>
-                            <li><a class="dropdown-item" href="/posts/swift">Swift</a></li>
-                            <li><a class="dropdown-item" href="/posts/ruby">Ruby</a></li>
-                            <li><a class="dropdown-item" href="/posts/bootstrap">Bootstrap</a></li>
-                            <li><a class="dropdown-item" href="/posts/tailwind">Tailwind</a></li>
-                            <li><a class="dropdown-item" href="/posts/git">GIT</a></li>
-                            <li><a class="dropdown-item" href="/posts/other">Other</a></li>
-                        </ul>
-                    </div>
-                </div>
-            {% endif %}
-        </div>
-
-        <div class="d-flex justify-content-center">
-            <form class="d-flex" role="search" action="/search" method="POST">
-                <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
-                <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
-            </form>
-        </div>
-
-        <div class="navbarWelcome align-items-center">
-            {% if logged_user is not defined %}
-                <div class="navRight d-flex justify-content-around">
-                    <form action="/login">
-                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
-                    </form>
-
-                    <form  action="/register">
-                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
-                    </form>
-                </div>
-            {% else %}
-                <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
-                <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
-            {% endif %}
-        </div> -->
-
-
-        <!-- <div class="userAction">
-            {% if logged_user is not defined %}
-                <div>
-                    <form action="/login">
-                        <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
-                    </form>
-
-                    <form  action="/register">
-                        <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
-                    </form>
-                </div>
-            {% else %}
-            <ul class="userTab">
-                <li>
-                    <a class="userTabBtn" href="#"><ion-icon name="person-circle-outline" class="userNavIcon"></ion-icon></a>
-                    <ul class="userTabDropdownMenu">
-                        <p>{{logged_user['first_name']}}</p>
-                        <li><a href="#" class="userTab-item">User Profile</a></li>
-                            <li><a href="#" class="userTab-item">Add Topic</a></li>
-                            <li><a href="/logout" class="userTab-item">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-            {% endif %}
-        </div> -->
 
                 <!-- dojo connect BLOCK -->
                 <!-- <a href="/"><img src="https://i.ibb.co/tbvjKk3/dojoconnect2.png" alt="dojoconnectlogo" border="0" width="125px" height="97px"></a> -->
