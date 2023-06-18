@@ -1,5 +1,21 @@
 // let viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 
+// scroll animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show')
+        } else {
+            entry.target.classList.remove('show')
+        }
+    })
+})
+
+const hiddenElements = document.querySelectorAll('.hidden')
+const navElements = document.querySelectorAll('.navHidden')
+hiddenElements.forEach((el) => observer.observe(el))
+navElements.forEach((el) => observer.observe(el))
+
 // dropdown
 let nav = document.querySelector('nav');
 let dropdownToggle = nav.querySelector(".dropdown");

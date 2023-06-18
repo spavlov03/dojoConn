@@ -1,4 +1,5 @@
 from flask import render_template, redirect, request,session
+import humanize 
 from flask_app import app
 from flask_app.models import user,post,comment
 
@@ -9,7 +10,16 @@ def dashboard():
     data = {"id": session['user_id']}
     logged_user = user.User.get_user_by_id(data)
     all_posts = post.Post.get_all_posts()
-    return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts)
+
+    #i added the following code block to count the number of comments of each post -Maleko
+    comments = {}
+    for post_item in all_posts:
+      post_item.humanized_time = humanize.naturaltime(post_item.created_at)
+      post_id = post_item.id
+      count_result = post.Post.commentCount(post_id)
+      comment_sum = count_result[0]['total_comments']
+      comments[post_id]= comment_sum
+    return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts, comments=comments)
 
 @app.route("/post/add")
 def new_post(): 

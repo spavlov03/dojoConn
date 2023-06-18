@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_app.models import user
+from flask_app.models import user, comment
 
 class Post:
   DB = "dojo_connect"
@@ -108,6 +108,16 @@ class Post:
     print("Search Result is --- ",result)
     return result
 # Need to fix search 
+  
+  # i added this method to count the # of comments of each post -Maleko
+  @classmethod
+  def commentCount(cls, post_id):
+    query = " SELECT COUNT(*) AS total_comments FROM comments WHERE post_id = %(post_id)s; "
+    data = {'post_id': post_id}
+    result = connectToMySQL(cls.DB).query_db(query, data)
+    return result
+
+
   @staticmethod
   def post_validation(post): 
     is_valid = True
