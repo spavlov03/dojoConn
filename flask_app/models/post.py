@@ -81,6 +81,7 @@ class Post:
   def get_all_posts_by_tech(cls,data): 
     query = "SELECT * FROM posts WHERE technology=%(technology)s ORDER BY posts.created_at DESC;"
     result = connectToMySQL(cls.DB).query_db(query,data)
+    
     print(result)
     return result
 

@@ -18,135 +18,172 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-        <!-- navbar -->
-        <div id="wrapa">
-            <nav class="our-navbar">
-                <div class="logo">
-                    <a href="/"><img class="brand-title" src="https://i.ibb.co/5YmWWrG/dojoconnect-UPDATED.png" alt="dojoconnect-UPDATED" border="0"></a>
-                    <h1>DOJO CONNECT</h1>
+    <!-- navbar -->
+    <div id="wrapa">
+        <nav class="our-navbar">
+            <div class="logo">
+                <a href="/"><img class="brand-title" src="https://i.ibb.co/5YmWWrG/dojoconnect-UPDATED.png" alt="dojoconnect-UPDATED" border="0"></a>
+                <h1>DOJO CONNECT</h1>
+            </div>
+            
+            <button type="button" class="btn-hamburger" data-action="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+    
+        <div class="navbarthings">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/">Home</a></li>
+                {% if logged_user is not defined %}
+                <p class="nav-item dropdown">Select Technology<ion-icon class="dropdownIcon" name="arrow-down-outline"></ion-icon></p>
+                <div class=" guestDDM dropdown-menu"> 
+                    <li class="dropdown-item navHidden"><a href="/posts/html">HTML</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/css">CSS</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/javascript">JavaScript</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/bootstrap">BootStrap</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/c#">C#</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/c++">C++</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/git">GIT</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/java">Java</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/mern">Mern</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/mean">Mean</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/python">Python</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/ruby">Ruby</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/swift">Swift</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/tailwind">Tailwind</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/other">Other</a></li>
                 </div>
-                
-                <button type="button" class="btn-hamburger" data-action="nav-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-        
-            <div class="navbarthings">
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="/">Home</a></li>
-                    {% if logged_user is not defined %}
+                {% else %}
+                <li class="nav-item"><a href="/user/{{logged_user.id}}">User Profile</a></li>
                     <p class="nav-item dropdown">Select Technology<ion-icon class="dropdownIcon" name="arrow-down-outline"></ion-icon></p>
-                    <div class="dropdown-menu"> 
-                        <li class="dropdown-item"><a href="/posts/html">HTML</a></li>
-                        <li class="dropdown-item"><a href="/posts/css">CSS</a></li>
-                        <li class="dropdown-item"><a href="/posts/javascript">JavaScript</a></li>
-                        <li class="dropdown-item"><a href="/posts/bootstrap">BootStrap</a></li>
-                        <li class="dropdown-item"><a href="/posts/c#">C#</a></li>
-                        <li class="dropdown-item"><a href="/posts/c++">C++</a></li>
-                        <li class="dropdown-item"><a href="/posts/git">GIT</a></li>
-                        <li class="dropdown-item"><a href="/posts/java">Java</a></li>
-                        <li class="dropdown-item"><a href="/posts/mern">Mern</a></li>
-                        <li class="dropdown-item"><a href="/posts/mean">Mean</a></li>
-                        <li class="dropdown-item"><a href="/posts/python">Python</a></li>
-                        <li class="dropdown-item"><a href="/posts/ruby">Ruby</a></li>
-                        <li class="dropdown-item"><a href="/posts/swift">Swift</a></li>
-                        <li class="dropdown-item"><a href="/posts/tailwind">Tailwind</a></li>
-                        <li class="dropdown-item"><a href="/posts/other">Other</a></li>
-                    </div>
-                    {% else %}
-                    <li class="nav-item"><a href="/user/{{logged_user.id}}">User Profile</a></li>
-                        <p class="nav-item dropdown">Select Technology<ion-icon class="dropdownIcon" name="arrow-down-outline"></ion-icon></p>
-                            <div class="dropdown-menu"> 
-                                <li class="dropdown-item"><a href="/posts/html">HTML</a></li>
-                                <li class="dropdown-item"><a href="/posts/css">CSS</a></li>
-                                <li class="dropdown-item"><a href="/posts/javascript">JavaScript</a></li>
-                                <li class="dropdown-item"><a href="/posts/bootstrap">BootStrap</a></li>
-                                <li class="dropdown-item"><a href="/posts/c#">C#</a></li>
-                                <li class="dropdown-item"><a href="/posts/c++">C++</a></li>
-                                <li class="dropdown-item"><a href="/posts/git">GIT</a></li>
-                                <li class="dropdown-item"><a href="/posts/java">Java</a></li>
-                                <li class="dropdown-item"><a href="/posts/mern">Mern</a></li>
-                                <li class="dropdown-item"><a href="/posts/mean">Mean</a></li>
-                                <li class="dropdown-item"><a href="/posts/python">Python</a></li>
-                                <li class="dropdown-item"><a href="/posts/ruby">Ruby</a></li>
-                                <li class="dropdown-item"><a href="/posts/swift">Swift</a></li>
-                                <li class="dropdown-item"><a href="/posts/tailwind">Tailwind</a></li>
-                                <li class="dropdown-item"><a href="/posts/other">Other</a></li>
-                            </div>
-        
-                    <!-- </li> -->
-                        {% endif %}
-                        <li class="nav-item search">
-                            <div class="searchBox">
-                                <form class="sss" role="search" action="/search" method="POST">
-                                    <input class="" name="search" value="{{request.form.search}}" type="search" placeholder="Search for a Topic" aria-label="Search">
-                                    <button class="enterBtn" type="submit"><ion-icon class="what" name="enter-outline"></ion-icon></button>
-                                </form>
-                            </div>
-                        </li>
-        
-                        <li class="nav-item">
-                            <span class="nav-item searchIcon">
-                                <ion-icon name="search-outline" class="searchBtn"></ion-icon>
-                                <ion-icon name="close-outline" class="closeBtn"></ion-icon>
-                            </span>
-                        </li>
-                    <!-- </li> -->
-        
-                    <ul class="nav-item userTab">
-                        <li class="blank">
-                            <ion-icon name="person-circle-outline" class="userTabBtn userNavIcon"></ion-icon>
-                            {% if logged_user is not defined %}
-                            <div class="utddm">
-                            <ul class="userTabDropdownMenu">
-                                    <li><p>Welcome, Guest!</p></li>
-                                    <li class="userTab-item"><a href="/login">Login</a></li>
-                                    <li class="userTab-item"><a href="/register">Register</a></li>
-                                </ul>
-                            </div>
-                            {% else %}
-                            <div class="utddm">
-                            <ul class="userTabDropdownMenu">
-                                    <li><p>Hello, {%filter title%} {{logged_user['first_name']}}!  {%endfilter%}</p></li>
-                                    <li class="userTab-item"><a href="/user/{{logged_user.id}}">Profile</a></li>
-                                    <li class="userTab-item"><a href="/post/add">New Topic</a></li>
-                                    <li class="userTab-item" id="logout"><a href="/logout">Sign Out</a></li>
-                                </ul>
-                            </div>
-                        </li>
+                        <div class="dropdown-menu"> 
+                            <li class="dropdown-item navHidden"><a href="/posts/html">HTML</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/css">CSS</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/javascript">JavaScript</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/bootstrap">BootStrap</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/c#">C#</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/c++">C++</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/git">GIT</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/java">Java</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/mern">Mern</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/mean">Mean</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/python">Python</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/ruby">Ruby</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/swift">Swift</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/tailwind">Tailwind</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/other">Other</a></li>
+                        </div>
+    
+                <!-- </li> -->
                     {% endif %}
-                    </ul>
-                </div>
-            </nav>
+                    <li class="nav-item search">
+                        <div class="searchBox">
+                            <form class="sss" role="search" action="/search" method="POST">
+                                <input class="" name="search" value="{{request.form.search}}" type="search" placeholder="Search for Topics" aria-label="Search">
+                                <button class="enterBtn" type="submit"><ion-icon class="what" name="enter-outline"></ion-icon></button>
+                            </form>
+                        </div>
+                    </li>
+    
+                    <li class="nav-item">
+                        <span class="nav-item searchIcon">
+                            <ion-icon name="search-outline" class="searchBtn"></ion-icon>
+                            <ion-icon name="close-outline" class="closeBtn"></ion-icon>
+                        </span>
+                    </li>
+                <!-- </li> -->
+    
+                <ul class="nav-item userTab">
+                    <li class="blank">
+                        <ion-icon name="person-circle-outline" class="userTabBtn userNavIcon"></ion-icon>
+                        {% if logged_user is not defined %}
+                        <div class="utddm">
+                        <ul class="userTabDropdownMenu">
+                                <li><p>Welcome, Guest!</p></li>
+                                <li class="userTab-item"><a href="/login">Login</a></li>
+                                <li class="userTab-item"><a href="/register">Register</a></li>
+                            </ul>
+                        </div>
+                        {% else %}
+                        <div class="utddm">
+                        <ul class="userTabDropdownMenu">
+                                <li><p>Hello, {%filter title%} {{logged_user['first_name']}}!  {%endfilter%}</p></li>
+                                <li class="userTab-item navHidden"><a href="/user/{{logged_user.id}}">Profile</a></li>
+                                <li class="userTab-item navHidden"><a href="/post/add">New Topic</a></li>
+                                <li class="userTab-item navHidden" id="logout"><a href="/logout">Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                {% endif %}
+                </ul>
             </div>
-
+        </nav>
+        </div>
+    
             
-        <!-- content -->
-        <div class="mainIndex container mt-5">
-            <div class="tableContent mt-5">
-                <div class="topicsHeader">
-                    <h4 class="topicsText">All Topics</h4>
+            <!-- content -->
+    
+    
+            <div class="content">
+                <div class="left">
+                    <!-- <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur nam mollitia molestiae veritatis doloribus sed, possimus quia modi consequuntur corrupti quidem laudantium veniam! Illum rerum laborum, ab iure reiciendis id?</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati deserunt quos accusamus quidem fuga consectetur illum amet facere libero nisi ducimus fugiat laudantium modi aut quam, quaerat impedit ullam.</p> -->
+                </div>
+    
+                <div class="right">
                     {% if logged_user is not defined %}
                     {% else %}
-                        <a class="btn btn-outline-dark btn-sm" href="/post/add">Add A Topic</a>
+                    <div class='topicButton'>
+                        <a class="newTopicBtn" href="/post/add">
+                            <div class="newTopic">
+                                <ion-icon class="plusIcon" name="add-outline"></ion-icon>
+                                <p>NEW TOPIC</p>
+                            </div>
+                        </a>
+                    </div>
                     {% endif %}
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam itaque reprehenderit vitae quia cupiditate. Reprehenderit assumenda nostrum, voluptatem vel fugit saepe odio minus. Adipisci earum voluptates totam placeat vero nesciunt?</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa sint, placeat vel, tempora illum sapiente qui dolores, quasi hic fugit doloremque voluptates numquam possimus temporibus illo rem vitae perferendis repellat.</p> -->
                 </div>
-            
-                <div class="topicsContainer pt-2 pb-4">
-                    {% for post in all_posts %}
-                        <div class="topicsContent mt-4 mb-2">
-                            <h5> <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a></h5>
-                            <h6 class="postedAt mb-4">{%filter title%} {{post.technology}} {%endfilter%}</h6>
-                            <p class="text-black ">{{post.description}}</p>
+    
+    
+                {% for post in all_posts %}
+                <div class="main">
+                    <div class="postCard hidden">
+                        <div class="vote">
+                            <ion-icon class="voteBtn" name="caret-up-outline"></ion-icon>
+                            <p class="randomNumber">333</p>
+                            <ion-icon class="voteBtn" name="caret-down-outline"></ion-icon>
                         </div>
-                    {% endfor %}
+    
+                        <div class="postContainer">
+                            <div class="topics">
+                                <h5 class="postTitle"><a href="/post/{{post.id}}">{{post.title}}</a></h5>
+                                <h6 class="postedAt"> <a class="text-decoration-none" href="/posts/{{post.technology}}">{%filter upper%} {{post.technology}} {%endfilter%}</a></h6>
+                                <p>{{post.description}}</p>
+                            </div>
+    
+                            <div class="postDetails">
+                                <div class="posted">
+                                    <p>Posted by</p>
+                                    <a class="text-decoration-none" href="/user/{{post.creator.id}}">{%filter title%} {{post.creator.first_name}}{%endfilter%}</a>
+                                    <p> {%filter title%} {{post.humanized_time}} {%endfilter%}</p>
+                                </div>
+    
+                                    <div class="postComments">
+                                        <ion-icon class="commentIcon" name="chatbox"></ion-icon>
+                                        <p>{{comments[post.id] if post.id in comments else 0}}</p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                {% endfor %}
+    
             </div>
-        </div>
-    </div>
 
     <script src="{{url_for('static',filename='/js/navbar.js')}}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

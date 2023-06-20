@@ -1,7 +1,7 @@
 from flask import render_template, redirect, request,session
-import humanize 
 from flask_app import app
 from flask_app.models import user,post,comment
+import humanize 
 
 @app.route("/dashboard")
 def dashboard():
@@ -113,6 +113,8 @@ def posts_by_tech(technology):
     return render_template('/discussions.html', all_posts=all_posts)
   logged_user_data = {"id": session['user_id']}
   logged_user = user.User.get_user_by_id(logged_user_data)
+
+  
   return render_template("/discussions.html",all_posts=all_posts, logged_user=logged_user)
 
 @app.route("/search",methods=["POST"])

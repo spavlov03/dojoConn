@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"> -->
 </head>
 <body>
     <!-- navbar -->
@@ -129,8 +130,24 @@
 
         <div class="content">
             <div class="left">
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur nam mollitia molestiae veritatis doloribus sed, possimus quia modi consequuntur corrupti quidem laudantium veniam! Illum rerum laborum, ab iure reiciendis id?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati deserunt quos accusamus quidem fuga consectetur illum amet facere libero nisi ducimus fugiat laudantium modi aut quam, quaerat impedit ullam.</p>
+                <!-- <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur nam mollitia molestiae veritatis doloribus sed, possimus quia modi consequuntur corrupti quidem laudantium veniam! Illum rerum laborum, ab iure reiciendis id?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati deserunt quos accusamus quidem fuga consectetur illum amet facere libero nisi ducimus fugiat laudantium modi aut quam, quaerat impedit ullam.</p> -->
+            </div>
+
+            <div class="right">
+                {% if logged_user is not defined %}
+                {% else %}
+                <div class='topicButton'>
+                    <a class="newTopicBtn" href="/post/add">
+                        <div class="newTopic">
+                            <ion-icon class="plusIcon" name="add-outline"></ion-icon>
+                            <p>NEW TOPIC</p>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam itaque reprehenderit vitae quia cupiditate. Reprehenderit assumenda nostrum, voluptatem vel fugit saepe odio minus. Adipisci earum voluptates totam placeat vero nesciunt?</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa sint, placeat vel, tempora illum sapiente qui dolores, quasi hic fugit doloremque voluptates numquam possimus temporibus illo rem vitae perferendis repellat.</p> -->
             </div>
 
 
@@ -153,7 +170,7 @@
                         <div class="postDetails">
                             <div class="posted">
                                 <p>Posted by</p>
-                                <a class="text-decoration-none" href="/user/{{post.creator.id}}">{%filter title%} {{post.creator.first_name}} {{post.creator.last_name}} {%endfilter%}</a>
+                                <a class="text-decoration-none" href="/user/{{post.creator.id}}">{%filter title%} {{post.creator.first_name}}{%endfilter%}</a>
                                 <p> {%filter title%} {{post.humanized_time}} {%endfilter%}</p>
                             </div>
 
@@ -166,14 +183,6 @@
                 </div>
             </div>
             {% endfor %}
-
-            <div class="right">
-                <div class="newtopicBtn">
-
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam itaque reprehenderit vitae quia cupiditate. Reprehenderit assumenda nostrum, voluptatem vel fugit saepe odio minus. Adipisci earum voluptates totam placeat vero nesciunt?</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa sint, placeat vel, tempora illum sapiente qui dolores, quasi hic fugit doloremque voluptates numquam possimus temporibus illo rem vitae perferendis repellat.</p>
-            </div>
 
         </div>
 

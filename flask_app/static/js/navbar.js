@@ -35,6 +35,32 @@ navToggle.addEventListener('click', () => {
     }
 })
 
+let technologySelect = document.querySelector('#technologySelect')
+document.getElementsByClassName('createForm').addEventListener('submit', (event)=> {
+    event.preventDefault()
+    let selectedValue = document.getElementById('technologySelect').value
+})
+
+let selectToggle = document.querySelector('selectToggle')
+let menuItems = document.querySelectorAll('.menuItem')
+let selectMenu = document.querySelector('.selectMenu')
+let selectedValueInput = document.querySelector('#selectedValueInput')
+
+menuItems.forEach((item) => {
+    item.addEventListener('click', ()=> {
+        let selectedValue = this.getAttribute('data-value')
+
+        selectedValueInput.value = selectedValue;
+
+        document.querySelector('form').submit();
+    })
+})
+
+selectToggle.addEventListener('click', ()=> {
+    // let selectMenu = this.nextElementSibling;
+    selectMenu.classList.toggle('active')
+})
+
 
 
 // searchbar
@@ -63,3 +89,5 @@ userBtn.addEventListener('click', () => {
     userTabMenu.classList.toggle('active');
     userBtn.classList.toggle('active')
 })
+
+
