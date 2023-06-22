@@ -156,12 +156,14 @@
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa sint, placeat vel, tempora illum sapiente qui dolores, quasi hic fugit doloremque voluptates numquam possimus temporibus illo rem vitae perferendis repellat.</p> -->
             </div>
 
-            <div class="main">
+            <div class="noResults">
                 {% if all_posts[0] is not defined %}
                 <h4>No Results</h4>
                 {% else %}
-                
-                {% for post in all_posts %}
+            </div>
+            
+            {% for post in all_posts %}
+            <div class="main">
                 <div class="postCard hidden">
                     <div class="vote">
                         <ion-icon class="voteBtn" name="caret-up-outline"></ion-icon>
@@ -173,7 +175,7 @@
                         <div class="topics">
                             <h5 class="postTitle"><a href="/post/{{post.id}}">{{post.title}}</a></h5>
                             <h6 class="postedAt"> <a class="text-decoration-none" href="/posts/{{post.technology}}">{%filter upper%} {{post.technology}} {%endfilter%}</a></h6>
-                            <p>{{post.description}}</p>
+                            <p class="topicDesc">{{post.description}}</p>
                         </div>
 
                         <div class="postDetails">

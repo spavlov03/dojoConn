@@ -126,10 +126,9 @@
 
         
         <!-- content -->
-
-
         <div class="content">
             <div class="left">
+                <span></span>
                 <!-- <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur nam mollitia molestiae veritatis doloribus sed, possimus quia modi consequuntur corrupti quidem laudantium veniam! Illum rerum laborum, ab iure reiciendis id?</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores obcaecati deserunt quos accusamus quidem fuga consectetur illum amet facere libero nisi ducimus fugiat laudantium modi aut quam, quaerat impedit ullam.</p> -->
             </div>
@@ -164,7 +163,7 @@
                         <div class="topics">
                             <h5 class="postTitle"><a href="/post/{{post.id}}">{{post.title}}</a></h5>
                             <h6 class="postedAt"> <a class="text-decoration-none" href="/posts/{{post.technology}}">{%filter upper%} {{post.technology}} {%endfilter%}</a></h6>
-                            <p>{{post.description}}</p>
+                            <p class="topicDesc">{{post.description}}</p>
                         </div>
 
                         <div class="postDetails">

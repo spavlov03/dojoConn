@@ -27,6 +27,7 @@ dropdownToggle.addEventListener('click', () => {
     dropdownMenu.classList.toggle('active');
 })
 
+
 navToggle.addEventListener('click', () => {
     if (nav.classList.contains('opened')) {
         nav.classList.toggle('opened');
@@ -34,33 +35,6 @@ navToggle.addEventListener('click', () => {
         nav.classList.add('opened');
     }
 })
-
-let technologySelect = document.querySelector('#technologySelect')
-document.getElementsByClassName('createForm').addEventListener('submit', (event)=> {
-    event.preventDefault()
-    let selectedValue = document.getElementById('technologySelect').value
-})
-
-let selectToggle = document.querySelector('selectToggle')
-let menuItems = document.querySelectorAll('.menuItem')
-let selectMenu = document.querySelector('.selectMenu')
-let selectedValueInput = document.querySelector('#selectedValueInput')
-
-menuItems.forEach((item) => {
-    item.addEventListener('click', ()=> {
-        let selectedValue = this.getAttribute('data-value')
-
-        selectedValueInput.value = selectedValue;
-
-        document.querySelector('form').submit();
-    })
-})
-
-selectToggle.addEventListener('click', ()=> {
-    // let selectMenu = this.nextElementSibling;
-    selectMenu.classList.toggle('active')
-})
-
 
 
 // searchbar
@@ -91,3 +65,24 @@ userBtn.addEventListener('click', () => {
 })
 
 
+// select menu
+const selectToggle = document.querySelector('.selectToggle');
+const selectMenu = document.querySelector('.selectMenu');
+const selectedOptionInput = document.getElementById('selectedOption');
+const menuItems = document.querySelectorAll('.menuItem');
+const textArea = document.querySelector('.textArea');
+
+selectToggle.addEventListener('click', () => {
+    selectMenu.classList.toggle('open');
+    textArea.classList.toggle('faded');
+});
+
+menuItems.forEach((menuItem) => {
+    menuItem.addEventListener('click', (event) => {
+        const selectedOption = event.target.getAttribute('data-value');
+        textArea.classList.toggle('faded')
+        selectedOptionInput.value = selectedOption;
+        selectToggle.textContent = menuItem.textContent;
+        selectMenu.classList.remove('open');
+    });
+});
