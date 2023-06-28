@@ -71,6 +71,16 @@ const selectMenu = document.querySelector('.selectMenu');
 const selectedOptionInput = document.getElementById('selectedOption');
 const menuItems = document.querySelectorAll('.menuItem');
 const textArea = document.querySelector('.textArea');
+const existingTechnology = selectedOptionInput.getAttribute('data-existing-technology')
+
+menuItems.forEach((menuItem) => {
+    const menuItemValue = menuItem.getAttribute('data-value');
+    if (menuItemValue === existingTechnology) {
+        menuItem.classList.add('selected');
+        selectToggle.textContent = menuItem.textContent;
+        selectedOptionInput.value = menuItemValue;
+    }
+});
 
 selectToggle.addEventListener('click', () => {
     selectMenu.classList.toggle('open');
@@ -80,9 +90,23 @@ selectToggle.addEventListener('click', () => {
 menuItems.forEach((menuItem) => {
     menuItem.addEventListener('click', (event) => {
         const selectedOption = event.target.getAttribute('data-value');
-        textArea.classList.toggle('faded')
+        textArea.classList.toggle('faded');
         selectedOptionInput.value = selectedOption;
         selectToggle.textContent = menuItem.textContent;
         selectMenu.classList.remove('open');
+        menuItems.forEach((item) => item.classList.remove('selected'));
+        menuItem.classList.add('selected');
     });
 });
+
+// create/edit post markdown
+const simplemde = new SimpleMDE({
+    element: document.getElementById("markdownEditor")
+});
+
+
+
+// for edit/update post
+const prePopulatedSelection = 'c++';
+selectedOptionInput = prePopulatedSelection;
+selectToggle.textContent = prePopulatedSelection;

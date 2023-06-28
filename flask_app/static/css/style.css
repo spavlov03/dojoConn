@@ -17,12 +17,6 @@ body {
 }
 
 
-/* validation messages */
-.messages {
-    width: 300px;
-}
-
-
 
 /* navbar rehaul */
 .logo {
@@ -39,6 +33,11 @@ body {
 
 .our-navbar {
     position: fixed;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    border-bottom: solid 2px #8a7cad;
+    align-items: center;
     z-index: 2;
     left: 0;
     right: 0;
@@ -46,7 +45,7 @@ body {
     height: 70px;
     padding: 0 1.5em;
     background-color: #342f42;
-} 
+}
 
 .nav-menu {
     position: absolute;
@@ -238,6 +237,10 @@ body {
 
 .searchBox input::placeholder {
     color: rgb(196, 196, 196);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: .7rem;
+    padding-left: 1em;
 }
 
 .enterBtn {
@@ -481,6 +484,13 @@ input[type="search"]::-webkit-search-cancel-button {
     /* margin-bottom: 10vh; */
 }
 
+.noResults {
+    margin: 0 auto;
+    color: #7284ca;
+    text-transform: uppercase;
+    grid-column-start: 2;
+}
+
 .main {
     padding: 0 2em;
     grid-column-start: 2;
@@ -564,6 +574,11 @@ input[type="search"]::-webkit-search-cancel-button {
     padding-bottom: 1em;
     margin-bottom: 5px;
     margin-top: 0px;
+}
+
+.topicDesc p {
+    margin: 0;
+    /* markdown2 messed up the styling for this, but its fixed */
 }
 
 .postTitle {
@@ -729,10 +744,393 @@ input[type="search"]::-webkit-search-cancel-button {
 .createPostCard {
     margin: 0 auto;
     margin-top: 5em;
-    width: 50%;
-    /* height: 500px; */
     border: #7284ca solid 1px;
     background-color: #342f42;
+}
+
+.createPostContainer {
+    width: 60%;
+    height: 100%;
+    margin: 7em auto 0 auto;
+}
+
+.dontNeedDivButWantDiv {
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(196, 196, 196);
+    font-weight: bolder;
+    font-size:.7rem;
+}
+
+
+.createPostCard {
+    width: 85%;
+    height: 100%;
+    border: #43364e solid 2px;;
+    border-radius: .3em;
+    padding: 1em 1em;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b;
+    /* margin: 3em 1em; */
+}
+
+.createPostCard label {
+    width: 50px;
+    font-size: .7rem;
+    color: rgb(196, 196, 196);
+    font-weight: bolder;
+}
+
+::placeholder {
+    font-weight: bolder;
+    font-size: .7rem;
+    color: #7284ca;
+    opacity: .65;
+    z-index: 0;
+}
+
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+
+.title input {
+    padding: 0 1em;
+}
+
+.title input:focus {
+    outline: none;
+    resize: none;
+}
+
+.title span {
+    border-bottom: solid 1px #7284ca;
+    width: 50px;
+    margin-top: .25em;
+    margin-bottom: .5em;
+}
+
+.labelTitle, .languageLabel, .labelDesc {
+    padding-left: .5rem;
+}
+
+.createTitle {
+    width: 97%;
+    height: 2.5em;
+    border: none;
+    border-bottom: #8a7cad solid 1px;
+    background-color: #2c2838;
+    color: rgb(196, 196, 196);
+    appearance: none;
+}
+
+.customSelectDropdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.customSelectDropdown span {
+    border-bottom: solid 1px #7284ca;
+    width: 85px;
+    margin-top: .25em;
+    margin-bottom: .5em;
+}
+
+.selectToggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 0;
+    background-color: #2c2838;
+    color: rgb(196, 196, 196);
+    border: none;
+    border-bottom: #8a7cad solid 1px;
+    cursor: pointer;
+    width: 100%;
+    height: 3.25em;
+    font-size: .7rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+    /* box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b; */
+}
+
+.selectToggle:hover {
+    background-color: #2c2838;
+}
+
+.selectMenu {
+    font-size: .8rem;
+    font-weight: bolder;
+    position: relative;
+    overflow-y: auto;
+    list-style: none;
+    top: -0.05rem;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 14rem;
+    color: rgb(196, 196, 196);
+    background-color: #2c2838;
+    border-bottom: #8a7cad solid 1px;
+    border-left: #8a7cad solid 1px;
+    border-right: #8a7cad solid 1px;
+    border-radius: 0 0 .5em .5em;
+    max-height: 0rem;
+    width: 99.8%;
+    transition: all .7s ease-in-out;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    z-index: 1;
+}
+
+.selectMenu::-webkit-scrollbar-thumb {
+    background: #7284ca;
+}
+
+.selectMenu::-webkit-scrollbar {
+    padding-right: 5px;
+    width: 2px;
+    background-color: transparent;
+    color: #7284ca;
+}
+
+.selectMenu.open {
+    display: block;
+    margin-bottom: 0rem;
+    max-height: 14rem;
+    top: -0.1rem;
+    overflow: scroll;
+    transition: all .7s ease-in-out;
+    line-height: 1;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    /* box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b; */
+}
+
+.selectMenu.open::-webkit-scrollbar-thumb {
+    background: #7284ca;
+}
+
+.selectMenu.open::-webkit-scrollbar {
+    padding-right: 5px;
+    width: 2px;
+    background-color: transparent;
+    color: #7284ca;
+}
+
+.selectIcon {
+    position: relative;
+    top: .05rem;
+}
+
+.menuItem {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.menuItem:hover {
+    background-color: #8a7cad;
+}
+
+.textArea {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    margin-top: -14rem;
+    width: 100%;
+    opacity: 1;
+    transition: .7s all ease-in-out;
+}
+
+.textArea.faded {
+    transition: .7s all ease-in-out;
+    opacity: .25;
+}
+
+.textArea textarea {
+    background-color: #2c2838;
+    border: none;
+    border-bottom: #8a7cad solid 1px;
+    /* border-radius: .5em .5em 0 0; */
+    /* height: 250px; */
+    color: rgb(196, 196, 196);
+    outline: none;
+    resize: none;
+    box-sizing: border-box;
+    padding: 1em;
+    line-height: 1;
+    z-index: 1;
+}
+
+.textArea .underline {
+        border-bottom: solid 1px #7284ca;
+        width: 95px;
+        margin-top: .25em;
+        margin-bottom: .5em;
+}
+
+.textArea textarea:focus {
+    border: none;
+    border-bottom: solid 1px #8a7cad;
+    line-height: 1;
+    z-index: 2;
+    caret-color: rgb(196, 196, 196) !important;
+}
+
+.textArea textarea:focus::placeholder {
+    padding: 0;
+}
+
+.submitter {
+    display: flex;
+    justify-content: center;
+}
+
+.submitter input {
+    /* display: none; */
+    position: inherit;
+    bottom: 1%;
+    width: 30%;
+    height: 50px;
+    background-color: #7284ca;
+    border-radius: 12px;
+    border: #4d5a8e solid 2px;
+    box-shadow: none;
+    color: rgb(196, 196, 196);
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b;
+}
+
+.flashMsg {
+    color: #ca7272;
+    font-size: .7rem;
+    font-weight: bolder;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* simpleMDE styling */
+.editor-toolbar {
+    opacity: 1;
+    background-color: #2c2838;
+    border-bottom: #8a7cad solid 1px;
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 0px 5px;
+    height: 2.5em !important; 
+}
+
+.editor-toolbar .fa-arrows-alt, .editor-toolbar .fa-columns {
+    display: none;
+}
+
+.editor-toolbar:hover {
+    opacity: 1;
+}
+
+.editor-toolbar a {
+    position: relative;
+    top: -.4rem;
+    margin: 0 2px;
+    color: #7284ca !important;
+    font-size: .75rem;
+}
+
+.editor-toolbar a.active, .editor-toolbar a:hover {
+    background-color: #7284ca;
+    color: rgb(196, 196, 196) !important;
+}
+
+.editor-preview-active {
+    background: #342f42;
+    border-right: solid 1px #8a7cad;
+    border-left: solid 1px #8a7cad;
+    border-top: none;
+    border-bottom: none;
+}
+
+.editor-preview-active a {
+    text-decoration: none;
+    color: #8a7cad;
+}
+
+.disabled-for-preview a {
+    background-color: #2c2838 !important;
+    color: rgb(196, 196, 196) !important;
+}
+
+.fa-eye.no-disable.active {
+    background-color: #7284ca !important;
+}
+
+.separator {
+    position: relative;
+    top: -.2rem;
+    height: 15px;
+    border-left: 1px solid rgb(196, 196, 196) !important;
+    border-right: 1px solid rgb(196, 196, 196)  !important;
+}
+
+.CodeMirror {
+    font-family: inherit;
+    color: rgb(196, 196, 196);
+    background: #2c2838;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0%;
+    border-bottom: #8a7cad solid 1px;
+    caret-color: rgb(196, 196, 196) !important;
+}
+
+.CodeMirror-empty {
+    font-size: .7em;
+    font-weight: bolder;
+    color: #7284ca;
+    opacity: 1.5;
+}
+
+.editor-statusbar {
+    display: none;
+}
+
+.CodeMirror .CodeMirror-code .cm-link {
+    color: #8a7cad;
+}
+
+.CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+    background: none;
+}
+
+.CodeMirror-cursor {
+    border-color: #7284ca;
+}
+
+.CodeMirror .CodeMirror-selected {
+    background: #7284ca;
 }
 
 
@@ -1021,6 +1419,10 @@ nav.opened .btn-hamburger span:nth-child(3) {
         margin-bottom: 5rem;
     }
 
+    .noResults {
+        grid-column-start: 1;
+    }
+
     .right {
         /* margin: 1em 1em; */
         width: 100%;
@@ -1054,6 +1456,14 @@ nav.opened .btn-hamburger span:nth-child(3) {
         white-space: wrap;
     }
 
+    .postTitle {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-all;
+        word-break: break-word;
+        /* hyphens: auto; */
+    }
+
     .postDetails {
         white-space: wrap;
         flex-wrap: wrap;
@@ -1066,6 +1476,8 @@ nav.opened .btn-hamburger span:nth-child(3) {
     .filler {
         margin-bottom: 4rem;
     }
+
+
 
 
 
@@ -1090,14 +1502,13 @@ nav.opened .btn-hamburger span:nth-child(3) {
 
     .createPostCard {
         width: 85%;
-        height: 525px;
+        height: 100%;
         border: #43364e solid 2px;;
         border-radius: .3em;
         padding: 1em 1em;
         margin-top: 1em;
         margin-bottom: 2em;
         box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b;
-        /* margin: 3em 1em; */
     }
 
     .createPostCard label {
@@ -1214,8 +1625,8 @@ nav.opened .btn-hamburger span:nth-child(3) {
         max-height: 0rem;
         width: 98%;
         transition: all .7s ease-in-out;
-        box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b;
-        z-index: 3;
+        /* box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b; */
+        z-index: 1;
     }
     
     .selectMenu.open {
@@ -1226,7 +1637,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
         overflow: scroll;
         transition: all .7s ease-in-out;
         line-height: 1;
-        box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b;
+        /* box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b; */
     }
 
     .selectIcon {
@@ -1270,15 +1681,15 @@ nav.opened .btn-hamburger span:nth-child(3) {
         box-sizing: border-box;
         padding: 1em;
         line-height: 1;
-        z-index: 2;
+        z-index: 1;
     }
 
-    .textArea span {
+    .textArea .underline {
         border-bottom: solid 1px #7284ca;
         width: 95px;
         margin-top: .25em;
         margin-bottom: .5em;
-    }
+}
 
     .textArea textarea:focus {
         border: none;
@@ -1309,25 +1720,41 @@ nav.opened .btn-hamburger span:nth-child(3) {
         box-shadow: 12px 12px 15px -8px #1b1b1b, -12px 12px 15px -8px #1b1b1b;
     }
 
-    /* .customSelect {
+    .editor-toolbar {
         display: flex;
+        align-items: center;
         justify-content: center;
-        position: relative;
-        min-width: 250px;
-        height: 5px;
-    }
-
-    .selectMenu {
-        border: none;
-        appearance: none;
-        padding: 0 30px 0 15px;
+        text-align: center;
+        opacity: 1;
+        background-color: #2c2838;
+        border-bottom: #8a7cad solid 1px;
+        border-radius: 0;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        padding: 0px 0px;
+        height: 2.5em !important; 
+        overflow: scroll;
+        /* overflow-y: hidden; */
         width: 100%;
-        color: rgb(196, 196, 196);
-        background-color: #43364e;
-        font-size: 1.5rem;
-        height: 20px;
-    } */
+    }
 
+    .editor-toolbar a {
+        position: relative;
+        top: .05rem;
+    }
+
+    .separator {
+        position: relative;
+        top: .1rem;
+        height: 15px;
+        border-left: 1px solid rgb(196, 196, 196) !important;
+        border-right: 1px solid rgb(196, 196, 196)  !important;
+    }
+
+    .CodeMirror {
+        /* height: -20rem; */
+    }
 
 
 
@@ -1338,27 +1765,6 @@ nav.opened .btn-hamburger span:nth-child(3) {
 
 }
 
-
-/* @media screen and (max-width: 460px) {
-    .postCard {
-        width: 95%;
-        white-space: wrap;
-    }
-
-    .postDetails {
-        white-space: wrap;
-        flex-wrap: wrap;
-    }
-} */
-
-
-.our-navbar {
-    display: flex;
-    justify-content: space-between;
-    color: white;
-    border-bottom: solid 2px #8a7cad;
-    align-items: center;
-}
 
 .brand-title {
     height: 60px;

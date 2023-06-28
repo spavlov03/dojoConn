@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
     <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"> -->
+    <!-- markdown editor -->
+    {{ simplemde.css }}
+    {{ simplemde.js }}
 </head>
 <body>
     <!-- navbar -->
@@ -160,10 +163,12 @@
                     </div>
 
                     <div class="postContainer">
-                        <div class="topics">
+                        <div class="topics" id="markdown-container">
                             <h5 class="postTitle"><a href="/post/{{post.id}}">{{post.title}}</a></h5>
                             <h6 class="postedAt"> <a class="text-decoration-none" href="/posts/{{post.technology}}">{%filter upper%} {{post.technology}} {%endfilter%}</a></h6>
-                            <p class="topicDesc">{{post.description}}</p>
+                            <div class="topicDesc">
+                                <p>{{post.description | safe}}</p>
+                            </div>
                         </div>
 
                         <div class="postDetails">
@@ -212,6 +217,7 @@
     <script src="{{url_for('static',filename='/js/navbar.js')}}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.10.2/dist/showdown.min.js"></script>
 </body>
 </html>
 

@@ -24,6 +24,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
+
+    {{ simplemde.css }}
+    {{ simplemde.js }}
+</head>
 </head>
 <body>
     <!-- navbar -->
@@ -45,7 +49,7 @@
         <div class="navbarthings">
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/">Home</a></li>
-                {% if logged_user is not defined %}
+                {% if logged_user is not in session %}
                 <p class="nav-item dropdown">Select Technology<ion-icon class="dropdownIcon" name="arrow-down-outline"></ion-icon></p>
                 <div class="dropdown-menu"> 
                     <li class="dropdown-item navHidden"><a href="/posts/html">HTML</a></li>
@@ -107,7 +111,7 @@
                 <ul class="nav-item userTab">
                     <li class="blank">
                         <ion-icon name="person-circle-outline" class="userTabBtn userNavIcon"></ion-icon>
-                        {% if logged_user is not defined %}
+                        {% if logged_user is not in session%}
                         <div class="utddm">
                         <ul class="userTabDropdownMenu">
                                 <li><p>Welcome, Guest!</p></li>
@@ -141,7 +145,7 @@
             </div>
 
             <div class="right">
-                {% if logged_user is not defined %}
+                {% if logged_user is not in session %}
                 {% else %}
                 <div class='topicButton'>
                     <a class="newTopicBtn" href="/post/add">
@@ -158,7 +162,7 @@
 
             <div class="noResults">
                 {% if all_posts[0] is not defined %}
-                <h4>No Results</h4>
+                <h4>Sorry, No Results :(</h4>
                 {% else %}
             </div>
             
@@ -175,13 +179,15 @@
                         <div class="topics">
                             <h5 class="postTitle"><a href="/post/{{post.id}}">{{post.title}}</a></h5>
                             <h6 class="postedAt"> <a class="text-decoration-none" href="/posts/{{post.technology}}">{%filter upper%} {{post.technology}} {%endfilter%}</a></h6>
-                            <p class="topicDesc">{{post.description}}</p>
+                            <div class="topicDesc">
+                                <p>{{post.markdown_content | safe}}</p>
+                            </div>
                         </div>
 
                         <div class="postDetails">
                             <div class="posted">
                                 <p>Posted by</p>
-                                <a class="text-decoration-none" href="/user/">{%filter title%} {%endfilter%}</a>
+                                <a class="text-decoration-none" href="/user/{{post.creator.id}}">{%filter title%} {{post.creator.first_name}}{%endfilter%}</a>
                                 <p> {%filter title%} {{post.humanized_time}} {%endfilter%}</p>
                             </div>
 

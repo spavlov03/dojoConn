@@ -1,134 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dojo Connect - Edit Post</title>
-  <!-- bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Connect - Edit Post</title>
+    <!-- bootstrap -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">  -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
 
-  <!-- css -->
-  <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <!-- css -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
 
-  <!-- fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
-</head>
-<body>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&family=Open+Sans&display=swap" rel="stylesheet">
 
-  <div class="container">
+    <!-- markdown editor -->
+    {{ simplemde.css }}
+    {{ simplemde.js }}
+    </head>
+    <body>
+
     <!-- navbar -->
-    <div class="navbar">
-      <div class="ps-3 d-flex">
-          <a href="/"><img class="" src="https://i.ibb.co/DDsmtWf/dojoconnect-1.png" alt="dojoconnectlogo" border="0" width="152px" height="50px"></a>
-      </div>
-
-      <div class="d-flex align-items-center text-center">
-          <a class="ps-2 text-decoration-none text-black" href="/">Home</a> 
-          {% if logged_user is not defined%}
-          {% else %}
-              <p class="ps-2 pe-2 m-0">|</p>
-              <a class=" text-decoration-none text-black" href="/user/{{logged_user.id}}">User Profile</a>
-              <p class="ps-2 pe-2 m-0">|</p> 
-              <div class=" d-flex justify-content-around">
-                  <div class="dropdown">
-                      <button class="btn btn-outline-dark dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Select Technology
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/posts/html">HTML</a></li>
-                        <li><a class="dropdown-item" href="/posts/css">CSS</a></li>
-                        <li><a class="dropdown-item" href="/posts/mern">Mern</a></li>
-                        <li><a class="dropdown-item" href="/posts/mean">Mean</a></li>
-                        <li><a class="dropdown-item" href="/posts/python">Python</a></li>
-                        <li><a class="dropdown-item" href="/posts/java">Java</a></li>
-                        <li><a class="dropdown-item" href="/posts/c#">C#</a></li>
-                        <li><a class="dropdown-item" href="/posts/c++">C++</a></li>
-                        <li><a class="dropdown-item" href="/posts/swift">Swift</a></li>
-                        <li><a class="dropdown-item" href="/posts/ruby">Ruby</a></li>
-                        <li><a class="dropdown-item" href="/posts/bootstrap">Bootstrap</a></li>
-                        <li><a class="dropdown-item" href="/posts/tailwind">Tailwind</a></li>
-                        <li><a class="dropdown-item" href="/posts/git">GIT</a></li>
-                        <li><a class="dropdown-item" href="/posts/other">Other</a></li>
-                      </ul>
-                  </div>
-              </div>
-          {% endif %}
-      </div>
-
-      <div class="d-flex justify-content-center">
-          <form class="d-flex" role="search" action="/search" method="POST">
-              <input class="form-control me-2" name="search" value="{{request.form.search}}" type="search" placeholder="Search Topics" aria-label="Search">
-              <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
-          </form>
-      </div>
-
-      <div class="navbarWelcome align-items-center">
-          {% if logged_user is not defined %}
-              <div class="navRight d-flex justify-content-around">
-                  <form action="/login">
-                      <button type="submit" class="btn btn-outline-success btn-sm">Login</button>
-                  </form>
-
-                  <form  action="/register">
-                      <button type="submit" class="btn btn-outline-primary btn-sm">Register</button>
-                  </form>
-              </div>
-          {% else %}
-              <p class="m-0 pe-4">Welcome, {{logged_user['first_name']}}!</p>
-              <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
-          {% endif %}
-      </div>
-  </div>
-
-    <div class="col-sm mt-5 d-flex justify-content-center">
-        <div class="edit-card rounded-4 shadow-lg" style="width: 30rem;">
-            <div class="card-body-add">
-                <h5 class="text-center border-bottom border-3 border-light text-light fw-bold">Edit Post</h5>
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <p class="error-msg text-warning">{{message}}</p>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
-                <form action="/post/edit/{{this_post.id}}" method="post">
-                    <label for="">Title</label>
-                    <input type="text" name="title" value="{{ this_post.title }}" class="form-control rounded-4">
-                    <label for="" class="form-label mt-2">Tech</label>
-                    <select name="technology" id="" class="form-select rounded-4">
-                        <option value="" disabled hidden>Select Tech</option>
-                        <option value="html" {% if this_post.technology=="html" %} selected {% endif %}> HTML </option>
-                        <option value="css" {% if this_post.technology=="css" %} selected {% endif %}> CSS </option>
-                        <option value="mern" {% if this_post.technology=="mern" %} selected {% endif %}> MERN </option>
-                        <option value="mean" {% if this_post.technology=="mean" %} selected {% endif %}> MEAN </option>
-                        <option value="python" {% if this_post.technology=="python" %} selected {% endif %} > Python </option>
-                        <option value="java" {% if this_post.technology=="java" %} selected {% endif %} > Java </option>
-                        <option value="c#" {% if this_post.technology=="c#" %} selected {% endif %}> C# </option>
-                        <option value="c++" {% if this_post.technology=="c++" %} selected {% endif %}> C++ </option>
-                        <option value="swift" {% if this_post.technology=="swift" %} selected {% endif %}> SWIFT </option>
-                        <option value="ruby" {% if this_post.technology=="ruby" %} selected {% endif %}> Ruby </option>
-                        <option value="bootstrap" {% if this_post.technology=="bootstrap" %} selected {% endif %}> Bootstrap </option>
-                        <option value="tailwind" {% if this_post.technology=="tailwind" %} selected {% endif %}> Tailwind </option>
-                        <option value="git" {% if this_post.technology=="git" %} selected {% endif %}> GIT </option>
-                        <option value="other" {% if this_post.technology=="other" %} selected {% endif %}> Other </option>
-                    </select>
-                    <!-- <div class="card-foot"> -->
-                        <label for="" class="form-label mt-2">Description</label>
-                        <textarea name="description" id="" cols="" rows="7" class="form-control rounded-4">{{ this_post.description }}</textarea>
-                        <input type="hidden" name="user_id" value="{{logged_user.id}}">
-                    <!-- </div> -->
-                    <div class="submitter row p-3">
-                        <input type="submit" class="btn btn-light" value="Submit">
-                    </div>
-                </form>
+    <div id="wrapa">
+        <nav class="our-navbar">
+            <div class="logo">
+                <a href="/"><img class="brand-title" src="https://i.ibb.co/5YmWWrG/dojoconnect-UPDATED.png" alt="dojoconnect-UPDATED" border="0"></a>
+                <h1>DOJO CONNECT</h1>
             </div>
+            
+            <button type="button" class="btn-hamburger" data-action="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+    
+        <div class="navbarthings">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/">Home</a></li>
+                {% if logged_user is not defined %}
+                <p class="nav-item dropdown">Select Technology<ion-icon class="dropdownIcon" name="arrow-down-outline"></ion-icon></p>
+                <div class="dropdown-menu"> 
+                    <li class="dropdown-item navHidden"><a href="/posts/html">HTML</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/css">CSS</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/javascript">JavaScript</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/bootstrap">BootStrap</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/c#">C#</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/c++">C++</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/git">GIT</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/java">Java</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/mern">Mern</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/mean">Mean</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/python">Python</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/ruby">Ruby</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/swift">Swift</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/tailwind">Tailwind</a></li>
+                    <li class="dropdown-item navHidden"><a href="/posts/other">Other</a></li>
+                </div>
+                {% else %}
+                <li class="nav-item"><a href="/user/{{logged_user.id}}">User Profile</a></li>
+                    <p class="nav-item dropdown">Select Technology<ion-icon class="dropdownIcon" name="arrow-down-outline"></ion-icon></p>
+                        <div class="dropdown-menu"> 
+                            <li class="dropdown-item navHidden"><a href="/posts/html">HTML</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/css">CSS</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/javascript">JavaScript</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/bootstrap">BootStrap</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/c#">C#</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/c++">C++</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/git">GIT</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/java">Java</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/mern">Mern</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/mean">Mean</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/python">Python</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/ruby">Ruby</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/swift">Swift</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/tailwind">Tailwind</a></li>
+                            <li class="dropdown-item navHidden"><a href="/posts/other">Other</a></li>
+                        </div>
+    
+                <!-- </li> -->
+                    {% endif %}
+                    <li class="nav-item search">
+                        <div class="searchBox">
+                            <form class="sss" role="search" action="/search" method="POST">
+                                <input class="" name="search" value="{{request.form.search}}" type="search" placeholder="Search for Topics" aria-label="Search">
+                                <button class="enterBtn" type="submit"><ion-icon class="what" name="enter-outline"></ion-icon></button>
+                            </form>
+                        </div>
+                    </li>
+    
+                    <li class="nav-item">
+                        <span class="nav-item searchIcon">
+                            <ion-icon name="search-outline" class="searchBtn"></ion-icon>
+                            <ion-icon name="close-outline" class="closeBtn"></ion-icon>
+                        </span>
+                    </li>
+                <!-- </li> -->
+    
+                <ul class="nav-item userTab">
+                    <li class="blank">
+                        <ion-icon name="person-circle-outline" class="userTabBtn userNavIcon"></ion-icon>
+                        {% if logged_user is not defined %}
+                        <div class="utddm">
+                        <ul class="userTabDropdownMenu">
+                                <li><p>Welcome, Guest!</p></li>
+                                <li class="userTab-item"><a href="/login" class="userTab-item">Login</a></li>
+                                <li class="userTab-item"><a href="/register" class="userTab-item">Register</a></li>
+                            </ul>
+                        </div>
+                        {% else %}
+                        <div class="utddm">
+                        <ul class="userTabDropdownMenu">
+                                <li><p>Hello, {%filter title%} {{logged_user['first_name']}}!  {%endfilter%}</p></li>
+                                <li class="userTab-item navHidden"><a href="/user/{{logged_user.id}}">Profile</a></li>
+                                <li class="userTab-item navHidden"><a href="/post/add">New Topic</a></li>
+                                <li class="userTab-item navHidden" id="logout"><a href="/logout">Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                {% endif %}
+                </ul>
+            </div>
+        </nav>
         </div>
+
+
+            <!-- content -->
+    <div class="createPostContainer">
+
+    <div class="createPostCard">
+
+        <div class="dontNeedDivButWantDiv">
+        <p>EDIT YOUR TOPIC</p>
+        </div>
+
+        <form action="/post/edit/{{this_post.id}}" method="POST" class="createForm">
+        <div class="title">
+            <label class="labelTitle" for="">TITLE</label>
+            <span class="underline"></span>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flashMsg">{{ messages[0] }}</div>
+            {% endif %}
+            {% endwith %}
+            <input class="createTitle" placeholder="<H1/>" type="text" name="title" value="{{ this_post.title }}">
+        </div>
+
+        <div class="customSelectDropdown">
+            <label class="languageLabel">LANGUAGE</label>
+            <span class="underline"></span>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flashMsg">{{ messages[1] }}</div>
+            {% endif %}
+            {% endwith %}
+            <button class="selectToggle" type="button" id="dropdownMenuButton" data-toggle="selectDropdown">SELECT<ion-icon class="dropdownIcon selectIcon" name="arrow-down-outline"></ion-icon></button>
+            <ul class="selectMenu hidden">
+            <li class="menuItem navHidden" data-value="html">HTML</li>
+            <li class="menuItem navHidden" data-value="css">CSS</li>
+            <li class="menuItem navHidden" data-value="javascript">Javascript</li>
+            <li class="menuItem navHidden" data-value="c#">C#</li>
+            <li class="menuItem navHidden" data-value="c++">C++</li>
+            <li class="menuItem navHidden" data-value="python">Python</li>
+            <li class="menuItem navHidden" data-value="java">Java</li>
+            <li class="menuItem navHidden" data-value="mern">MERN</li>
+            <li class="menuItem navHidden" data-value="mean">MEAN</li>
+            <li class="menuItem navHidden" data-value="swift">Swift</li>
+            <li class="menuItem navHidden" data-value="ruby">Ruby</li>
+            <li class="menuItem navHidden" data-value="bootstrap">Bootstrap</li>
+            <li class="menuItem navHidden" data-value="tailwind">Tailwind</li>
+            <li class="menuItem navHidden" data-value="git">Git</li>
+            <li class="menuItem navHidden" data-value="other">Other</li>
+            </ul>
+            <input type="hidden" name="technology" id="selectedOption" data-existing-technology="{{ this_post.technology }}">
+        </div>
+
+        <div class="textArea">
+            <label class="labelDesc">DESCRIPTION</label>
+            <span class="underline"></span>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flashMsg">{{ messages[2] }}</div>
+            {% endif %}
+            {% endwith %}
+            <textarea name="description" id="markdownEditor" cols="30" rows="10" placeholder="DESCRIBE YOUR ISSUE(S)">{{ this_post.description }}</textarea>  
+            <input type="hidden" name="user_id" value="{{logged_user.id}}">
+        </div>
+
+        <div class="submitter">
+            <input type="submit" value="UPDATE" placeholder="Create Topic">
+        </div>
+        </form>
+
     </div>
 
-  </div>
-</body>
-</html>
+
+    </div>
+
+        <!-- <div class="col-sm mt-5 d-flex justify-content-center">
+            <div class="edit-card rounded-4 shadow-lg" style="width: 30rem;">
+                <div class="card-body-add">
+                    <h5 class="text-center border-bottom border-3 border-light text-light fw-bold">Edit Post</h5>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="error-msg text-warning">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <form action="/post/edit/{{this_post.id}}" method="post">
+                        <label for="">Title</label>
+                        <input type="text" name="title" value="{{ this_post.title }}" class="form-control rounded-4">
+                        <label for="" class="form-label mt-2">Tech</label>
+                        <select name="technology" id="" class="form-select rounded-4">
+                            <option value="" disabled hidden>Select Tech</option>
+                            <option value="html" {% if this_post.technology=="html" %} selected {% endif %}> HTML </option>
+                            <option value="css" {% if this_post.technology=="css" %} selected {% endif %}> CSS </option>
+                            <option value="mern" {% if this_post.technology=="mern" %} selected {% endif %}> MERN </option>
+                            <option value="mean" {% if this_post.technology=="mean" %} selected {% endif %}> MEAN </option>
+                            <option value="python" {% if this_post.technology=="python" %} selected {% endif %} > Python </option>
+                            <option value="java" {% if this_post.technology=="java" %} selected {% endif %} > Java </option>
+                            <option value="c#" {% if this_post.technology=="c#" %} selected {% endif %}> C# </option>
+                            <option value="c++" {% if this_post.technology=="c++" %} selected {% endif %}> C++ </option>
+                            <option value="swift" {% if this_post.technology=="swift" %} selected {% endif %}> SWIFT </option>
+                            <option value="ruby" {% if this_post.technology=="ruby" %} selected {% endif %}> Ruby </option>
+                            <option value="bootstrap" {% if this_post.technology=="bootstrap" %} selected {% endif %}> Bootstrap </option>
+                            <option value="tailwind" {% if this_post.technology=="tailwind" %} selected {% endif %}> Tailwind </option>
+                            <option value="git" {% if this_post.technology=="git" %} selected {% endif %}> GIT </option>
+                            <option value="other" {% if this_post.technology=="other" %} selected {% endif %}> Other </option>
+                        </select>
+                        <div class="card-foot"> 
+                            <label for="" class="form-label mt-2">Description</label>
+                            <textarea name="description" id="" cols="" rows="7" class="form-control rounded-4">{{ this_post.description }}</textarea>
+                            <input type="hidden" name="user_id" value="{{logged_user.id}}">
+                        </div>
+                        <div class="submitter row p-3">
+                            <input type="submit" class="btn btn-light" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> -->
+
+
+    <!-- js/scripts -->
+    <script src="{{url_for('static',filename='/js/navbar.js')}}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- added stylesheet downhere because of the markdown editor CDN ~_~ -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    </body>
+    </html>

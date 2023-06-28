@@ -79,7 +79,8 @@ class Post:
 
   @classmethod
   def get_all_posts_by_tech(cls,data): 
-    query = "SELECT * FROM posts WHERE technology=%(technology)s ORDER BY posts.created_at DESC;"
+    query = "SELECT posts.*, users.id AS creator_id, users.first_name AS creator_first_name, users.last_name AS creator_last_name, users.email AS creator_email, users.password AS creator_password, users.created_at AS creator_created_at, users.updated_at AS creator_updated_at FROM posts JOIN users ON posts.user_id = users.id WHERE technology=%(technology)s ORDER BY posts.created_at DESC;"
+
     result = connectToMySQL(cls.DB).query_db(query,data)
     
     print(result)
@@ -123,12 +124,12 @@ class Post:
   def post_validation(post): 
     is_valid = True
     if len(post['title']) <1: 
-      flash("Tile is required")
+      flash("Tile is required", "title")
       is_valid = False
     if len(post['technology']) <1: 
-      flash("Must select Technology")
+      flash("Must select Technology", 'technology')
       is_valid = False
     if len(post['description']) <1: 
-      flash("Must enter description")
+      flash("Must enter description", 'description')
       is_valid = False
     return is_valid
