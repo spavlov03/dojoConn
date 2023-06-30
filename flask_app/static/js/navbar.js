@@ -64,6 +64,11 @@ userBtn.addEventListener('click', () => {
     userBtn.classList.toggle('active')
 })
 
+// create/edit post markdown
+const simplemde = new SimpleMDE({
+    element: document.getElementById("markdownEditor")
+});
+
 
 // select menu
 const selectToggle = document.querySelector('.selectToggle');
@@ -71,6 +76,7 @@ const selectMenu = document.querySelector('.selectMenu');
 const selectedOptionInput = document.getElementById('selectedOption');
 const menuItems = document.querySelectorAll('.menuItem');
 const textArea = document.querySelector('.textArea');
+// for updating post
 const existingTechnology = selectedOptionInput.getAttribute('data-existing-technology')
 
 menuItems.forEach((menuItem) => {
@@ -99,14 +105,9 @@ menuItems.forEach((menuItem) => {
     });
 });
 
-// create/edit post markdown
-const simplemde = new SimpleMDE({
-    element: document.getElementById("markdownEditor")
-});
-
 
 
 // for edit/update post
-const prePopulatedSelection = 'c++';
-selectedOptionInput = prePopulatedSelection;
-selectToggle.textContent = prePopulatedSelection;
+// const prePopulatedSelection = 'c++';
+// selectedOptionInput = prePopulatedSelection;
+// selectToggle.textContent = prePopulatedSelection;

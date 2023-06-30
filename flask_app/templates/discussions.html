@@ -49,9 +49,9 @@
         <div class="navbarthings">
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/">Home</a></li>
-                {% if logged_user is not in session %}
+                {% if logged_user is none %}
                 <p class="nav-item dropdown">Select Technology<ion-icon class="dropdownIcon" name="arrow-down-outline"></ion-icon></p>
-                <div class="dropdown-menu"> 
+                <div class="guestDDM dropdown-menu"> 
                     <li class="dropdown-item navHidden"><a href="/posts/html">HTML</a></li>
                     <li class="dropdown-item navHidden"><a href="/posts/css">CSS</a></li>
                     <li class="dropdown-item navHidden"><a href="/posts/javascript">JavaScript</a></li>
@@ -111,7 +111,7 @@
                 <ul class="nav-item userTab">
                     <li class="blank">
                         <ion-icon name="person-circle-outline" class="userTabBtn userNavIcon"></ion-icon>
-                        {% if logged_user is not in session%}
+                        {% if logged_user is none %}
                         <div class="utddm">
                         <ul class="userTabDropdownMenu">
                                 <li><p>Welcome, Guest!</p></li>
@@ -145,7 +145,7 @@
             </div>
 
             <div class="right">
-                {% if logged_user is not in session %}
+                {% if logged_user is none %}
                 {% else %}
                 <div class='topicButton'>
                     <a class="newTopicBtn" href="/post/add">

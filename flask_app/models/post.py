@@ -104,7 +104,7 @@ class Post:
   
   @classmethod
   def search(cls,data): 
-    query = "SELECT * FROM posts WHERE title LIKE %(title)s ORDER BY posts.created_at DESC;"
+    query = "posts.*, users.id AS creator_id, users.first_name AS creator_first_name, users.last_name AS creator_last_name, users.email AS creator_email, users.password AS creator_password, users.created_at AS creator_created_at, users.updated_at AS creator_updated_at FROM posts JOIN users ON posts.user_id = users.id LIKE %(title)s ORDER BY posts.created_at DESC;"
     # query = "SELECT * FROM posts WHERE title=%(title)s;"
     result = connectToMySQL(cls.DB).query_db(query,data)
     print("Search Result is --- ",result)

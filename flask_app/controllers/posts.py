@@ -3,9 +3,15 @@ from flask_app import app
 from flask_app.models import user,post,comment
 import humanize 
 import markdown2
+# messing around with different markdown editors -maleko
+# from flask_ckeditor import CKEditor
+# ckeditor = CKEditor()
+
 
 @app.route("/dashboard")
 def dashboard():
+    # would like to add a # limit of posts displayed per page eventually -maleko
+    page = request.args.get('page', 1, type=int)
     if "user_id" not in session:
         return redirect("/logout")
     data = {"id": session['user_id']}
@@ -55,9 +61,13 @@ def view_post(id):
   this_post = post.Post.get_one_post_by_id_with_user(post_data)
   post_comments = comment.Comment.get_comments_by_post(post_data)
   if 'user_id' not in session: 
+    this_post.humanized_time = humanize.naturaltime(this_post.created_at)
+    this_post.description = markdown2.markdown(this_post.description)
     return render_template("view_post.html",this_post=this_post,post_comments=post_comments)
   data = {"id": session['user_id']}
   logged_user = user.User.get_user_by_id(data)
+  this_post.humanized_time = humanize.naturaltime(this_post.created_at)
+  this_post.description = markdown2.markdown(this_post.description)
   return render_template("view_post.html",this_post=this_post,logged_user=logged_user,post_comments=post_comments)
 
 @app.route("/post/<int:id>/edit")
@@ -168,12 +178,13 @@ def search():
     data = {'title': request.form['search']}
     search = "search"
     all_posts = post.Post.search(data)
+    logged_user = None
     
     if 'user_id' in session:
         logged_user_data = {"id": session['user_id']}
         logged_user = user.User.get_user_by_id(logged_user_data)
         return render_template("/discussions.html", all_posts=all_posts, logged_user=logged_user, search=search)
     
-    return render_template("/discussions.html", all_posts=all_posts, search=search)
+    return render_template("/discussions.html", all_posts=all_posts, search=search, logged_user=logged_user)
 
   

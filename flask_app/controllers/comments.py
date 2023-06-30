@@ -1,6 +1,8 @@
 from flask import render_template, redirect, request,session
 from flask_app import app
 from flask_app.models import user,post,comment
+import humanize 
+import markdown2
 
 @app.route("/post/<int:id>/comment",methods=['POST'])
 def add_comment(id): 
