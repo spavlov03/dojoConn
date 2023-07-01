@@ -57,18 +57,43 @@ def add_post():
 
 @app.route("/post/<int:id>/")
 def view_post(id):
-  post_data = {"id":id}
-  this_post = post.Post.get_one_post_by_id_with_user(post_data)
-  post_comments = comment.Comment.get_comments_by_post(post_data)
-  if 'user_id' not in session: 
+    post_data = {"id": id}
+    this_post = post.Post.get_one_post_by_id_with_user(post_data)
+    post_comments = comment.Comment.get_comments_by_post(post_data)
+
+    if 'user_id' not in session:
+        this_post.humanized_time = humanize.naturaltime(this_post.created_at)
+        this_post.description = markdown2.markdown(this_post.description)
+        for comment_obj in post_comments:
+            comment_obj.humanized_time = humanize.naturaltime(comment_obj.created_at)
+        return render_template("view_post.html", this_post=this_post, post_comments=post_comments)
+
+    data = {"id": session['user_id']}
+    logged_user = user.User.get_user_by_id(data)
     this_post.humanized_time = humanize.naturaltime(this_post.created_at)
     this_post.description = markdown2.markdown(this_post.description)
-    return render_template("view_post.html",this_post=this_post,post_comments=post_comments)
-  data = {"id": session['user_id']}
-  logged_user = user.User.get_user_by_id(data)
-  this_post.humanized_time = humanize.naturaltime(this_post.created_at)
-  this_post.description = markdown2.markdown(this_post.description)
-  return render_template("view_post.html",this_post=this_post,logged_user=logged_user,post_comments=post_comments)
+    for comment_obj in post_comments:
+        comment_obj.humanized_time = humanize.naturaltime(comment_obj.created_at)
+    return render_template("view_post.html", this_post=this_post, logged_user=logged_user, post_comments=post_comments)
+
+
+# @app.route("/post/<int:id>/")
+# def view_post(id):
+#   post_data = {"id":id}
+#   this_post = post.Post.get_one_post_by_id_with_user(post_data)
+#   post_comments = comment.Comment.get_comments_by_post(post_data)
+
+  
+#   if 'user_id' not in session: 
+#     this_post.humanized_time = humanize.naturaltime(this_post.created_at)
+#     this_post.description = markdown2.markdown(this_post.description)
+#     return render_template("view_post.html",this_post=this_post,post_comments=post_comments)
+  
+#   data = {"id": session['user_id']}
+#   logged_user = user.User.get_user_by_id(data)
+#   this_post.humanized_time = humanize.naturaltime(this_post.created_at)
+#   this_post.description = markdown2.markdown(this_post.description)
+#   return render_template("view_post.html",this_post=this_post,logged_user=logged_user,post_comments=post_comments)
 
 @app.route("/post/<int:id>/edit")
 def edit_post(id):

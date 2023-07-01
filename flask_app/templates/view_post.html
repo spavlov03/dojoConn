@@ -130,10 +130,24 @@
 
 
         <!-- post content -->
-
         <div class="content">
 
-            <div class="main">
+            <!-- undecided if i wanna do this -Maleko -->
+            <div class="postNewTopicBtn">
+                {% if logged_user is not defined %}
+                {% else %}
+                <div class='topicButton'>
+                    <a class="newTopicBtn" href="/post/add">
+                        <div class="newTopic">
+                            <ion-icon class="plusIcon" name="add-outline"></ion-icon>
+                            <p>NEW TOPIC</p>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="viewPostmain">
                 <div class="viewPostCard">
                     <div class="postHead">
                         <h5 class="postTitle"><a href="/post/{{this_post.id}}">{{this_post.title}}</a></h5>
@@ -152,8 +166,7 @@
                         </div>
                     </div>
 
-
-                    <div class="postblah">
+                    <div class="postContent">
                         <div class="postVote">
                             <ion-icon class="voteBtn" name="caret-up-outline"></ion-icon>
                             <p class="randomNumber">333</p>
@@ -165,10 +178,12 @@
                         </div>
                     </div>
 
+                    
+
                     <div class="viewPostDetails">
                         <div class="humanized">
                             <div class="postdd">
-                                <p>Posted</p>
+                                <p>Asked</p>
                                 <p> {%filter lower%} {{this_post.humanized_time}} {%endfilter%}</p>
                             </div>
                             <div class="bywhom">
@@ -178,172 +193,64 @@
                         </div>
                     </div>
                 </div>
-
+                
+                <!-- comments -->
+                {% for comment in post_comments %}
+                <div class="commentsContainer">
+                    <div class="commentsContent">
+                        <div class="commentsC">
+                            <div class="commentVote">
+                                <ion-icon class="voteBtn" name="caret-up-outline"></ion-icon>
+                                <p class="randomNumber">0</p>
+                                <ion-icon class="voteBtn" name="caret-down-outline"></ion-icon>
+                            </div>
+                        
+                            <div class="comment">
+                                <p>{{comment.comment | safe}}</p>
+                            </div>
                         </div>
 
-            <!-- comments -->
+                        <div class="commentDeets">
+                            <div class="removeComment">
+                                {% if logged_user is undefined %}
+                                {%else%}
+                                {% if logged_user.id==comment.creator.id %}
+                                <a class="delete" href="/post/{{comment.post_id}}/comment/{{comment.id}}/delete">Remove</a>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+
+                            <div class="commentBy">
+                                <p class="">Said {{comment.humanized_time}} by</p>
+                                <p class=""><a class="text-decoration-none ps-1" href="/user/{{comment.creator.id}}">{%filter title%} {{comment.creator.first_name}} {%endfilter%} </a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
             {% if logged_user is undefined %}
             {%else%}
             <div class="userCommentContainer">
+                <!-- {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="error-msg text-warning">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %} -->
                 <div class="userComment">
                     <form action="/post/{{this_post.id}}/comment" method="post">
-                        <textarea name="comment" id="markdownEditor" cols="30" rows="7" placeholder="YOUR COMMENT"></textarea>  
+                        <textarea class="userCommentt" name="comment" id="markdownEditor" cols="30" rows="7" placeholder="YOUR COMMENT"></textarea>  
                         <input type="hidden" name="user_id" value="{{logged_user.id}}">
                         <input class="addcommentBtn" type="submit" value="Comment">
                     </form>
                 </div>
             </div>
             {%endif%}
-
-            <div class="aaaaaa">
-                {% for comment in post_comments %}
-                <div class="commentsContainer container mt-5 p-4 mb-5">
-                    <div class="comment">
-                        <p>{{comment.comment | safe}}</p>
-                    </div>
-
-                    <div class="addedBy">
-                        <div>
-                            <p class="postedAt">posted {{comment.created_at.strftime('%b %e, %Y at %H:%M')}}</p>
-                            <p class="postedAt">by: <a class="text-decoration-none ps-1" href="/user/{{comment.creator.id}}">{{comment.creator.first_name}}</a></p>
-                        </div>
-
-                        <div class="postedAt">
-                            {% if logged_user is undefined %}
-                            {%else%}
-                            {% if logged_user.id==comment.creator.id %}
-                            <a class="btn btn-outline-danger btn-sm" href="/post/{{comment.post_id}}/comment/{{comment.id}}/delete">Remove</a>
-                            {% endif %}
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-            </div>
-
-            <!-- <div class="commentBorder">
-                <div class="addComment mt-3">
-                    <div class="ok">
-                        <form action="/post/{{this_post.id}}/comment" method="post">
-                            <label class="form-group" for="">Add Comment</label>
-                    </div>
-                        <div class="form-control mt-4">
-                            <textarea class="form-control border-dark" name="comment" id="markdownEditor" cols="30" rows="10"></textarea>
-                        </div>
-                        <input type="hidden" name="user_id" value="{{logged_user.id}}">
-                        <div class="d-flex justify-content-center mt-2">
-                            <input class="btn btn-outline-warning btn-sm" type="submit" value="Post">
-                        </div>
-                    </form>
-                    {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            {% for message in messages %}
-                                <p class="error-msg text-warning">{{message}}</p>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                </div>
-            </div> -->
-
         </div>
-        
-        <!-- <div>
-            <div class="container">
-                <div class="postContainer bg-white text-black p-5 rounded-3 mt-5">
-                    <div class="postHeader">
-                        <h3>{{this_post.title}}</h3>
-                        <div class="postBtns d-flex justify-content-around">
-                            {% if logged_user is not defined %}
-                            {% else %}
-                            {% if logged_user.id==this_post.creator.id %}
-                                <a class="" href="/post/{{this_post.id}}/edit">Edit</a>
-                                <span>   </span>
-                                <a class="" href="/post/{{this_post.id}}/delete">Delete</a>
-                            {% endif %}
-                            {% endif %}
-                        </div>
-                    </div>
 
-                    <div class="postTech pb-2">
-                        <h6 class="postTechText">{%filter title%} {{this_post.technology}} {%endfilter%}</h6>
-                    </div>
-
-                    <div class="postDescription">
-                        <p class="ps-5 pe-5">{{this_post.description | safe }}</p>
-                    </div>
-
-                    <div class="addedBy">
-                        <div class="m-0">
-                            <p class="postedAt">posted {{this_post.created_at.strftime('%b %e, %Y at %H:%M')}}</p>
-                        </div>
-
-                        <div class="postedAt">
-                            <p class="pe-1 m-0">by</p>
-                            <a class="text-decoration-none" href="/user/{{this_post.creator.id}}">{{this_post.creator.first_name}} {{this_post.creator.last_name}}</a>
-                        </div>
-                    </div>
-                    {% if logged_user is not defined %}
-                    {% else %}
-                    {% if logged_user.id==this_post.creator.id %}
-                        <a class="" href="/post/{{this_post.id}}/edit">Edit</a>
-                        <span>   </span>
-                        <a class="" href="/post/{{this_post.id}}/delete">Delete</a>
-                    {% endif %}
-                    {% endif %}
-                </div>
-
-                {% if logged_user is not defined %}
-                {%else%}
-                <div class="commentBorder">
-                    <div class="addComment mt-3">
-                        <div class="ok">
-                            <form action="/post/{{this_post.id}}/comment" method="post">
-                                <label class="form-group" for="">Add Comment</label>
-                        </div>
-                            <div class="form-control mt-4">
-                                <textarea class="form-control border-dark" name="comment" id="" cols="30" rows="5"></textarea>
-                            </div>
-                            <input type="hidden" name="user_id" value="{{logged_user.id}}">
-                            <div class="d-flex justify-content-center mt-2">
-                                <input class="btn btn-outline-warning btn-sm" type="submit" value="Post">
-                            </div>
-                        </form>
-                        {% with messages = get_flashed_messages() %}
-                            {% if messages %}
-                                {% for message in messages %}
-                                    <p class="error-msg text-warning">{{message}}</p>
-                                {% endfor %}
-                            {% endif %}
-                        {% endwith %}
-                    </div>
-                </div>
-                {%endif%}
-
-                {% for comment in post_comments %}
-                    <div class="commentsContainer container mt-5 p-4 mb-5">
-                        <div class="comment">
-                            <p>{{comment.comment}}</p>
-                        </div>
-
-                        <div class="addedBy">
-                            <div>
-                                <p class="postedAt">posted {{comment.created_at.strftime('%b %e, %Y at %H:%M')}}</p>
-                                <p class="postedAt">by: <a class="text-decoration-none ps-1" href="/user/{{comment.creator.id}}">{{comment.creator.first_name}}</a></p>
-                            </div>
-    
-                            <div class="postedAt">
-                                {% if logged_user is not defined %}
-                                {%else%}
-                                {% if logged_user.id==comment.creator.id %}
-                                <a class="btn btn-outline-danger btn-sm" href="/post/{{comment.post_id}}/comment/{{comment.id}}/delete">Remove</a>
-                                {% endif %}
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div> -->
+    </div>
 
 
 
