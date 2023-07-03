@@ -76,6 +76,15 @@ def view_post(id):
         comment_obj.humanized_time = humanize.naturaltime(comment_obj.created_at)
     return render_template("view_post.html", this_post=this_post, logged_user=logged_user, post_comments=post_comments)
 
+@app.route("/post/<int:id>/upvote")
+def upvote_post(id):
+    post_data = {
+       "id": id ,
+       "votes" : session['user_id']
+       }
+    post.Post.upvote(post_data)
+    print("UPVOTE PRESSED")
+    return redirect("/")
 
 # @app.route("/post/<int:id>/")
 # def view_post(id):

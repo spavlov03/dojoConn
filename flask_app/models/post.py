@@ -85,6 +85,14 @@ class Post:
     
     print(result)
     return result
+  
+  @classmethod
+  def upvote(cls,data): 
+    print("data is ",data)
+    query = "UPDATE posts SET votes=%(votes)s WHERE id=%(id)s"
+    result = connectToMySQL(cls.DB).query_db(query,data)
+    print("Adding UPVOTE",result)
+    return result
 
   @classmethod
   def get_all_posts_by_user(cls, data):
