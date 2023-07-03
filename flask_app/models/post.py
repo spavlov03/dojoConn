@@ -14,7 +14,7 @@ class Post:
     self.updated_at = data['updated_at']
     self.user_id = data['user_id']
     self.creator = None
-    # self.likes = []
+    self.votes = []
 
   @classmethod
   def add_post(cls,post_data): 
