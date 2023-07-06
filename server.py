@@ -1,5 +1,5 @@
 from flask_app import app
-from flask_app.controllers import users,posts,comments
+from flask_app.controllers import users,posts,comments,upvotes
 
 
 if __name__ == "__main__":

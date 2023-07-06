@@ -160,7 +160,15 @@
                         <a href="post/{{post.id}}/upvote">
                             <ion-icon class="voteBtn" name="caret-up-outline" title="upvote"></ion-icon>
                         </a>
-                        <p class="randomNumber">{{post.votes|length}}</p>
+                        <p class="randomNumber">
+                            {% set sum = 0 %}
+                                {% for upvote in upvotes: %}
+                                    {% if upvote["post_id"] == post['id']: %}
+                                        {% set sum=1 %}
+                                    {% endif %}
+                                {% endfor %}
+                                        {{ sum }}
+                        </p>
                         <a href="">
                             <ion-icon class="voteBtn" name="caret-down-outline" title="downvote"></ion-icon>
                         </a>

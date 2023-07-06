@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request,session, Markup
 from flask_app import app
-from flask_app.models import user,post,comment
+from flask_app.models import user,post,comment,upvote
 import humanize 
 import markdown2
 # messing around with different markdown editors -maleko
@@ -17,6 +17,7 @@ def dashboard():
     data = {"id": session['user_id']}
     logged_user = user.User.get_user_by_id(data)
     all_posts = post.Post.get_all_posts()
+    upvotes = upvote.Upvote.get_all_upvotes()
 
     # added this for markdown purposes -maleko
     for post_item in all_posts:
@@ -30,7 +31,7 @@ def dashboard():
       count_result = post.Post.commentCount(post_id)
       comment_sum = count_result[0]['total_comments']
       comments[post_id]= comment_sum
-    return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts, comments=comments)
+    return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts, comments=comments,upvotes=upvotes)
 
 @app.route("/post/add")
 def new_post(): 
@@ -76,15 +77,15 @@ def view_post(id):
         comment_obj.humanized_time = humanize.naturaltime(comment_obj.created_at)
     return render_template("view_post.html", this_post=this_post, logged_user=logged_user, post_comments=post_comments)
 
-@app.route("/post/<int:id>/upvote")
-def upvote_post(id):
-    post_data = {
-       "id": id ,
-       "votes" : session['user_id']
-       }
-    post.Post.upvote(post_data)
-    print("UPVOTE PRESSED")
-    return redirect("/")
+# @app.route("/post/<int:id>/upvote")
+# def upvote_post(id):
+#     post_data = {
+#        "id": id ,
+#        "votes" : session['user_id']
+#        }
+#     post.Post.upvote(post_data)
+#     print("UPVOTE PRESSED")
+#     return redirect("/")
 
 # @app.route("/post/<int:id>/")
 # def view_post(id):
