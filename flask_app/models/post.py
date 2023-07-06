@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_app.models import user, comment
+from flask_app.models import user, comment, upvote
 
 class Post:
   DB = "dojo_connect"
@@ -86,13 +86,22 @@ class Post:
     print(result)
     return result
   
-  # @classmethod
-  # def upvote(cls,data): 
-  #   print("data is ",data)
-  #   query = "UPDATE posts SET votes=%(votes)s WHERE id=%(id)s"
-  #   result = connectToMySQL(cls.DB).query_db(query,data)
-  #   print("Adding UPVOTE",result)
-  #   return result
+  @classmethod
+  def get_all_upvotes_by_post(cls): 
+    query = "SELECT * FROM posts JOIN upvotes ON posts.id = upvotes.post_id"  
+    result = connectToMySQL(cls.DB).query_db(query)
+    print("RESULUTS IN UPVOTES----",result)
+    posts = []
+    for row in result: 
+      post = cls(row)
+      post_upvotes = {
+        "user_id": row['user_id'],
+        "post_id": row['post_id']
+      }
+      upvotes = upvote.Upvote(post_upvotes)
+      post.votes = upvotes
+      posts.append(post)
+    return posts
 
   @classmethod
   def get_all_posts_by_user(cls, data):

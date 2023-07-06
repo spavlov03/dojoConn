@@ -161,13 +161,9 @@
                             <ion-icon class="voteBtn" name="caret-up-outline" title="upvote"></ion-icon>
                         </a>
                         <p class="randomNumber">
-                            {% set sum = 0 %}
-                                {% for upvote in upvotes: %}
-                                    {% if upvote["post_id"] == post['id']: %}
-                                        {% set sum=1 %}
-                                    {% endif %}
-                                {% endfor %}
-                                        {{ sum }}
+                            
+                                {{post.votes}}
+
                         </p>
                         <a href="">
                             <ion-icon class="voteBtn" name="caret-down-outline" title="downvote"></ion-icon>

@@ -17,8 +17,8 @@ class Upvote:
         print("UPVOTING POST-----",result)
         return result
     
-    @classmethod
-    def get_all_upvotes(cls): 
-        query = "SELECT * FROM upvotes"
-        result = connectToMySQL(cls.DB).query_db(query)
-        return result
+    # @classmethod
+    # def get_all_upvotes(cls): 
+    #     query = "SELECT * FROM upvotes"
+    #     result = connectToMySQL(cls.DB).query_db(query)
+    #     return result

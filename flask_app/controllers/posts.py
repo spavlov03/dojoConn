@@ -17,7 +17,7 @@ def dashboard():
     data = {"id": session['user_id']}
     logged_user = user.User.get_user_by_id(data)
     all_posts = post.Post.get_all_posts()
-    upvotes = upvote.Upvote.get_all_upvotes()
+    upvotes = post.Post.get_all_upvotes_by_post()
 
     # added this for markdown purposes -maleko
     for post_item in all_posts:
@@ -31,6 +31,7 @@ def dashboard():
       count_result = post.Post.commentCount(post_id)
       comment_sum = count_result[0]['total_comments']
       comments[post_id]= comment_sum
+      print(upvotes[0].user_id)
     return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts, comments=comments,upvotes=upvotes)
 
 @app.route("/post/add")
