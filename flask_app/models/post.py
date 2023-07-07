@@ -14,7 +14,6 @@ class Post:
     self.updated_at = data['updated_at']
     self.user_id = data['user_id']
     self.creator = None
-    self.votes = []
 
   @classmethod
   def add_post(cls,post_data): 
@@ -85,23 +84,6 @@ class Post:
     
     print(result)
     return result
-  
-  @classmethod
-  def get_all_upvotes_by_post(cls): 
-    query = "SELECT * FROM posts JOIN upvotes ON posts.id = upvotes.post_id"  
-    result = connectToMySQL(cls.DB).query_db(query)
-    print("RESULUTS IN UPVOTES----",result)
-    posts = []
-    for row in result: 
-      post = cls(row)
-      post_upvotes = {
-        "user_id": row['user_id'],
-        "post_id": row['post_id']
-      }
-      upvotes = upvote.Upvote(post_upvotes)
-      post.votes = upvotes
-      posts.append(post)
-    return posts
 
   @classmethod
   def get_all_posts_by_user(cls, data):
@@ -132,6 +114,14 @@ class Post:
   @classmethod
   def commentCount(cls, post_id):
     query = " SELECT COUNT(*) AS total_comments FROM comments WHERE post_id = %(post_id)s; "
+    data = {'post_id': post_id}
+    result = connectToMySQL(cls.DB).query_db(query, data)
+    return result
+  
+  @classmethod
+  def votesCount(cls, post_id):
+    query = " SELECT COUNT(*) AS total_upvotes FROM votes WHERE post_id = %(post_id)s; "
+    print("POST ID",post_id)
     data = {'post_id': post_id}
     result = connectToMySQL(cls.DB).query_db(query, data)
     return result

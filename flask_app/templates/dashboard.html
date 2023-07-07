@@ -162,10 +162,10 @@
                         </a>
                         <p class="randomNumber">
                             
-                                {{post.votes}}
+                                {{votes[post.id]}}
 
                         </p>
-                        <a href="">
+                        <a href="post/{{post.id}}/downvote">
                             <ion-icon class="voteBtn" name="caret-down-outline" title="downvote"></ion-icon>
                         </a>
                     </div>

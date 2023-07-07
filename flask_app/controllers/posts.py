@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request,session, Markup
 from flask_app import app
-from flask_app.models import user,post,comment,upvote
+from flask_app.models import user,post,comment
 import humanize 
 import markdown2
 # messing around with different markdown editors -maleko
@@ -17,7 +17,6 @@ def dashboard():
     data = {"id": session['user_id']}
     logged_user = user.User.get_user_by_id(data)
     all_posts = post.Post.get_all_posts()
-    upvotes = post.Post.get_all_upvotes_by_post()
 
     # added this for markdown purposes -maleko
     for post_item in all_posts:
@@ -31,8 +30,14 @@ def dashboard():
       count_result = post.Post.commentCount(post_id)
       comment_sum = count_result[0]['total_comments']
       comments[post_id]= comment_sum
-      print(upvotes[0].user_id)
-    return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts, comments=comments,upvotes=upvotes)
+    votes = {}
+    for post_item in all_posts: 
+        post_id = post_item.id
+        count_result = post.Post.votesCount(post_id)
+        votes_sum = count_result[0]['total_upvotes']
+        print("Count Result",votes_sum)
+        votes[post_id]= votes_sum
+    return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts, comments=comments,votes=votes)
 
 @app.route("/post/add")
 def new_post(): 
@@ -61,6 +66,7 @@ def add_post():
 def view_post(id):
     post_data = {"id": id}
     this_post = post.Post.get_one_post_by_id_with_user(post_data)
+    post_upvotes = post.Post.votesCount(id)
     post_comments = comment.Comment.get_comments_by_post(post_data)
 
     if 'user_id' not in session:
@@ -76,17 +82,7 @@ def view_post(id):
     this_post.description = markdown2.markdown(this_post.description)
     for comment_obj in post_comments:
         comment_obj.humanized_time = humanize.naturaltime(comment_obj.created_at)
-    return render_template("view_post.html", this_post=this_post, logged_user=logged_user, post_comments=post_comments)
-
-# @app.route("/post/<int:id>/upvote")
-# def upvote_post(id):
-#     post_data = {
-#        "id": id ,
-#        "votes" : session['user_id']
-#        }
-#     post.Post.upvote(post_data)
-#     print("UPVOTE PRESSED")
-#     return redirect("/")
+    return render_template("view_post.html", this_post=this_post, logged_user=logged_user, post_comments=post_comments,post_upvotes=post_upvotes)
 
 # @app.route("/post/<int:id>/")
 # def view_post(id):
