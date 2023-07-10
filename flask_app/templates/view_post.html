@@ -204,9 +204,14 @@
                     <div class="commentsContent">
                         <div class="commentsC">
                             <div class="commentVote">
-                                <ion-icon class="voteBtn" name="caret-up-outline"></ion-icon>
+                                <a href="upvote/{{comment.id}}">
+                                    <ion-icon class="voteBtn" name="caret-up-outline"></ion-icon>
+                                </a>
+                                
                                 <p class="randomNumber">0</p>
-                                <ion-icon class="voteBtn" name="caret-down-outline"></ion-icon>
+                                <a href="downvote/{{comment.id}}">
+                                    <ion-icon class="voteBtn" name="caret-down-outline"></ion-icon>
+                                </a>
                             </div>
                         
                             <div class="comment">

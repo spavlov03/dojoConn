@@ -13,8 +13,9 @@ def upvote_post(id):
         "user_id":session['user_id'], 
         "post_id":id}
     all_upvotes = upvote.Upvote.get_all_upvote_by_post({"post_id":id})
+    print("ALL UPVOTES---->",all_upvotes)
     if all_upvotes == () : 
-       upvote.Upvote.upvote_post(data)
+        upvote.Upvote.upvote_post(data)
     else:
       add = True
       for vote in all_upvotes:
@@ -35,4 +36,28 @@ def downvote_post(id):
         "user_id":session['user_id'], 
         "post_id":id}
     upvote.Upvote.downvote_post(data)
+    return redirect('/')
+
+@app.route('/post/<int:id>/upvote/<int:id2>')
+def upvote_comment(id,id2): 
+    if 'user_id' not in session: 
+      return redirect('/logout')
+    data = {
+        "user_id":session['user_id'], 
+        "post_id":id,
+        "comment_id":id2}
+    all_upvotes = upvote.Upvote.get_all_upvote_by_comment({"comment_id":id})
+    print("ALL UPVOTES---->",all_upvotes)
+    if all_upvotes == () : 
+        upvote.Upvote.upvote_comment(data)
+    else:
+      add = True
+      for vote in all_upvotes:
+        if ("user_id",session['user_id']) in vote.items():
+          add = True
+        else: 
+          add = False
+      if (add == False):
+          upvote.Upvote.upvote_comment(data)
+      print(add)
     return redirect('/')

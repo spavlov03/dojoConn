@@ -17,7 +17,7 @@ def dashboard():
     data = {"id": session['user_id']}
     logged_user = user.User.get_user_by_id(data)
     all_posts = post.Post.get_all_posts()
-
+    
     # added this for markdown purposes -maleko
     for post_item in all_posts:
       post_item.description = markdown2.markdown(post_item.description)
@@ -30,14 +30,14 @@ def dashboard():
       count_result = post.Post.commentCount(post_id)
       comment_sum = count_result[0]['total_comments']
       comments[post_id]= comment_sum
-    votes = {}
+    postsVotes = {}
     for post_item in all_posts: 
         post_id = post_item.id
-        count_result = post.Post.votesCount(post_id)
+        count_result = post.Post.postsVotesCount(post_id)
         votes_sum = count_result[0]['total_upvotes']
         print("Count Result",votes_sum)
-        votes[post_id]= votes_sum
-    return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts, comments=comments,votes=votes)
+        postsVotes[post_id]= votes_sum
+    return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts, comments=comments,postsVotes=postsVotes)
 
 @app.route("/post/add")
 def new_post(): 
@@ -66,9 +66,10 @@ def add_post():
 def view_post(id):
     post_data = {"id": id}
     this_post = post.Post.get_one_post_by_id_with_user(post_data)
-    post_upvotes = post.Post.votesCount(id)
+    post_upvotes = post.Post.postsVotesCount(id)
     post_comments = comment.Comment.get_comments_by_post(post_data)
-
+    # comments_upvotes = post.Post.commentsVotesCount(post_data)
+    # print("Comments for post---->>>",comments_upvotes)
     if 'user_id' not in session:
         this_post.humanized_time = humanize.naturaltime(this_post.created_at)
         this_post.description = markdown2.markdown(this_post.description)
