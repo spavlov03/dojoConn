@@ -120,7 +120,7 @@ class Post:
   
   @classmethod
   def postsVotesCount(cls, post_id):
-    query = " SELECT COUNT(*) AS total_upvotes FROM votes WHERE post_id = %(post_id)s; "
+    query = " SELECT COUNT(*) AS total_upvotes FROM votes WHERE post_id = %(post_id)s and comment_id IS null;"
     print("POST ID",post_id)
     data = {'post_id': post_id}
     result = connectToMySQL(cls.DB).query_db(query, data)

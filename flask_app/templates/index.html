@@ -154,9 +154,15 @@
                 <div class="main">
                     <div class="postCard hidden">
                         <div class="vote">
-                            <ion-icon class="voteBtn" name="caret-up-outline"></ion-icon>
-                            <p class="randomNumber">333</p>
-                            <ion-icon class="voteBtn" name="caret-down-outline"></ion-icon>
+                            <a onclick="alert('Please login or register to upvote')">
+                                <ion-icon class="voteBtn" name="caret-up-outline" title="upvote"></ion-icon>
+                            </a>
+                            <p class="randomNumber">
+                                    {{postsVotes[post.id]}}
+                            </p>
+                            <a onclick="alert('Please login or register to downvote')">
+                                <ion-icon class="voteBtn" name="caret-down-outline" title="downvote"></ion-icon>
+                            </a>
                         </div>
     
                         <div class="postContainer">

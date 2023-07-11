@@ -35,7 +35,7 @@ def dashboard():
         post_id = post_item.id
         count_result = post.Post.postsVotesCount(post_id)
         votes_sum = count_result[0]['total_upvotes']
-        print("Count Result",votes_sum)
+        # print("Count Result",votes_sum)
         postsVotes[post_id]= votes_sum
     return render_template('dashboard.html',logged_user = logged_user,all_posts=all_posts, comments=comments,postsVotes=postsVotes)
 
@@ -68,8 +68,11 @@ def view_post(id):
     this_post = post.Post.get_one_post_by_id_with_user(post_data)
     post_upvotes = post.Post.postsVotesCount(id)
     post_comments = comment.Comment.get_comments_by_post(post_data)
-    # comments_upvotes = post.Post.commentsVotesCount(post_data)
-    # print("Comments for post---->>>",comments_upvotes)
+    print("POST COMMENTS-----",post_comments)
+    comments_count = {}
+    for com in post_comments: 
+      comments_count[com.id] = post.Post.commentsVotesCount(com.id)
+    print("Comments for post---->>>",comments_count)
     if 'user_id' not in session:
         this_post.humanized_time = humanize.naturaltime(this_post.created_at)
         this_post.description = markdown2.markdown(this_post.description)
@@ -83,7 +86,7 @@ def view_post(id):
     this_post.description = markdown2.markdown(this_post.description)
     for comment_obj in post_comments:
         comment_obj.humanized_time = humanize.naturaltime(comment_obj.created_at)
-    return render_template("view_post.html", this_post=this_post, logged_user=logged_user, post_comments=post_comments,post_upvotes=post_upvotes)
+    return render_template("view_post.html", this_post=this_post, logged_user=logged_user, post_comments=post_comments,post_upvotes=post_upvotes,comments_count=comments_count)
 
 # @app.route("/post/<int:id>/")
 # def view_post(id):

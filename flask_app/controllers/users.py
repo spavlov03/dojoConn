@@ -23,7 +23,14 @@ def index():
         count_result = post.Post.commentCount(post_id)
         comment_sum = count_result[0]['total_comments']
         comments[post_id]= comment_sum
-    return render_template('index.html', all_posts = all_posts, comments=comments)
+    postsVotes = {}
+    for post_item in all_posts: 
+        post_id = post_item.id
+        count_result = post.Post.postsVotesCount(post_id)
+        votes_sum = count_result[0]['total_upvotes']
+        # print("Count Result",votes_sum)
+        postsVotes[post_id]= votes_sum
+    return render_template('index.html', all_posts = all_posts, comments=comments,postsVotes=postsVotes)
 
 @app.route("/register")
 def register(): 

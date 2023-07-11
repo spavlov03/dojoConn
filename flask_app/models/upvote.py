@@ -18,13 +18,13 @@ class Upvote:
     
     @classmethod
     def downvote_post(cls,post_data): 
-        query = 'DELETE from votes WHERE user_id=%(user_id)s AND post_id=%(post_id)s;'
+        query = 'DELETE from votes WHERE user_id=%(user_id)s AND post_id=%(post_id)s AND comment_id IS NULL;'
         result = connectToMySQL(cls.DB).query_db(query,post_data)
         return result
     
     @classmethod
     def get_all_upvote_by_post(cls,post_data): 
-        query = "SELECT * FROM votes WHERE post_id = %(post_id)s"
+        query = "SELECT * FROM votes WHERE post_id = %(post_id)s AND comment_id IS NULL"
         result = connectToMySQL(cls.DB).query_db(query,post_data)
         return result
     
