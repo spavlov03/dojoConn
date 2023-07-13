@@ -154,14 +154,14 @@
                 <div class="main">
                     <div class="postCard hidden">
                         <div class="vote">
-                            <a onclick="alert('Please login or register to upvote')">
-                                <ion-icon class="voteBtn" name="caret-up-outline" title="upvote"></ion-icon>
+                            <a class="upvote" onclick="alert('Please login or register to upvote')">
+                                <ion-icon class="voteBtn" name="chevron-up-outline" title="upvote"></ion-icon>
                             </a>
                             <p class="randomNumber">
                                     {{postsVotes[post.id]}}
                             </p>
-                            <a onclick="alert('Please login or register to downvote')">
-                                <ion-icon class="voteBtn" name="caret-down-outline" title="downvote"></ion-icon>
+                            <a class="downvote" onclick="alert('Please login or register to downvote')">
+                                <ion-icon class="voteBtn" name="chevron-down-outline" title="downvote"></ion-icon>
                             </a>
                         </div>
     

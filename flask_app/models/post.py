@@ -139,7 +139,7 @@ class Post:
   def post_validation(post): 
     is_valid = True
     if len(post['title']) <1: 
-      flash("Tile is required", "title")
+      flash("Title is required", "title")
       is_valid = False
     if len(post['technology']) <1: 
       flash("Must select Technology", 'technology')

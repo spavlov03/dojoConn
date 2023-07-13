@@ -168,12 +168,12 @@
 
                     <div class="postContent">
                         <div class="postVote">
-                            <a href="upvote">
-                                <ion-icon class="voteBtn" name="caret-up-outline"></ion-icon>
+                            <a class="upvote" href="upvote">
+                                <ion-icon class="voteBtn" name="chevron-up-outline"></ion-icon>
                             </a>
                             <p class="randomNumber">{{post_upvotes[0].total_upvotes}}</p>
-                            <a href="downvote">
-                                <ion-icon class="voteBtn" name="caret-down-outline"></ion-icon>
+                            <a class="downvote" href="downvote">
+                                <ion-icon class="voteBtn" name="chevron-down-outline"></ion-icon>
                             </a>
                         </div>
 
@@ -204,13 +204,13 @@
                     <div class="commentsContent">
                         <div class="commentsC">
                             <div class="commentVote">
-                                <a href="upvote/{{comment.id}}">
-                                    <ion-icon class="voteBtn" name="caret-up-outline"></ion-icon>
+                                <a class="upvote" href="upvote/{{comment.id}}">
+                                    <ion-icon class="voteBtn" name="chevron-up-outline"></ion-icon>
                                 </a>
                                 
                                 <p class="randomNumber">{{comments_count[comment.id][0]['total_upvotes']}}</p>
-                                <a href="downvote/{{comment.id}}">
-                                    <ion-icon class="voteBtn" name="caret-down-outline"></ion-icon>
+                                <a class="downvote" href="downvote/{{comment.id}}">
+                                    <ion-icon class="voteBtn" name="chevron-down-outline"></ion-icon>
                                 </a>
                             </div>
                         

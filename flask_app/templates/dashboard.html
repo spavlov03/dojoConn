@@ -157,14 +157,14 @@
             <div class="main">
                 <div class="postCard hidden">
                     <div class="vote">
-                        <a href="post/{{post.id}}/upvote">
-                            <ion-icon class="voteBtn" name="caret-up-outline" title="upvote"></ion-icon>
+                        <a class="upvote" href="post/{{post.id}}/upvote">
+                            <ion-icon class="voteBtn" name="chevron-up-outline" title="upvote"></ion-icon>
                         </a>
                         <p class="randomNumber">
                                 {{postsVotes[post.id]}}
                         </p>
-                        <a href="post/{{post.id}}/downvote">
-                            <ion-icon class="voteBtn" name="caret-down-outline" title="downvote"></ion-icon>
+                        <a class="downvote" href="post/{{post.id}}/downvote">
+                            <ion-icon class="voteBtn" name="chevron-down-outline" title="downvote"></ion-icon>
                         </a>
                     </div>
 

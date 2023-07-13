@@ -175,6 +175,14 @@ def posts_by_tech(technology):
         p.markdown_content = Markup(markdown2.markdown(p.description))
         p.humanized_time = humanize.naturaltime(p.created_at)
 
+    postsVotes = {}
+    for post_item in all_posts: 
+        post_id = post_item.id
+        count_result = post.Post.postsVotesCount(post_id)
+        votes_sum = count_result[0]['total_upvotes']
+        # print("Count Result",votes_sum)
+        postsVotes[post_id]= votes_sum
+
         post_id = p.id
         count_result = post.Post.commentCount(post_id)
         comment_sum = count_result[0]['total_comments']
@@ -194,7 +202,7 @@ def posts_by_tech(technology):
 
         all_posts.append(p)
 
-    return render_template("/discussions.html", all_posts=all_posts, logged_user=logged_user, comments=comments)
+    return render_template("/discussions.html", all_posts=all_posts, logged_user=logged_user, comments=comments, postsVotes=postsVotes)
 
 # WORKING
 # @app.route("/search",methods=["POST"])
