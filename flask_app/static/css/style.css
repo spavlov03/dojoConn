@@ -1474,6 +1474,62 @@ input[type="search"]::-webkit-search-cancel-button {
 
 
 
+
+/* VIEW USER PAGE CSS */
+/* .viewUserCard {
+    grid-column-start: 3;
+    height: 500px;
+    width: 300px;
+    background-color: #342f42;
+    border: solid 1px #8a7cad;
+    border-radius: .3em;
+    color: rgb(196, 196, 196);
+}
+
+.cardHeader {
+    padding: 1.5rem 1rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    border-bottom: solid 2px #8a7cad;
+}
+
+.asdfg {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.userInfo {
+    padding-left: 1rem;
+}
+
+.defaultImg {
+    width: 70px;
+    height: 70px;
+    border: solid 3px #7284ca;
+    border-radius: 50%;
+}
+
+.userDetails {
+    padding: 0 1rem;
+    display: block;
+}
+
+.what {
+    display: flex;
+    align-items: center;
+    color: #7284ca;
+}
+
+.what p {
+    font-size: .75rem;
+    padding: 0rem .5rem;
+    color: rgb(196, 196, 196);
+} */
+
+
+
+
 /* MOBILE */
 nav .btn-hamburger {
     display: none;
@@ -2392,6 +2448,156 @@ nav.opened .btn-hamburger span:nth-child(3) {
 
 
 
+    /* view user page css */
+    .viewUserCard {
+        grid-column-start: 1;
+        padding: 1rem;
+        background-color: #342f42;
+        border: solid 2px #43364e;
+        border-radius: .3em;
+        color: rgb(196, 196, 196);
+    }
+
+    .cardHeader {
+        display: flex;
+        text-align: start;
+        align-items: center;
+        /* border-bottom: solid 1px #8a7cad; */
+        padding-bottom: 1rem;
+    }
+
+    .defaultImg {
+        width: 70px;
+        height: 70px;
+        border: solid 3px #7284ca;
+        border-radius: 50%;
+    }
+
+    .userInfo {
+        padding-left: 1rem;
+        display: block;
+        /* border-bottom: solid 1px #8a7cad;
+        width: 100%; */
+    }
+
+    .userEmail {
+        margin-top: -15px;
+        font-size: .7em;
+        margin-bottom: 0px;
+        /* text-transform: uppercase; */
+    }
+
+    .userInfo .edit {
+        margin-left: -3px;
+        margin-bottom: 20px;
+    }
+
+    .userDetails {
+        display: none;
+    }
+
+    .userContent {
+        padding: 0 1rem;
+        background-color: #342f42;
+        border-bottom: solid 2px #43364e;
+
+    }
+
+    .filter {
+        display: flex;
+        align-items: start;
+        color: rgb(196, 196, 196);
+        margin-bottom: 15px;
+        /* justify-content: space-between; */
+        /* width: 75%; */
+    }
+
+    .active {
+        border: solid 1px #4d5a8e;
+        border-radius: 1.5em;
+        background-color: #7284ca;
+        padding: .7rem;
+        text-transform: uppercase;
+        font-size: .8rem;
+        font-weight: 500;
+        color: rgb(196, 196, 196);
+    }
+
+    .filter a {
+        text-decoration: none;
+        color: rgb(196, 196, 196);
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: .8rem;
+    }
+
+    .inactive {
+        padding: .7rem;
+        text-transform: uppercase;
+        font-size: .8rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: rgb(196, 196, 196);
+    }
+
+    .userActivityCard {
+        padding: 1rem;
+        border-top: solid 3px #43364e;
+        margin-bottom: 15px;
+    }
+
+    .userActivityCard a {
+        text-decoration: none;
+        color: #8a7cad;
+    }
+
+    .userActivityCard h5 {
+        margin-bottom: 1px;
+    }
+
+    .userActivityCard h6 a {
+        color: #7284ca;
+        margin-bottom: 15px
+    }
+
+    .userActivityDetails {
+        display: flex;
+        width: 100%;
+        /* padding: 0 1rem; */
+        justify-content: space-around;
+    }
+
+    .userActivityDetails .vote {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        margin-top: 7px;
+        font-size: .9rem;
+    }
+
+    .userActivityDetails a {
+        color: #7284ca;
+    }
+
+    .userActivityTime {
+        font-size: .8em;
+        color: rgb(196, 196, 196);
+        align-items: center;
+    }
+
+    .userActivityComments {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: rgb(196, 196, 196);
+        font-size: .8em;
+    }
+
+    .userActivityComments .commentIcon {
+        margin-top: 1px;
+        color: #7284ca;
+        /* font-size: .7em; */
+    }
 
 }
 

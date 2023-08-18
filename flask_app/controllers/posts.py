@@ -78,7 +78,7 @@ def view_post(id):
         this_post.description = markdown2.markdown(this_post.description)
         for comment_obj in post_comments:
             comment_obj.humanized_time = humanize.naturaltime(comment_obj.created_at)
-        return render_template("view_post.html", this_post=this_post, post_comments=post_comments)
+        return render_template("view_post.html", this_post=this_post, post_comments=post_comments, post_upvotes=post_upvotes, comments_count=comments_count)
 
     data = {"id": session['user_id']}
     logged_user = user.User.get_user_by_id(data)

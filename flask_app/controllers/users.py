@@ -73,11 +73,28 @@ def view_user(id):
     data = {"id":id}
     user_info = user.User.get_user_by_id(data)
     posts_by_user = post.Post.get_all_posts_by_user(data)
+    
+    comments = {}
+    for post_item in posts_by_user:
+        post_item.humanized_time = humanize.naturaltime(post_item.created_at)
+        post_id = post_item.id
+        count_result = post.Post.commentCount(post_id)
+        comment_sum = count_result[0]['total_comments']
+        comments[post_id]= comment_sum
+
+    postsVotes = {}
+    for post_item in posts_by_user: 
+        post_id = post_item.id
+        count_result = post.Post.postsVotesCount(post_id)
+        votes_sum = count_result[0]['total_upvotes']
+        # print("Count Result",votes_sum)
+        postsVotes[post_id]= votes_sum
+
     if 'user_id' not in session: 
         return render_template('view_user.html', user_info=user_info,posts_by_user=posts_by_user)
     logged_user_data={"id":session['user_id']}
     logged_user = user.User.get_user_by_id(logged_user_data)
-    return render_template('view_user.html', user_info=user_info,logged_user=logged_user,posts_by_user=posts_by_user)
+    return render_template('view_user.html', user_info=user_info,logged_user=logged_user,posts_by_user=posts_by_user, comments=comments, postsVotes=postsVotes)
 
 @app.route('/user/<int:id>/edit')
 def edit_user(id): 
