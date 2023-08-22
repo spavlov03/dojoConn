@@ -1476,12 +1476,12 @@ input[type="search"]::-webkit-search-cancel-button {
 
 
 /* VIEW USER PAGE CSS */
-/* .viewUserCard {
+.viewUserCard {
     grid-column-start: 3;
-    height: 500px;
     width: 300px;
+    height: 500px;
     background-color: #342f42;
-    border: solid 1px #8a7cad;
+    border: solid 2px #43364e;
     border-radius: .3em;
     color: rgb(196, 196, 196);
 }
@@ -1491,7 +1491,7 @@ input[type="search"]::-webkit-search-cancel-button {
     display: flex;
     text-align: center;
     align-items: center;
-    border-bottom: solid 2px #8a7cad;
+    /* border-bottom: solid 2px #8a7cad; */
 }
 
 .asdfg {
@@ -1525,7 +1525,13 @@ input[type="search"]::-webkit-search-cancel-button {
     font-size: .75rem;
     padding: 0rem .5rem;
     color: rgb(196, 196, 196);
-} */
+}
+
+.userContent {
+    grid-column-start: 2;
+    word-wrap: break-word;
+    
+}
 
 
 
@@ -2451,6 +2457,8 @@ nav.opened .btn-hamburger span:nth-child(3) {
     /* view user page css */
     .viewUserCard {
         grid-column-start: 1;
+        width: auto;
+        height: auto;
         padding: 1rem;
         background-color: #342f42;
         border: solid 2px #43364e;
@@ -2463,7 +2471,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
         text-align: start;
         align-items: center;
         /* border-bottom: solid 1px #8a7cad; */
-        padding-bottom: 1rem;
+        /* padding-bottom: 1rem; */
     }
 
     .defaultImg {
@@ -2497,6 +2505,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
     }
 
     .userContent {
+        grid-column-start: 1;
         padding: 0 1rem;
         background-color: #342f42;
         border-bottom: solid 2px #43364e;
@@ -2512,7 +2521,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
         /* width: 75%; */
     }
 
-    .active {
+    .filterActive {
         border: solid 1px #4d5a8e;
         border-radius: 1.5em;
         background-color: #7284ca;
