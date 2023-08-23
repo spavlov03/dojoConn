@@ -91,7 +91,7 @@ def view_user(id):
         postsVotes[post_id]= votes_sum
 
     if 'user_id' not in session: 
-        return render_template('view_user.html', user_info=user_info,posts_by_user=posts_by_user)
+        return render_template('view_user.html', user_info=user_info,posts_by_user=posts_by_user, comments=comments, postsVotes=postsVotes)
     logged_user_data={"id":session['user_id']}
     logged_user = user.User.get_user_by_id(logged_user_data)
     return render_template('view_user.html', user_info=user_info,logged_user=logged_user,posts_by_user=posts_by_user, comments=comments, postsVotes=postsVotes)

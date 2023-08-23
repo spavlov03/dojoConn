@@ -87,7 +87,7 @@ class Post:
 
   @classmethod
   def get_all_posts_by_user(cls, data):
-    query = "SELECT * FROM posts JOIN users ON posts.user_id = users.id WHERE user_id = %(id)s;"
+    query = "SELECT * FROM posts JOIN users ON posts.user_id = users.id WHERE user_id = %(id)s ORDER BY posts.created_at DESC;"
     result = connectToMySQL(cls.DB).query_db(query,data)
     posts = []
     for row in result:

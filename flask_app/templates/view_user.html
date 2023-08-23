@@ -144,26 +144,44 @@
       </div>
       
       <div class="userDetails">
-        <p>Joined</p>
+        <p class="joined">Joined</p>
         <div class="what">
           <ion-icon class="time" name="time"></ion-icon>
-          <p>{{user_info.created_at.strftime('%B %e, %Y')}}</p>
+          <p>{{user_info.created_at.strftime('%b %e, %Y')}}</p>
         </div>
       </div>
+
+      {% if logged_user is not defined %}
+      {% else %}
+      {% if logged_user.id==user_info.id %}
+        <div class='userTopicButton'>
+          <a class="newTopicBtn" href="/post/add">
+              <div class="newTopic">
+                  <ion-icon class="plusIcon" name="add-outline"></ion-icon>
+                  <p>NEW TOPIC</p>
+              </div>
+          </a>
+      </div>
+      {% endif %}
+      {% endif %}
 
   </div>
 
   <div class="userContent">
+    <div class="filterBar">
+
     <div class="filter">
       <h4 class="filterActive"><a href="/user/4">Activity</h4></a>
-      <!-- <h4 class="inactive"><a href="/user/4">Posts</h4></a>
-      <h4 class="inactive"><a href="/user/4">Comments</h4></a> -->
+      <!-- <h4 class="filterInactive"><a href="/user/4">Posts</h4></a>
+      <h4 class="filterInactive"><a href="/user/4">Comments</h4></a> -->
     </div>
+  </div>
 
     {% for post in posts_by_user %}
-    <div class="userActivityCard">
+    <div class="userActivityCard hidden">
         <h5><a class="" href="/post/{{post.id}}">{{post.title}}</a></h5>
         <h6 class="postedAt"> <a class="text-decoration-none" href="/posts/{{post.technology}}">{%filter upper%} {{post.technology}} {%endfilter%}</a></h6>
+        <!-- <p>{{post.description}}</p> -->
 
 
         <div class="userActivityDetails">
